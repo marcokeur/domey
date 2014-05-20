@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import sys
 import subprocess
 import signal
@@ -8,9 +10,9 @@ processList = []
 
 def startScripts():
         print "Launching scripts"
-        processList.append(subprocess.Popen(['watch', 'ls']))
-        processList.append(subprocess.Popen(['watch', 'df']))
-        processList.append(subprocess.Popen(['watch', 'uptime']))
+        processList.append(subprocess.Popen(['python', 'scripts/publish_uptime.py']))
+        processList.append(subprocess.Popen(['python', 'scripts/republish_short_topics.py']))
+        processList.append(subprocess.Popen(['python', 'scripts/weather_publisher.py', 'NLXX0037']))
 
 def stopScripts():
         for process in processList:
