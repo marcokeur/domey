@@ -13,7 +13,8 @@ def startScripts():
         print "Launching scripts"
         processList.append(subprocess.Popen(['python', 'scripts/publish_uptime.py']))
         processList.append(subprocess.Popen(['python', 'scripts/republish_short_topics.py']))
-        processList.append(subprocess.Popen(['python', 'scripts/weather_publisher.py', 'NLXX0037']))
+	processList.append(subprocess.Popen(['python', 'scripts/serial_to_udp.py', '/dev/ttyAMA0', 'localhost', '1884']))
+#        processList.append(subprocess.Popen(['python', 'scripts/weather_publisher.py', 'NLXX0037']))
 
 def stopScripts():
         for process in processList:
