@@ -1,5 +1,3 @@
-#!/usr/bin/python
- 
 import mosquitto
 import os
 import time
@@ -29,22 +27,34 @@ def on_message(mosq, obj, msg):
 	except (NameError, IndexError):
 		print "topic to short or error"
 
+def doMain():
+	mypid = os.getpid()
+	client_uniq = "pubclient_"+str(mypid)
 
-mypid = os.getpid()
-client_uniq = "pubclient_"+str(mypid)
+	mqttc = mosquitto.Mosquitto() 
+	mqttc.on_message = on_message
 
-mqttc = mosquitto.Mosquitto() 
-mqttc.on_message = on_message
+	#connect to broker
+	mqttc.connect(broker, port, 60)
 
-#connect to broker
-mqttc.connect(broker, port, 60)
-
-mqttc.subscribe("#", 0)
+	mqttc.subscribe("#", 0)
  
-#remain connected and publish
-while mqttc.loop() == 0:
-    #msg = "test message "+time.ctime()
-    #mqttc.publish("/timesample", msg, 0, True) #qos=0, retain=y
-    #print "message published"
-    #time.sleep(1.5)
-    pass
+	#remain connected and publish
+	while mqttc.loop() == 0:
+	    pass
+    
+def stop(signum, frame):
+	sys.exit(0)
+	
+def start():
+	context = daemon.DaemonContext()
+	context.signal_map = { signal.SIGTERM: stop }
+
+    	context.open()
+    	
+    	with context:
+        	doMain()
+
+if __name__ == "__main__":
+	start()
+
