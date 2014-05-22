@@ -6,7 +6,7 @@ from socket import *
 
 baud_rate = 115200
 udp_ip = "127.0.0.1"
-udp_port 1884
+udp_port = 1884
 serial_port = "/dev/ttyAMA0"
 
 s = serial.Serial( serial_port, baud_rate, timeout=1 )
