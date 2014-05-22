@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import mosquitto
 import os
 import time
