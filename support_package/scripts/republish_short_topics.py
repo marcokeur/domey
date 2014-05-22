@@ -5,6 +5,8 @@ import mosquitto
 import os
 import time
 import ConfigParser
+
+mqttc = mosquitto.Mosquitto() 
  
 def sensor(x):
 	return {
@@ -38,7 +40,6 @@ def doMain():
 	mypid = os.getpid()
 	client_uniq = "pubclient_"+str(mypid)
 
-	mqttc = mosquitto.Mosquitto() 
 	mqttc.on_message = on_message
 
 	#connect to broker
