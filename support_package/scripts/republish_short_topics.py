@@ -42,7 +42,7 @@ def doMain():
 	mqttc.on_message = on_message
 
 	#connect to broker
-	mqttc.connect(broker, port, 60)
+	mqttc.connect(mqtt_sn_host, mqtt_sn_port, 60)
 
 	mqttc.subscribe("#", 0)
  
