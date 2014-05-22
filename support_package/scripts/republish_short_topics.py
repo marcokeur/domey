@@ -1,6 +1,7 @@
 import mosquitto
 import os
 import time
+import ConfigParser
  
 broker = "localhost"
 port = 1883
@@ -28,6 +29,12 @@ def on_message(mosq, obj, msg):
 		print "topic to short or error"
 
 def doMain():
+	config = ConfigParser.RawConfigParser()
+	config.read('/etc/support_package/config.ini')
+	
+	mqtt_sn_host = config.get('General', 'mqtt_sn_host')
+	mqtt_sn_port = config.get('General', 'mqtt_sn_port')
+	
 	mypid = os.getpid()
 	client_uniq = "pubclient_"+str(mypid)
 
