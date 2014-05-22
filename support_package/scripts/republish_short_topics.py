@@ -32,8 +32,8 @@ def doMain():
 	config = ConfigParser.RawConfigParser()
 	config.read('/etc/support_package/config.ini')
 	
-	mqtt_sn_host = config.get('general', 'mqtt_sn_host')
-	mqtt_sn_port = config.get('general', 'mqtt_sn_port')
+	mqtt_host = config.get('general', 'mqtt_host')
+	mqtt_port = config.get('general', 'mqtt_port')
 	
 	mypid = os.getpid()
 	client_uniq = "pubclient_"+str(mypid)
@@ -42,7 +42,7 @@ def doMain():
 	mqttc.on_message = on_message
 
 	#connect to broker
-	mqttc.connect(mqtt_sn_host, mqtt_sn_port, 60)
+	mqttc.connect(mqtt_host, mqtt_port, 60)
 
 	mqttc.subscribe("#", 0)
  
