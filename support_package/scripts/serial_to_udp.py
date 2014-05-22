@@ -13,7 +13,7 @@ s = serial.Serial( serial_port, baud_rate, timeout=1 )
 def send(msg, ip, port):
     socket(AF_INET,SOCK_DGRAM).sendto(msg, (ip, port))
 
-def main():
+def doMain():
 	while (1):
         	line = s.readline()
 
@@ -31,7 +31,7 @@ def start():
     	context.open()
     	
     	with context:
-        	doMainProgram()
+        	doMain()
 
 if __name__ == "__main__":
 	start()
