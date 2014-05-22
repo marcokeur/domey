@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import signal
 import serial
 import sys
 import daemon
