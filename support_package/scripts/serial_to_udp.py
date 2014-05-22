@@ -10,12 +10,11 @@ udp_ip = "127.0.0.1"
 udp_port = 1884
 serial_port = "/dev/ttyAMA0"
 
-s = serial.Serial( serial_port, baud_rate, timeout=1 )
-
 def send(msg, ip, port):
     socket(AF_INET,SOCK_DGRAM).sendto(msg, (ip, port))
 
 def doMain():
+	s = serial.Serial( serial_port, baud_rate, timeout=1 )
 	while (1):
         	line = s.readline()
 
