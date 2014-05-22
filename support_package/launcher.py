@@ -5,7 +5,7 @@ import subprocess
 import signal
 import time
 import os
-import daemon
+#import daemon
 
 processList = []
 
@@ -35,7 +35,7 @@ def main():
 
 
 def run():
-	with daemon.DaemonContext():
+	#with daemon.DaemonContext():
 		main()
 
 if __name__ == "__main__":
