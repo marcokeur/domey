@@ -36,19 +36,27 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-#define NODE_ID  0x03
+//#define MQTT_SN
 
-#define COUNTER_ID  0x01
-#define TEMPERATURE_SENSOR_ID 0x02
-#define HUMIDITY_SENSOR_ID 0x03
-#define LIGHT_SENSOR_ID 0x04
 
-#define MQTT_SN_MAX_PACKET_LENGTH    (255)
-#define MQTT_SN_TYPE_PUBLISH         (0x0C)
-#define MQTT_SN_FLAG_RETAIN          (0x1 << 4)
-#define MQTT_SN_FLAG_QOS_N1          (0x3 << 5)
-#define MQTT_SN_SHORT_TOPIC_TYPE     (0x02 & 0x3)
-#define MQTT_SN_HEADER_LENGTH        (0x07)
+#define NODE_ID  0x01
+
+
+#ifdef MQTT_SN
+  #define COUNTER_ID  0x01
+  #define TEMPERATURE_SENSOR_ID 0x02
+  #define HUMIDITY_SENSOR_ID 0x03
+  #define LIGHT_SENSOR_ID 0x04
+  
+  #define MQTT_SN_MAX_PACKET_LENGTH    (255)
+  #define MQTT_SN_TYPE_PUBLISH         (0x0C)
+  #define MQTT_SN_FLAG_RETAIN          (0x1 << 4)
+  #define MQTT_SN_FLAG_QOS_N1          (0x3 << 5)
+  #define MQTT_SN_SHORT_TOPIC_TYPE     (0x02 & 0x3)
+  #define MQTT_SN_HEADER_LENGTH        (0x07)
+#endif
+
+#ifdef MQTT_SN
 
 uint8_t debug = true;
 static uint16_t next_message_id = 1;
@@ -93,20 +101,22 @@ void mqtt_sn_publish(uint16_t topic_id, const char * data, uint8_t retain)
     }
 }
 
+#endif
+
 #include <util/atomic.h>
 
-#define SERIAL  1   // set to 1 to also report readings on the serial port
-#define DEBUG   1   // set to 1 to display each loop() run and PIR trigger
+#define SERIAL  0   // set to 1 to also report readings on the serial port
+#define DEBUG   0   // set to 1 to display each loop() run and PIR trigger
 
 // SHT11, ONE_WIRE and DHT11 are mutually exclusive.
 // for One WIRE and DHT11 we refer to the ARDUINO (D 4) PIN 6
 // For the other we use JeeNode PORT mapping.... yeah confusing.
 
-#define DHT11PIN 4
-//#define ONE_WIRE_PIN  4   // PD4 - defined in a OneWire sensor is connected to port 1.
+//#define DHT11PIN 4
+#define ONE_WIRE_PIN  4   // PD4 - defined in a OneWire sensor is connected to port 1.
 //#define SHT11_PORT  1   // defined if SHT11 is connected to a port
 #define LDR_PORT    4   // defined if LDR is connected to a port's AIO pin
-//#define PIR_PORT    4   // defined if PIR is connected to a port's DIO pin
+#define PIR_PORT    4   // defined if PIR is connected to a port's DIO pin
 // If you change this pin adjust the ISR() vector
 
 #define MEASURE_PERIOD  300 // how often to measure, in tenths of seconds
@@ -315,13 +325,10 @@ static void doReport() {
   PCICR &= ~(1 << PCIE2);  // disable the PD pin-change interrupt.     
 #endif
   rf12_sleep(RF12_WAKEUP);
-  while (!rf12_canSend())
-    rf12_recvDone();
-  //rf12_sendStart(0, &payload, sizeof payload, RADIO_SYNC_MODE);
-        
-        
-        
-        
+  rf12_sendNow(0, &payload, sizeof payload);
+  rf12_sendWait(RADIO_SYNC_MODE);        
+  
+#ifdef MQTT_SN        
   byte nodeId = 0x31;
         
   // Convert the 2 character topic name into a 2 byte topic id
@@ -345,6 +352,8 @@ static void doReport() {
   //sprintf(buff, "%d", payload.temp);
   buff[0] = 0x33;
   mqtt_sn_publish(topic_id, buff, false);  
+
+#endif  
   
   rf12_sleep(RF12_SLEEP);
 
@@ -384,9 +393,8 @@ static void doTrigger() {
 
   for (byte i = 0; i < RETRY_LIMIT; ++i) {
     rf12_sleep(RF12_WAKEUP);
-    while (!rf12_canSend())
-      rf12_recvDone();
-    rf12_sendStart(RF12_HDR_ACK, &payload, sizeof payload, RADIO_SYNC_MODE);
+    rf12_sendNow(RF12_HDR_ACK, &payload, sizeof payload);
+    rf12_sendWait(RADIO_SYNC_MODE);
     byte acked = waitForAck();
     rf12_sleep(RF12_SLEEP);
 
@@ -413,7 +421,9 @@ static void doTrigger() {
 void setup () {
 #if SERIAL || DEBUG
   Serial.begin(57600);
-  Serial.print("\n[roomNode.4]");
+  Serial.print("\n[roomNode.");
+  Serial.print(NODE_ID);
+  Serial.print("]");
   myNodeID = rf12_initialize(NODE_ID, RF12_868MHZ, 33);
 #else
   myNodeID = rf12_initialize(NODE_ID, RF12_868MHZ, 33); // don't report info on the serial port
