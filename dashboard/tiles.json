@@ -1,0 +1,69 @@
+[
+    {
+        "type": "button",
+        "name": "testbutton",
+        "subscribe_topic": "pit/test/button/state",
+        "publish_topic": "pit/test/button/action"
+    },
+    {
+        "type": "text",
+        "name": "Office Light Level",
+        "unit": "%",
+        "subscribe_topic": "pit/office/roomnode/light",
+        "thresholds": {
+                "low": 25,
+                "high": 100
+        }
+    },
+    {
+        "type": "text",
+        "name": "Office Temperature",
+        "unit": "C",
+        "subscribe_topic": "pit/office/roomnode/temperature",
+        "thresholds": {
+                "low": 19,
+                "high": 22
+        }
+    },
+    {
+        "type": "text",
+        "name": "Office Motion Dectected",
+        "unit": "bool",
+        "subscribe_topic": "pit/office/roomnode/motion",
+        "thresholds": {
+                "low": 0,
+                "high": 1
+        }
+    },
+    {
+        "type": "text",
+        "name": "Living Light Level",
+        "unit": "%",
+        "subscribe_topic": "pit/livingroom/roomnode/light",
+        "thresholds": {
+                "low": 25,
+                "high": 100
+        }
+    },
+    {
+        "type": "text",
+        "name": "Living Temperature",
+        "unit": "C",
+        "subscribe_topic": "pit/livingroom/roomnode/temperature",
+        "thresholds": {
+                "low": 19,
+                "high": 22
+        }
+    },
+    {
+        "type": "text",
+        "name": "Living Motion Dectected",
+        "unit": "bool",
+        "subscribe_topic": "pit/livingroom/roomnode/motion",
+        "thresholds": {
+                "low": 0,
+                "high": 1
+        }
+    }
+    
+]
