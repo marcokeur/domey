@@ -4,11 +4,11 @@
 import mosquitto
 import time
 #define what happens after connection
-def on_connect(client, userdata, flags):
+def on_connect(client, flags):
     print "Connected";
 
 #On recipt of a message create a pynotification and show it
-def on_message(client, userdata, msg):
+def on_message(client, msg):
 	print msg.payload;
 	time.sleep(1);
 	if msg.payload == "on":

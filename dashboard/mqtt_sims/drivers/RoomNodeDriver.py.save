@@ -1,0 +1,15 @@
+import serial
+import mosquitto
+
+ser = serial.Serial('/dev/ttyUSB0', 57600, timeout=1);
+
+DRIVERNAME = "RoomNode"
+
+def getName():
+	return DRIVERNAME
+
+def toMqtt(line, mqttc):
+	print "line to mqtt"
+
+def on_message(client, userdata, msg):
+	print msg.payload

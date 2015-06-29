@@ -1,7 +1,7 @@
 import serial
 import mosquitto
 
-ser = serial.Serial('/dev/ttyUSB1', 57600, timeout=1);
+ser = serial.Serial('/dev/ttyUSB0', 57600, timeout=1);
 mqttc = mosquitto.Mosquitto("python_sub")
 
 while True:
