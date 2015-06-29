@@ -96,16 +96,16 @@ function initTopicList(callback){
     
 //pass it on to the browsers
 function callbackToBrowser(topic, payload){
-    tiles.forEach(function(tile) {
-        if(tile.subscribe_topic == topic){        
-            topics[topic] = payload;
+    //tiles.forEach(function(tile) {
+    //    if(tile.subscribe_topic == topic){        
+    //        topics[topic] = payload;
 
             browsers.forEach(function(res) {
                 console.log("  informing browser: "+res);
                 res.write("data: " + JSON.stringify({topic:topic, payload:payload}) + "\n\n");
             });
-        }
-    });
+    //    }
+    //});
 }
 
 //pass to mongo
@@ -137,6 +137,7 @@ app.get('/tiles', function(req, res) {
 });
 
 app.get('/update-stream', function(req, res) {
+    console.log("browser");
     req.socket.setNoDelay(true);
     res.writeHead(200, {
         'Content-Type': 'text/event-stream',
