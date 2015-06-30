@@ -1,9 +1,15 @@
 [
     {
         "type": "button",
-        "name": "testbutton",
-        "subscribe_topic": "pit/test/button/state",
-        "publish_topic": "pit/test/button/action"
+        "name": "MiLight in Living",
+        "subscribe_topic": "pit/livingroom/milight/state",
+        "publish_topic": "pit/livingroom/milight/action"
+    },
+    {
+        "type": "button",
+        "name": "MiLight in Bedroom",
+        "subscribe_topic": "pit/bedroom/milight/state",
+        "publish_topic": "pit/bedroom/milight/action"
     },
     {
         "type": "text",

@@ -68,10 +68,10 @@ mongoclient.connect(settings.mongoUrl, function(err, db){
             console.log("Received MQTT: " + topic + ": " +payload);
 
             //callback to both browsers an store in database
-            callbackToBrowser(topic, payload);
+            callbackToBrowser(topic, payload.toString());
 
             //if mongo is ready, start pushing
-            callbackToMongo(mongoCollection, topic, payload);
+            callbackToMongo(mongoCollection, topic, payload.toString());
 
         }); 
     }
@@ -106,7 +106,7 @@ function callbackToBrowser(topic, payload){
 function callbackToMongo(collection, topic, payload){
     collection.update(
         { _id:topic },
-        { $push: { events: { event: { value:payload, when:new Date() } } } },
+        { $push: { events: { event: { value:payload.toString(), when:new Date() } } } },
         { upsert: true },
         function(err, docs){
             if(err)
@@ -142,7 +142,7 @@ app.get('/update-stream', function(req, res) {
     browsers.push(res);
 
     Object.keys(topics).forEach(function(key) {
-        res.write("data: " + JSON.stringify({topic:key, payload:topics[key]}) + "\n\n");
+        res.write("data: " + JSON.stringify({topic:key, payload:topics[key].toString()}) + "\n\n");
     });
 
     req.on("close", function() {

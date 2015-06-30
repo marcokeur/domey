@@ -40,10 +40,19 @@ module.exports = {
                 "subTopic" : "pit/livingroom/milight/action",
                 "pubTopic" : "pit/livingroom/milight/state",
                 "dataMap" : {
-                    "on"  : [0x42, 0x03, 0x55],
-                    "off" : [0x41, 0x03, 0x55]
+                    "on"  : [0x45, 0x03, 0x55],
+                    "off" : [0x46, 0x03, 0x55]
+                }
+            },
+            {
+                "subTopic" : "pit/bedroom/milight/action",
+                "pubTopic" : "pit/bedroom/milight/state",
+                "dataMap" : {
+                    "on"  : [0x47, 0x03, 0x55],
+                    "off" : [0x48, 0x03, 0x55]
                 }
             }
+            
         ]
     }
 }
