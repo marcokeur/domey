@@ -26,7 +26,6 @@ var mongoclient = mongo.MongoClient;
 var mongoCollection;
 
 var settings = require('./settings.js');
-require('./drivers');
 
 // Middleware
 var bodyParser = require('body-parser');
