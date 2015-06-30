@@ -3,7 +3,7 @@ var settings = require('../settings');
 var subscriptionList;
 
 // Connect to the MQTT sever
-client = mqtt.createClient(settings.mqttPort, settings.mqttHost);
+client = mqtt.connect({ host: settings.mqttHost, port: settings.mqttPort});
 
 client.on('connect', function () {
     subscriptionList = {};

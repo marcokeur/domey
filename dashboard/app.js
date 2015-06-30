@@ -52,13 +52,13 @@ mongoclient.connect(settings.mongoUrl, function(err, db){
 
         //init the topic list with values from mongo
         initTopicList(function(topics){
-            require('./api/topics')(app,topics);
+            require('./api/topics.js')(app,topics);
         });
         
         require('./api/history.js')(app, mongoCollection);
         
         // Connect to the MQTT sever
-        client = mqtt.createClient(settings.mqttPort, settings.mqttHost);
+        client = mqtt.connect({ host: settings.mqttHost, port: settings.mqttPort});
 
         //subscribe to the basetopic, so we get all submessages 
         client.subscribe(settings.mqttBaseTopic + '/#');
@@ -96,16 +96,10 @@ function initTopicList(callback){
     
 //pass it on to the browsers
 function callbackToBrowser(topic, payload){
-    //tiles.forEach(function(tile) {
-    //    if(tile.subscribe_topic == topic){        
-    //        topics[topic] = payload;
-
-            browsers.forEach(function(res) {
-                console.log("  informing browser: "+res);
-                res.write("data: " + JSON.stringify({topic:topic, payload:payload}) + "\n\n");
-            });
-    //    }
-    //});
+    browsers.forEach(function(res) {
+        console.log("  informing browser: "+res);
+        res.write("data: " + JSON.stringify({topic:topic, payload:payload}) + "\n\n");
+    });
 }
 
 //pass to mongo
@@ -157,13 +151,8 @@ app.get('/update-stream', function(req, res) {
     });
 });
 
-
-
-
-
 // Serve a static file, if it exists
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 var server = http.createServer(app)
 server.listen(settings.uiPort, settings.uiHost, function(){
