@@ -31,11 +31,17 @@ var settings = require('./settings.js');
 var bodyParser = require('body-parser');
 var errorhandler = require('errorhandler');
 var morgan  = require('morgan');
+var cookieParser = require('cookie-parser');
 
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(morgan());
+// parses request cookies, populating
+// req.cookies and req.signedCookies
+// when the secret is passed, used 
+// for signing the cookies.
+app.use(cookieParser('my secret here'));
 
 browsers = [];
 var topics = {};
@@ -56,6 +62,8 @@ mongoclient.connect(settings.mongoUrl, function(err, db){
         });
         
         require('./api/history.js')(app, mongoCollection);
+
+	require('./api/authorization.js')(app);
         
         // Connect to the MQTT sever
         client = mqtt.connect({ host: settings.mqttHost, port: settings.mqttPort});

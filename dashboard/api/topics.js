@@ -14,9 +14,13 @@ module.exports = function(app, topics){
     });
 
     app.post('/topics/*', function(req, res) {
-        var topic = req.params[0];
-        console.log("Publishing: '"+req.body.payload+"' to '"+topic+"'");
-        client.publish(topic, req.body.payload);
-        res.status(204).end();
+	if(req.cookies.autorized){
+        	var topic = req.params[0];
+        	console.log("Publishing: '"+req.body.payload+"' to '"+topic+"'");
+        	client.publish(topic, req.body.payload);
+        	res.status(204).end();
+	}else{
+		res.status(401).end();
+	}
     });
 }
