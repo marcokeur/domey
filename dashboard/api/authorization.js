@@ -1,23 +1,28 @@
+var settings = require('../settings.js');
+
 module.exports = function(app){
 
 app.get('/authorize', function(req, res){
   if (req.cookies.authorized) {
     res.send('Authorized :). Click to <a href="/forget">forget</a>!.');
   } else {
-    res.send('<form method="post"><p>Check to <label>'
-      + '<input type="checkbox" name="remember"/> remember me</label> '
-      + '<input type="submit" value="Submit"/>.</p></form>');
+    res.send('<form method="post" action="/authorize">'
+            + '<p>enter pin '
+            + '<input type="password" maxlength=4 name="pin" />'
+            + '<input type="submit" value="Submit"/></p></form>');
   }
 });
 
 app.get('/forget', function(req, res){
-  res.clearCookie('remember');
+  res.clearCookie('authorized');
   res.redirect('back');
 });
 
 app.post('/authorize', function(req, res){
-  var minute = 60 * 1000;
-  if (req.body.remember) res.cookie('authorized', 1, { maxAge: minute });
+  if (req.body.pin.toString() == settings.pin.toString()){
+      console.log("ok");
+      res.cookie('authorized', 1, { maxAge: settings.timeout });
+  }
   res.redirect('back');
 });
 }

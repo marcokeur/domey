@@ -4,16 +4,43 @@ var textfill_config = {
     maxFontPixels: 0
 };
 
-$.postJSON = function (url, data, callback) {
+$.postJSON = function (url, data, successCallback, errorCallback) {
     return jQuery.ajax({
         'type': 'POST',
         'url': url,
         'contentType': 'application/json',
         'data': $.toJSON(data),
         'dataType': 'json',
-        'success': callback
+        'success': successCallback,
+        'error': errorCallback
     });
 };
+
+function showAuthorizeWindow(){
+    var src = "/authorize";
+    $.modal('<iframe src="' + src + '" height="110" width="300" style="border:0">', {
+        closeHTML:"",
+        containerCss:{
+            backgroundColor:"#ddd", 
+            borderColor:"#ddd", 
+            height:70, 
+            padding:0, 
+            width:300
+        },
+        overlayClose:true
+    });
+}
+
+function postOrAuthorize(url, data){
+    $.postJSON(url,
+               data,
+                function(){},
+                function (xhr, ajaxOptions, thrownError) {
+                    if(xhr.status == 401){
+                        showAuthorizeWindow();
+                    }
+                });
+}
 
 $(function () { //DOM Ready
 
@@ -31,13 +58,13 @@ $(function () { //DOM Ready
                 //button.text('Off');
                 button.on("click", function (event) {
                     if (button.attr('state') == 'off') {
-                        $.postJSON('/topics/' + tile.publish_topic, {
-                            payload: "on"
-                        });
+                            postOrAuthorize('/topics/'+tile.publish_topic, {
+                                payload: "on"
+                            });
                     } else {
-                        $.postJSON('/topics/' + tile.publish_topic, {
-                            payload: "off"
-                        });
+                            postOrAuthorize('/topics/'+tile.publish_topic, {
+                                payload: "off"
+                            });
                     }
                 });
                 button.appendTo(item);

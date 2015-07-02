@@ -9,9 +9,21 @@ module.exports = function(app, mongoCollection){
             { $match : { _id : topic }},
             { $project : { _id: 0, events: 1 }},
             { $unwind : "$events" },
-            { $group : { "_id": "$events.event.when" },            
+            { $group : { "_id": "$events.event.when",            
                 "value": { "$first" : "$events.event.value" },
                 "when": { "$first" : "$events.event.when" }       
+                       }
+            },
+            { $project : { _id: 0,
+                          value: 1,
+                          when: {
+                            minute : { "$minute" : "$when" },
+                            hour : { "$hour" : "$when" },
+                            day : { "$dayOfMonth" : "$when" },
+                            month : { "$month" : "$when" },
+                            year : { "$year" : "$when" },
+                            }
+                         }
             },
             { $sort : { when : -1 } }
             ], function(err, doc) {
@@ -67,6 +79,7 @@ module.exports = function(app, mongoCollection){
     
     /* return results for one week (aggreagted by hour) */
     app.get('/history/week/*', function(req, res) {
+        console.log(mongoCollection);
         var topic = req.params[0];
         //var topic = 'revspace/sensors/nose/MQ-135'
         res.type('text/plain');
@@ -76,7 +89,6 @@ module.exports = function(app, mongoCollection){
             { $match : { _id : topic }},
             { $unwind : "$events" },
             { $group : { "_id": {
-                            "minute" : "00",
                             "hour" : { "$hour" : "$events.event.when" },
                             "day" : { "$dayOfMonth" : "$events.event.when" },
                             "month" : { "$month" : "$events.event.when" },

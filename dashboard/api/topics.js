@@ -14,7 +14,7 @@ module.exports = function(app, topics){
     });
 
     app.post('/topics/*', function(req, res) {
-	if(req.cookies.autorized){
+	if(req.cookies.authorized){
         	var topic = req.params[0];
         	console.log("Publishing: '"+req.body.payload+"' to '"+topic+"'");
         	client.publish(topic, req.body.payload);

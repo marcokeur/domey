@@ -18,7 +18,7 @@ module.exports = {
     // By default, Marquette accepts connections on all IPv4 interfaces.
     // The following property can be used to listen on a specific interface. For
     // example, the following would only allow connections from the local machine.
-    //uiHost: "0.0.0.0",
+    uiHost: "0.0.0.0",
 
     // the tcp port that the Marquette web server is listening on
     uiPort: 3000,
@@ -40,4 +40,10 @@ module.exports = {
     
     //mongo stuff
     mongoUrl: "mongodb://localhost:27017/marquette",
+    
+    //pin for sending stuff
+    pin: 1234,
+    
+    //timeout for session to expire
+    timeout: 60 * 1000 * 60 // one hour
 }
