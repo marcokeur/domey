@@ -6,7 +6,8 @@
   "dependencies": {
     "mqtt": "~1.3.2",
     "serialport": "~1.7.4",
-    "node-schedule": "~0.2.9"
+    "node-schedule": "~0.2.9",
+    "request": "~2.58.0"
   },
   "devDependencies": {},
   "scripts": {
