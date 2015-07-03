@@ -21,3 +21,5 @@ The jee driver is a bit special. Because a single jeenode on the raspberry side 
 
 ##embedded
 contains sourcecode from various sensors & acutators
+
+[![Build Status](https://travis-ci.org/marcokeur/domotica.svg?branch=master)](https://travis-ci.org/marcokeur/domotica)
