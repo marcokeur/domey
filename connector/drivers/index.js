@@ -1,6 +1,7 @@
 var mqtt = require('mqtt');
 var settings = require('../settings');
 var subscriptionList;
+var driverList = {};
 
 // Connect to the MQTT sever
 client = mqtt.connect({ host: settings.mqttHost, port: settings.mqttPort});
@@ -9,6 +10,11 @@ client.on('connect', function () {
     subscriptionList = {};
     
     requireDrivers();
+
+    for(var driver in driverList){
+        console.log(driver);
+        driverList[driver].initDriver();   
+    }
 });
 
 client.on('message', function (topic, message) {
@@ -23,7 +29,8 @@ function requireDrivers(){
     require('fs').readdirSync(__dirname + '/').forEach(function(file) {
     if (file.match(/\.js$/) !== null && file !== 'index.js') {
         var name = file.replace('.js', '');
-        exports[name] = require('./' + file)(publishCallback, subscribeCallback);
+        driverList[name] = require('./' + file);
+        driverList[name](settings[name], publishCallback, subscribeCallback);
       }
     });
 }
