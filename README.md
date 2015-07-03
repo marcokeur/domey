@@ -2,11 +2,13 @@ Domotica
 ========
 This repository holds all code that is used for my home domotica system. It consists of various components that will be explained here.
 
-The nodejs Stuff depends on the following packages; 
-    *nodejs
-    *mongodb
-    *npm
-    *python
+The nodejs stuff depends on the following packages; 
+*  nodejs
+*  mongodb
+*  npm
+*  python
+
+The embedded parts are build using Arduino IDE and ESP8266 SDK
 
 ##dashboard
 contains the frontend and middleware (mqtt stuff and mongodb database)
