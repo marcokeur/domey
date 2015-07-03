@@ -7,6 +7,7 @@ The nodejs stuff depends on the following packages;
 *  mongodb
 *  npm
 *  python
+*  build-essential (ubuntu) / base-devel (arch)
 
 The embedded parts are build using Arduino IDE and ESP8266 SDK
 
