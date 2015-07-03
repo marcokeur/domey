@@ -39,14 +39,14 @@ function createSocket(){
 }
 
 function doAction(topic, action){
-    for(var deviceid in settings.milight.deviceMap){
+    for(var deviceid in driverConfig.deviceMap){
         if(driverConfig.deviceMap[deviceid].subTopic == topic){
             for(var datakey in driverConfig.deviceMap[deviceid].dataMap){
                 if(datakey == action){
                     var message = Buffer(driverConfig.deviceMap[deviceid].dataMap[datakey]);
                     
                     //send the udp message
-                    client.send(message, 0, message.length, settings.milight.port, settings.milight.ip,  function(err, bytes) {
+                    client.send(message, 0, message.length, driverConfig.port, driverConfig.ip,  function(err, bytes) {
                         //udp packet send
                         console.log("set the " +topic+" " + action);
                     });
