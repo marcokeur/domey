@@ -1,0 +1,26 @@
+{
+	"id": "com.milight",
+	"version": "1.0",
+	"name": {
+		"en": "MiLight"
+	},
+	"description": {
+		"en": "Control your MiLights"
+	},
+	"author": {
+		"name": "Marco Keur",
+		"website": "http://github.com/marcokeur"
+	},
+	"dependencies": {
+		"dgram": "*"
+	},
+    "drivers": [
+		{
+			"id": "bulb",
+			"name": {
+				"en": "Milight Bulb",
+				"nl": "Milight Lamp"
+			}
+		}
+	]
+}
