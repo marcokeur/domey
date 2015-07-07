@@ -3,13 +3,18 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
 var managerList = [];
-
+var things = [];
 
 function Manager(){
 	EventEmitter.call(this);
 
 	//init managers here
 	//and put in list
+    var drivers = require('./manager/drivers.js');
+    managerList['drivers'] = new drivers();
+    
+    var web = require('./manager/web.js');
+    managerList['web'] = new web();
 }
 
 module.exports = Manager;
@@ -19,32 +24,28 @@ util.inherits(Manager, EventEmitter);
 Manager.prototype.init = function(){
 	console.log('Manager - init');
 
-    var drivers = require('./manager/drivers.js');
-    managerList['drivers'] = new drivers();
+    for(var manager in managerList)
+        managerList[manager].init();
     
-    loadThings();
-    /*
-	requireManagers(this);
-	console.log(ManagerList);
-    for(var manager in ManagerList){
-        console.log('Manager - registering ' + manager);
-        ManagerList[manager].init();
-    }
-    */
+    loadThings(this);
 };
 
 Manager.prototype.manager = function ( type ){
 	//get from list
 	//and return
-	if(ManagerList[type] == undefined){
-		return ManagerList;
+	if(managerList[type] == undefined){
+		return managerList;
 	}else{
-		return ManagerList[type];
+		return managerList[type];
 	}
 }
 
 Manager.prototype.log = function ( msg ){
 	console.log("Manager.log: " + msg);
+}
+
+Manager.prototype.getThings = function(){
+    return things;   
 }
 
 function parseMeta(file){
@@ -67,10 +68,19 @@ function installDependencies( dependencies, callback ){
     });   
 }
 
-function loadThings(){
+function Thing(name, humanName, uri){
+    this.name = name;
+    this.humanName = humanName;
+    this.uri = uri;
+}
+
+var loadedDrivers = [];
+
+
+function loadThings(self){
     fs.readdirSync(__dirname + '/../things/').forEach(function(thingName) {
        var meta = parseMeta(__dirname + '/../things/' + thingName + '/app.json'); 
-        console.log(meta.dependencies);
+        console.log(meta);
         var depList = [];
         for(var dep in meta.dependencies){
             depList.push(dep);
@@ -79,61 +89,33 @@ function loadThings(){
             //dependencies installed
             //lets load the drivers
             meta.drivers.forEach(function(driver){
-  console.log(driver);              managerList['drivers'].loadDriver(thingName, driver.id);
+                console.log('driver: ' + driver + ' thingname -> ' + thingName);
+                managerList['drivers'].loadDriver(thingName, driver.id, function(){
+                    
+                    loadedDrivers.push(driver.id);
+                    if(loadedDrivers.length == 2){
+                        self.emit('ready');    
+                    }
+                });
             });
         });
+        
+        fs.exists(__dirname + '/../things/' + thingName + '/api.js', function(){
+            managerList['web'].registerApi(thingName, __dirname + '/../things/' + thingName + '/api.js', function(){
+                console.log('api registered');
+            });
+        });
+        
+        if(meta.configPage !== undefined){
+            //register a handle to page
+            managerList['web'].registerPage(thingName, __dirname + '/../things/' + thingName + '/' + meta.configPage, '/' + thingName + '/' + meta.configPage, function(){
+                console.log('page registered');
+            });
+            
+            //add the 'thing' to the list for menu
+            things.push(new Thing(thingName, meta.name.en, '/' + thingName + '/' + meta.configPage));
+
+        }
     }); 
 }
 
-/*
-function requireManagers(self){
-    require('fs').readdirSync(__dirname + '/manager/').forEach(function(file) {
-    if (file.match(/\.js$/) !== null && file !== 'index.js') {
-        var name = file.replace('.js', '');
-        var raw = require('./manager/' + file);
-        ManagerList[name] = new raw();
-        
-        if(name == 'things'){
-            ManagerList[name].on('ready', function(){
-                self.emit('ready');
-            });
-        }
-      }
-    });
-}
-
-function registerThings(self, callback){
-    require('fs').readdirSync(__dirname + '/../../things').forEach(function(thing, index, array) {
-        console.log('Things - registering thing: ' + thing);
-        
-        var depList = [];
-        
-        var app_json = JSON.parse(require('fs').readFileSync(__dirname + '/../../things/' + thing + '/app.json', 'utf-8'));
-        for(var dep in app_json.dependencies){
-            depList.push(dep);   
-        }
-
-        if(depList.length > 0){
-            installDependencies(depList, thing, function(thing){
-                if(require('fs').existsSync(__dirname + '/../../things/' + thing + '/app.js')){
-                    var raw = require(__dirname + '/../../things/' + thing + '/app.js');
-                    thingsList[thing] = new raw();
-                }
-                console.log('things.done for ' + thing);
-
-                if (index === array.length - 1) {
-                    console.log('all things done');
-                    callback(self);
-                }
-            });
-        }else{
-                if (index === array.length - 1) {
-                    console.log('all things done');
-                    callback(self);
-                }
-        }
-    });
-}
-
-
-*/

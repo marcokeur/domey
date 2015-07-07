@@ -1,0 +1,57 @@
+.sidebar-nav.navbar-collapse
+    ul#side-menu.nav
+      li.sidebar-search
+        .input-group.custom-search-form
+          input.form-control(type='text', placeholder='Search...')
+          |                                 
+          span.input-group-btn
+            button.btn.btn-default(type='button')
+              i.fa.fa-search
+        // /input-group
+      |                         
+      li
+        a(href='index.html')
+          i.fa.fa-dashboard.fa-fw
+          |  Dashboard
+      |                         
+      li
+        a(href='#')
+          i.fa.fa-bar-chart-o.fa-fw
+          |  Internals
+          span.fa.arrow
+        |                             
+        ul.nav.nav-second-level
+          li
+            a(href='/mqtt') Mqtt log
+          |                                 
+          li
+            a(href='/aggregation') Aggregation
+        // /.nav-second-level
+      |                                              
+      li
+        a(href='#')
+          i.fa.fa-files-o.fa-fw
+          |  Sample Pages
+          span.fa.arrow
+        |                             
+        ul.nav.nav-second-level
+          li
+            a(href='/blank.html') Blank Page
+          |                                 
+          li
+            a(href='/login.html') Login Page
+        // /.nav-second-level
+      |                         
+      li
+        a(href='#')
+          i.fa.fa-files-o.fa-fw
+          |  Things
+          span.fa.arrow
+        |                             
+        ul.nav.nav-second-level
+          #things
+          for thing in things
+            include sidebar-item-thing
+            //a(href='login.html') Login Page
+        // /.nav-second-level        
+    // /.sidebar-collapse

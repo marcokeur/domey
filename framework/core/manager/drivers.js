@@ -22,29 +22,18 @@ Drivers.prototype.getDriver = function( id ){
     return driverList[id];
 };
 
-Drivers.prototype.loadDriver = function( thing, driverId ){
+Drivers.prototype.loadDriver = function( thing, driverId, callback){
     var driver = require(__dirname + '/../../things/' + thing +   '/drivers/' + driverId + '/driver.js');
     driverList[driverId] = driver;
+    console.log('driverlist ' + driverList[driverId]);
+        console.log(util.inspect(driverList, {showHidden: false, depth: null}));
+
+    callback();
 };
 
-//eventEmitter.on('things.done', registerDrivers());
-/*
-function registerDrivers(){
-    require('fs').readdirSync(__dirname + '/../../things/').forEach(function(thing) {
-        console.log('Drivers - registering drivers for thing: ' + thing);
-        
-            var app_json = JSON.parse(require('fs').readFileSync(__dirname + '/../../things/' + thing + '/app.json', 'utf-8'));
-            if(app_json.drivers !== undefined){
-                app_json.drivers.forEach(function(driver){
-                    console.log('Drivers - registering driver: ' +driver.id);   
+Drivers.prototype.realtime = function(driverName, device, key, value){
+    console.log('realtime event! -> ' + driverName + ' ' + device + ' ' + key + ' ' + value);
+    var util = require('util');
 
-                    var raw = require(__dirname + '/../../things/' + thing + '/drivers/' + driver.id + '/driver.js');
-                    console.log(raw);
-                    driverList[driver.id] = raw;
-            
-                });
-            }
-
-    });
-}
-*/
+    this.emit('realtime');
+};

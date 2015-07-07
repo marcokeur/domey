@@ -1,0 +1,28 @@
+{
+	"id": "org.jeelabs",
+	"version": "1.0",
+	"name": {
+		"en": "JeeLabs"
+	},
+	"description": {
+		"en": "Computing stuff tied to the pysical world!"
+	},
+	"author": {
+		"name": "Marco Keur",
+		"website": "http://github.com/marcokeur"
+	},
+	"dependencies": {
+		"serialport": "*"
+	},
+    "drivers": [
+		{
+			"id": "roomnode",
+			"name": {
+				"en": "JeeLabs RoomNode",
+				"nl": "JeeLabs RoomNode"
+			},
+            "capabilities": [ "temperature", "light", "motion" ]
+		}
+	],
+    "configPage" : "config.jade"
+}

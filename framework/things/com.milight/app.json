@@ -20,7 +20,9 @@
 			"name": {
 				"en": "Milight Bulb",
 				"nl": "Milight Lamp"
-			}
+			},
+            "capabilities": [ "onoff" ]
 		}
-	]
+	],
+    "configPage" : "config.jade"
 }
