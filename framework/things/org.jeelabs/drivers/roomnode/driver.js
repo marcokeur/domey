@@ -38,10 +38,15 @@ var self = {
 
                 // emit realtime event if something has changed
                 Object.keys(package.state).forEach(function(sensor){
-                    Manager.manager('drivers').realtime('roomnode',
-                        package.id, 
-                        sensor, 
-                        package.state[sensor]);
+                    Manager.manager('drivers').realtime({
+                        thing: 'org.jeenode',
+                        driver: 'roomnode',
+                        device: package.id, 
+                        state: {
+                            type: sensor,
+                            value: package.state[sensor]
+                        }
+                    });
                 });
             });
         });
@@ -52,7 +57,7 @@ var self = {
         
         callback();
     },
-
+    
 	getDevice: function( id ) {
 		if( typeof this.devices[id] == 'undefined' ) return new Error("device is not connected (yet)");
 		return this.devices[id];
@@ -62,27 +67,6 @@ var self = {
         return device;
     },
  
-    /*
-    update: function( id ) {
-        var device = self.getDevice( id );
-        var message = [];
-        if ( device.state.onoff ) {
-            message.push(device.on);  
-        }else{
-            message.push(device.off);    
-        }
-        
-        message.push(0x00);
-        message.push(0x55);
-        
-        var buf = new Buffer(message);
-        
-        console.log(buf.toString('hex'));
-        client.send(buf, 0, buf.length, 8899, '255.255.255.255', function(err, bytes){
-            console.log('data send');
-        });
-    },
-*/
     capabilities: {
 
         onoff: {

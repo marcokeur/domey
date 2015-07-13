@@ -25,15 +25,17 @@ Drivers.prototype.getDriver = function( id ){
 Drivers.prototype.loadDriver = function( thing, driverId, callback){
     var driver = require(__dirname + '/../../things/' + thing +   '/drivers/' + driverId + '/driver.js');
     driverList[driverId] = driver;
-    console.log('driverlist ' + driverList[driverId]);
-        console.log(util.inspect(driverList, {showHidden: false, depth: null}));
+    driverList[driverId].init('bla', function(){
+        console.log('driver init done');
+    });
+    console.log(util.inspect(driverList, {showHidden: false, depth: null}));
 
     callback();
 };
 
-Drivers.prototype.realtime = function(driverName, device, key, value){
-    console.log('realtime event! -> ' + driverName + ' ' + device + ' ' + key + ' ' + value);
+Drivers.prototype.realtime = function(msg){
+    console.log('realtime event! -> ' + JSON.stringify(msg));
     var util = require('util');
 
-    this.emit('realtime');
+    this.emit('realtime', msg);
 };

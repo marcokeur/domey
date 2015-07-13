@@ -58,9 +58,14 @@ var self = {
                     self.capabilities.onoff.set( deviceId, false, function(){                    
                         // emit realtime event if something has changed
                         Manager.manager('drivers').realtime('bulb', {
-                            id: self.devices[deviceId].id
-                        }, 'state', self.devices[deviceId].state);
-                    });
+                            thing: 'com.milight',
+                            driver: 'bulb',
+                            device: self.devices[deviceId].id,
+                            state: {
+                                'onoff' : self.devices[deviceId].state
+                            }
+                        });
+                    });                    
                 }
             }
         });

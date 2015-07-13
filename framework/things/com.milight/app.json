@@ -24,5 +24,26 @@
             "capabilities": [ "onoff" ]
 		}
 	],
-    "configPage" : "config.jade"
+    "configPage" : "config.jade",
+    "flow": {
+        "actions": [
+            {
+                "method": "lightOn",
+                "title" : {
+                    "en" : "Turn on a bulb",
+                    "nl" : "Zet een lamp aan"
+                },
+                "args": [
+                    {
+                        "name": "bulb",
+                        "type": "device",
+                        "placeholder":{
+                            "en" : "Find a bulb...",
+                            "nl" : "Vind een lamp..."
+                        }
+                    }                        
+                ]
+            }
+        ]
+    }
 }

@@ -15,6 +15,9 @@ function Manager(){
     
     var web = require('./manager/web.js');
     managerList['web'] = new web();
+    
+    var persistence = require('./manager/persistence.js');
+    managerList['persistence'] = new persistence();
 }
 
 module.exports = Manager;
@@ -53,6 +56,7 @@ function parseMeta(file){
 }
 
 function installDependencies( dependencies, callback ){
+/*    
     var npm = require("npm");
     npm.load(function (err) {
       // catch errors
@@ -66,12 +70,16 @@ function installDependencies( dependencies, callback ){
         //console.log(message);
       });
     });   
+    */
+              callback();
+
 }
 
-function Thing(name, humanName, uri){
+function Thing(name, humanName, uri, meta){
     this.name = name;
     this.humanName = humanName;
     this.uri = uri;
+    this.meta = meta;
 }
 
 var loadedDrivers = [];
@@ -106,14 +114,16 @@ function loadThings(self){
             });
         });
         
+        managerList['web'].registerThing(thingName, meta);
+        
         if(meta.configPage !== undefined){
             //register a handle to page
-            managerList['web'].registerPage(thingName, __dirname + '/../things/' + thingName + '/' + meta.configPage, '/' + thingName + '/' + meta.configPage, function(){
+            managerList['web'].registerPage(thingName, __dirname + '/../things/' + thingName + '/' + meta.configPage, '/' + thingName + '/' + meta.configPage, meta, function(){
                 console.log('page registered');
             });
             
             //add the 'thing' to the list for menu
-            things.push(new Thing(thingName, meta.name.en, '/' + thingName + '/' + meta.configPage));
+            things.push(new Thing(thingName, meta.name.en, '/' + thingName, meta));
 
         }
     }); 
