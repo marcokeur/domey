@@ -1,7 +1,7 @@
 extends wrapper.jade
 
 block title
-    h1.page-header JeeLabs
+    h1.page-header #{currentThing.humanName}
 
 block content
     .row
@@ -27,3 +27,6 @@ block content
                                                 td #{device.id}
                                                 td #{key}
                                                 td #{value}
+                                                
+block script            
+    script(src='/js/thing.js')  

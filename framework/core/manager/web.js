@@ -6,9 +6,20 @@ var express = require('express')
 , http = require('http')
 , server = http.createServer(app)
 , jade = require('jade')
-, io = require('socket.io').listen(server);
+, io = require('socket.io').listen(server)
+, passport = require('passport')
+, localStrategy = require('passport-local')
+, flash = require('connect-flash')
+, expressSession = require('express-session')
+, bodyParser = require('body-parser');
 
-var webContent = {};
+
+var users = [
+        { username: 'marco' },
+        { username: 'marko' }
+    ];
+
+
 
 function Web() 
 {
@@ -26,34 +37,53 @@ Web.prototype.init = function(){
     app.set('views', __dirname + '/../../views');
     app.set('view engine', 'jade');
     
+    passport.serializeUser(function(user, done) {
+        done(null, user.username);
+    });
+
+    passport.deserializeUser(function(id, done) {
+        for(user in users){
+            if(users[user].username == id){
+                done(null, user);
+            }
+        }
+    });
+    
+    passport.use('login', new localStrategy({
+        usernameField: 'username',
+        passwordField: 'password',
+        passReqToCallback : true
+      },
+      function(req, username, password, done) {
+        console.log('username' + username);
+        if(username == 'marco'){
+            var user = {
+                username: 'marco'
+            }
+            return done(null, user);
+        }else{
+            return done(null, false, 
+                req.flash('message', 'User Not found.'));  
+        }
+    }));
+    
+    //auth
+    app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(expressSession({secret: 'mySecretKey'}));
+    app.use(passport.initialize());
+    app.use(passport.session());
+    app.use(flash());
+    
     // static file handling
     app.use(express.static(__dirname + '/../../public'));    
-    
-    app.get('/', function(request, response) {
-            gatherContent();
-    console.log(webContent);
-        response.render('wrapper', webContent);
-    });
-    
-    app.get('/login', function(request, response){
-            gatherContent();
 
-        response.render('login', webContent);
-    });
+    //load routes from dir
+    require(__dirname + '/../../routes')(app, io, passport);
     
-    app.post('/login', function(request, response){
-            gatherContent();
+    app.get('/', isAuthenticated, function(request, response) {
+        response.redirect('/dashboard');
+    });
 
-        response.redirect('/');
-    });
-        
-    io.sockets.on('connection', function(socket) {
-      socket.on('message', function (message) {
-          console.log('Received message: ' + message);
-          io.sockets.emit('pageview', { 'url': message });
-      });
-    });
-    
     Manager.manager('drivers').on('realtime', function(msg){
         console.log('event! ' + msg);
         io.sockets.emit('realtime', msg);
@@ -70,6 +100,8 @@ Web.prototype.registerThing = function(thing, meta){
 
         gatherContent();
         webContent['currentThing'] = {
+            humanName: meta.name.en,
+            desc: meta.description,
             drivers : meta.drivers
         };
         
@@ -137,5 +169,15 @@ function gatherContent(){
               'uri' : things[i].uri    
             }
         );
-    }    
+    }
+    
+    return webContent;
+}
+
+// As with any middleware it is quintessential to call next()
+// if the user is authenticated
+var isAuthenticated = function (req, res, next) {
+  if (req.isAuthenticated())
+    return next();
+  res.redirect('/login');
 }

@@ -11,3 +11,7 @@ socket.on('realtime', function(msg) {
     $('#'+rowid).remove();
     $('#'+msg.driver).prepend('<tr id="'+rowid+'"><td>'+msg.device+'</td><td>'+msg.state.type+'</td><td>'+msg.state.value+'</td></tr>');
 });
+
+socket.on('dashboard_items', function(msg) {
+    console.log(msg);
+});

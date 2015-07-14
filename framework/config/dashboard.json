@@ -1,0 +1,72 @@
+{
+    "dashboard" : [
+        { 
+            "name" : {
+                "en" : "Livingroom"
+            },
+            "desc" : {
+                "en" : "All roomnodes sensors in one dashboard"
+            },
+            "items" : [
+                { 
+                    "name" : {
+                        "en" : "Temperature Office",
+                        "nl" : "Temperatuur kantoor"
+                    },
+                    "desc" : {
+                        "en" : "degrees celcius"   
+                    },
+                    "filter" : {
+                        "thing" : "com.milight",
+                        "driver" : "roomnode",
+                        "device" : "rf12-868:33:2",
+                        "state" : "temperature"
+                    }
+                },
+                { 
+                    "name" : {
+                        "en" : "Light Office"
+                    },
+                    "desc" : {
+                        "en" : "percent"   
+                    },
+                    "filter" : {
+                        "thing" : "com.milight",
+                        "driver" : "roomnode",
+                        "device" : "rf12-868:33:2",
+                        "state" : "light"
+                    }
+                },
+                {
+                    "name" : {
+                        "en" : "Motion Office"
+                    },
+                    "desc" : {
+                        "en" : "boolean"   
+                    },
+                    "filter" : {
+                        "thing" : "com.milight",
+                        "driver" : "roomnode",
+                        "device" : "rf12-868:33:2",
+                        "state" : "motion"
+                    }
+                },
+                { 
+                    "name" : {
+                        "en" : "Temperature Living",
+                        "nl" : "Temperatuur woonkamer"
+                    },
+                    "desc" : {
+                        "en" : "degrees celcius"   
+                    },
+                    "filter" : {
+                        "thing" : "com.milight",
+                        "driver" : "roomnode",
+                        "device" : "rf12-868:33:3",
+                        "state" : "temperature"
+                    }
+                }
+            ]
+        }
+    ]
+}
