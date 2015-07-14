@@ -1,5 +1,6 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
+var fs = require('fs');
 
 var express = require('express')
 , app = express()
@@ -13,13 +14,7 @@ var express = require('express')
 , expressSession = require('express-session')
 , bodyParser = require('body-parser');
 
-
-var users = [
-        { username: 'marco' },
-        { username: 'marko' }
-    ];
-
-
+var users = {}
 
 function Web() 
 {
@@ -33,7 +28,6 @@ util.inherits(Web, EventEmitter);
 Web.prototype.init = function(){
 	console.log("Web init");
       
-    
     app.set('views', __dirname + '/../../views');
     app.set('view engine', 'jade');
     
@@ -55,16 +49,16 @@ Web.prototype.init = function(){
         passReqToCallback : true
       },
       function(req, username, password, done) {
-        console.log('username' + username);
-        if(username == 'marco'){
-            var user = {
-                username: 'marco'
+        users = JSON.parse(fs.readFileSync(__dirname + '/../../config/users.json', 'utf8')).users;
+        
+        for(i in users){
+            if(users[i].username == username && users[i].password == password){
+                return done(null, users[i]);
             }
-            return done(null, user);
-        }else{
-            return done(null, false, 
-                req.flash('message', 'User Not found.'));  
         }
+        
+        //if no match has been found
+        return done(null, false, req.flash('error', 'Invalid credentials'));  
     }));
     
     //auth
@@ -80,12 +74,11 @@ Web.prototype.init = function(){
     //load routes from dir
     require(__dirname + '/../../routes')(app, io, passport);
     
-    app.get('/', isAuthenticated, function(request, response) {
+    app.get('/', this.isAuthenticated, function(request, response) {
         response.redirect('/dashboard');
     });
 
     Manager.manager('drivers').on('realtime', function(msg){
-        console.log('event! ' + msg);
         io.sockets.emit('realtime', msg);
     });
     
@@ -109,7 +102,6 @@ Web.prototype.registerThing = function(thing, meta){
             webContent.currentThing['devices'] = Manager.manager('drivers').getDriver(webContent.currentThing.drivers[i].id).devices;
         }
 
-        console.log(JSON.stringify(webContent.currentThing.devices));
         response.render(__dirname + '/../../views/thing.jade', webContent);
     });    
 }
@@ -159,7 +151,7 @@ Web.prototype.registerPage = function(thing, file, uri, meta, callback){
 }
 
 
-function gatherContent(){
+Web.prototype.gatherContent = function(){
     webContent = {}
     var things = Manager.getThings();
     webContent.menu = [];
@@ -176,7 +168,7 @@ function gatherContent(){
 
 // As with any middleware it is quintessential to call next()
 // if the user is authenticated
-var isAuthenticated = function (req, res, next) {
+Web.prototype.isAuthenticated = function (req, res, next) {
   if (req.isAuthenticated())
     return next();
   res.redirect('/login');

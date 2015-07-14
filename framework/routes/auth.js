@@ -1,6 +1,6 @@
 module.exports = function(app, passport) {
     app.get('/login', function(request, response){
-        response.render('login', { message: request.flash('message') });
+        response.render('login', { message: request.flash('error') });
     });
     
     /* Handle Login POST */

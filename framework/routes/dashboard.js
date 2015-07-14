@@ -4,10 +4,9 @@ var dashboardConfig = JSON.parse(fs.readFileSync(__dirname + "/../config/dashboa
 module.exports = function(app, io){
     //serve the dashboard
     app.get('/dashboard', function(request, response) {
-        webContent = gatherContent();
+        webContent = Manager.manager('web').gatherContent();
         webContent['dashboard'] = dashboardConfig.dashboard;
 
-        console.log(JSON.stringify(webContent));
         response.render('dashboard', webContent);    
     });
     
@@ -18,18 +17,3 @@ module.exports = function(app, io){
       //});
     });
 };
-
-function gatherContent(){
-    webContent = {}
-    var things = Manager.getThings();
-    webContent.menu = [];
-    for(var i in things){
-        webContent.menu.push( 
-            { 'humanName' : things[i].humanName,
-              'uri' : things[i].uri    
-            }
-        );
-    }
-    
-    return webContent;
-}

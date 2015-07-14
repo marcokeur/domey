@@ -9,17 +9,19 @@ block wrapper
                   h3.panel-title Please Sign In
                 |                     
                 .panel-body
-                  form(role='form', action='/login', method='post')
-                    fieldset
-                      .form-group
-                        input.form-control(placeholder='E-mail', name='username', type='text', autofocus='')
-                      |                                 
-                      .form-group
-                        input.form-control(placeholder='Password', name='password', type='password', value='')
-                      |                                 
-                      .checkbox
-                        label
-                          input(name='remember', type='checkbox', value='Remember Me')
-                          | Remember Me
-                      // Change this to a button or input when using this as a form
-                      input.btn.btn-lg.btn-success.btn-block(type='submit', value='Login')
+                    if message && message.length
+                        strong #{message}
+                    form(role='form', action='/login', method='post')
+                        fieldset
+                          .form-group
+                            input.form-control(placeholder='E-mail', name='username', type='text', autofocus='')
+                          |                                 
+                          .form-group
+                            input.form-control(placeholder='Password', name='password', type='password', value='')
+                          |                                 
+                          .checkbox
+                            label
+                              input(name='remember', type='checkbox', value='Remember Me')
+                              | Remember Me
+                          // Change this to a button or input when using this as a form
+                          input.btn.btn-lg.btn-success.btn-block(type='submit', value='Login')
