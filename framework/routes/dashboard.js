@@ -3,7 +3,7 @@ var dashboardConfig = JSON.parse(fs.readFileSync(__dirname + "/../config/dashboa
 
 module.exports = function(app, io){
     //serve the dashboard
-    app.get('/dashboard', function(request, response) {
+    app.get('/dashboard', Manager.manager('web').isAuthenticated, function(request, response) {
         webContent = Manager.manager('web').gatherContent();
         webContent['dashboard'] = dashboardConfig.dashboard;
 
