@@ -1,0 +1,49 @@
+{
+	"id": "com.milight",
+	"version": "1.0",
+	"name": {
+		"en": "MiLight"
+	},
+	"description": {
+		"en": "Control your MiLights"
+	},
+	"author": {
+		"name": "Marco Keur",
+		"website": "http://github.com/marcokeur"
+	},
+	"dependencies": {
+		"dgram": "*"
+	},
+    "drivers": [
+		{
+			"id": "bulb",
+			"name": {
+				"en": "Milight Bulb",
+				"nl": "Milight Lamp"
+			},
+            "capabilities": [ "onoff" ]
+		}
+	],
+    "configPage" : "config.jade",
+    "flow": {
+        "actions": [
+            {
+                "method": "lightOn",
+                "title" : {
+                    "en" : "Turn on a bulb",
+                    "nl" : "Zet een lamp aan"
+                },
+                "args": [
+                    {
+                        "name": "bulb",
+                        "type": "device",
+                        "placeholder":{
+                            "en" : "Find a bulb...",
+                            "nl" : "Vind een lamp..."
+                        }
+                    }                        
+                ]
+            }
+        ]
+    }
+}

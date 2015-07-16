@@ -1,0 +1,32 @@
+extends wrapper.jade
+
+block title
+    h1.page-header #{currentThing.humanName}
+
+block content
+    .row
+        each driver in currentThing.drivers
+            .col-lg-6
+                .panel.panel-default
+                    .panel-heading
+                        | #{driver.name.en}
+                    .panel-body
+                        .table-responsive
+                            table.table.table-striped.table-bordered.table-hover
+                                thead
+                                    tr 
+                                        th device
+                                        th sensor
+                                        th value
+                                tbody(id='#{driver.id}')
+                                    each device in currentThing.devices
+                                        each value, key in device.state
+                                            - var rowid = device.id + '_' + key
+                                            - var rowid = rowid.replace(/:/g, '-')
+                                            tr(id='#{rowid}')
+                                                td #{device.id}
+                                                td #{key}
+                                                td #{value}
+                                                
+block script            
+    script(src='/js/thing.js')  
