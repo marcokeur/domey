@@ -23,6 +23,5 @@
 			},
             "capabilities": [ "temperature", "light", "motion" ]
 		}
-	],
-    "configPage" : "config.jade"
+	]
 }

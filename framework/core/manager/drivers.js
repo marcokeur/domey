@@ -17,23 +17,30 @@ util.inherits(Drivers, EventEmitter);
 
 Drivers.prototype.init = function(){
 	//console.log("Drivers init");
+    Manager.on('thing_registered', function(thing){
+        thing.meta.drivers.forEach(function(driver){
+            console.log('driver: ' + driver.id + ' thingname -> ' + thing.name);
+            loadDriver(thing.name, driver.id, function(){
+               Manager.manager('drivers').emit('driver_registered', driver); 
+            });
+        }); 
+    });
 };
 
 Drivers.prototype.getDriver = function( id ){
     return driverList[id];
 };
 
-Drivers.prototype.loadDriver = function( thing, driverId, callback){
-    var driver = require(__dirname + '/../../things/' + thing +   '/drivers/' + driverId + '/driver.js');
-    driverList[driverId] = driver;
-    driverList[driverId].init('bla', function(){
-        //console.log('driver init done');
-    });
-
-    callback();
-};
-
 Drivers.prototype.realtime = function(msg){
     this.emit('realtime', msg);
     winston.info('Realtime event emitted', msg);
+};
+
+function loadDriver( thing, driverId, callback){
+    var driver = require(__dirname + '/../../things/' + thing +   '/drivers/' + driverId + '/driver.js');
+    driverList[driverId] = driver;
+    driverList[driverId].init('devices...', function(){
+        //callback when driver is loaded
+        callback();
+    });
 };

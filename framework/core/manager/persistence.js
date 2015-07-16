@@ -35,6 +35,7 @@ Persistence.prototype.init = function(){
     
     Manager.manager('drivers').on('realtime', function(msg){
         console.log('store in db');
+        /*
         var event = new RealtimeEvent({
             _id: {
             thing: msg.thing,
@@ -70,6 +71,7 @@ Persistence.prototype.init = function(){
                     console.log(event);
                 }
             });
+            */
     });
 };
 

@@ -18,6 +18,21 @@ function Manager(){
     
     var persistence = require('./manager/persistence.js');
     managerList['persistence'] = new persistence();
+    
+    var flow = require('./manager/flow.js');
+    managerList['flow'] = new flow();
+    
+    this.on('thing_registered', function(thing){
+        //check if all items have been loaded
+        if(things.length == fs.readdirSync(__dirname + '/../things/').length) {
+            //if so, emit the all things registered event
+            this.emit('all_things_registered', things); 
+            console.log('all things registered!');
+            
+                this.emit('testflow');
+
+        }    
+    });
 }
 
 module.exports = Manager;
@@ -25,7 +40,7 @@ module.exports = Manager;
 util.inherits(Manager, EventEmitter);
 
 Manager.prototype.init = function(){
-	console.log('Manager - init');
+	console.log('Framework - init');
 
     for(var manager in managerList)
         managerList[manager].init();
@@ -43,89 +58,95 @@ Manager.prototype.manager = function ( type ){
 	}
 }
 
-Manager.prototype.log = function ( msg ){
-	console.log("Manager.log: " + msg);
-}
-
 Manager.prototype.getThings = function(){
     return things;   
 }
 
-function parseMeta(file){
+Manager.prototype.getThing = function(thingName){
+    for(i in things){
+        if(things[i].name == thingName){
+            return things[i];
+        }
+    }
+}
+
+function loadJSON(file){
     return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
 function installDependencies( dependencies, callback ){
-/*    
+    var depList = [];
+    for(var dep in dependencies){
+        depList.push(dep);
+    }
+
     var npm = require("npm");
     npm.load(function (err) {
-      // catch errors
-      npm.commands.install(dependencies, function (er, data) {
-        // log the error or data
-          console.log('npm install done');
-          callback();
-      });
-      npm.on("log", function (message) {
-        // log the progress of the installation
-        //console.log(message);
-      });
+        // catch errors
+        npm.commands.install(depList, function (er, data) {
+            // log the error or data
+            console.log('npm install done');
+            callback();
+        });
+        npm.on("log", function (message) {
+            // log the progress of the installation
+            console.log(message);
+        });
     });   
-    */
-              callback();
-
 }
 
-function Thing(name, humanName, uri, meta){
+function Thing(name, humanName, uri, meta, obj){
     this.name = name;
     this.humanName = humanName;
     this.uri = uri;
     this.meta = meta;
+    this.obj = obj;
 }
 
 var loadedDrivers = [];
 
 
 function loadThings(self){
-    fs.readdirSync(__dirname + '/../things/').forEach(function(thingName) {
-       var meta = parseMeta(__dirname + '/../things/' + thingName + '/app.json'); 
-        console.log(meta);
-        var depList = [];
-        for(var dep in meta.dependencies){
-            depList.push(dep);
-        }
-        installDependencies(depList, function(){
-            //dependencies installed
-            //lets load the drivers
-            meta.drivers.forEach(function(driver){
-                console.log('driver: ' + driver + ' thingname -> ' + thingName);
-                managerList['drivers'].loadDriver(thingName, driver.id, function(){
+    var installedThingsFile = __dirname + '/../config/installed_things.json';
+    var installedThings = loadJSON(installedThingsFile);
+    
+    //for each thing in dir
+    fs.readdirSync(__dirname + '/../things/').forEach(function(thingName, index, array) {
+        //load the metadata
+        var meta = loadJSON(__dirname + '/../things/' + thingName + '/app.json'); 
+        
+        //check if the thing already has been installed
+        if(installedThings.indexOf(meta.id) == -1){
+            console.log('Unknown thing, lets installed dependencies');
+            //if not, install dependencies
+                installDependencies(meta.dependencies, function(){
+                    //dependencies installed
+                    installedThings.push(meta.id);
                     
-                    loadedDrivers.push(driver.id);
-                    if(loadedDrivers.length == 2){
-                        self.emit('ready');    
-                    }
+                    //write to file    
+                    fs.writeFileSync(installedThingsFile, JSON.stringify(installedThings));
+                    
+                    //lets load the drivers
+                    loadThing(self, meta);
                 });
-            });
-        });
-        
-        fs.exists(__dirname + '/../things/' + thingName + '/api.js', function(){
-            managerList['web'].registerApi(thingName, __dirname + '/../things/' + thingName + '/api.js', function(){
-                console.log('api registered');
-            });
-        });
-        
-        managerList['web'].registerThing(thingName, meta);
-        
-        if(meta.configPage !== undefined){
-            //register a handle to page
-            managerList['web'].registerPage(thingName, __dirname + '/../things/' + thingName + '/' + meta.configPage, '/' + thingName + '/' + meta.configPage, meta, function(){
-                console.log('page registered');
-            });
-            
-            //add the 'thing' to the list for menu
-            things.push(new Thing(thingName, meta.name.en, '/' + thingName, meta));
-
+        }else{
+            //we know this one already, just load it
+            loadThing(self, meta);
         }
     }); 
+}
+
+function loadThing(self,meta){
+    //instantiate the thing
+    var obj = require(__dirname + '/../things/' + meta.id + '/app.js');
+    var inst = new obj();
+    inst.init();
+    //add the 'thing' to the list for menu
+    thing = new Thing(meta.id, meta.name.en, '/things/' + meta.id, meta, inst);
+    things.push(thing);
+    
+    //emit that this thing has been loaded
+    self.emit('thing_registered', thing); 
+    console.log('Thing ' + meta.id + ' registered');
 }
 

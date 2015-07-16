@@ -26,7 +26,7 @@ module.exports = Web;
 util.inherits(Web, EventEmitter);
 
 Web.prototype.init = function(){
-	console.log("Web init");
+	console.log("Web manager - init");
       
     app.set('views', __dirname + '/../../views');
     app.set('view engine', 'jade');
@@ -63,7 +63,9 @@ Web.prototype.init = function(){
     
     //auth
     app.use(bodyParser.urlencoded({ extended: true }))
-    app.use(expressSession({secret: 'mySecretKey'}));
+    app.use(expressSession({secret: 'mySecretKey',
+                            resave: true,
+                            saveUninitialized: true}));
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(flash());
@@ -73,67 +75,37 @@ Web.prototype.init = function(){
 
     //load routes from dir
     require(__dirname + '/../../routes')(app, io, passport);
-    
-    app.get('/', this.isAuthenticated, function(request, response) {
-        response.redirect('/dashboard');
-    });
+        
+    Manager.on('all_things_registered',function(things){
+        //add handles to the things api's
+        for(i in things){
 
+            var apiPath = __dirname + '/../../things/' + things[i].name + '/api.js';
+            fs.existsSync(apiPath, function(err, rd){
+                console.log(err);
+                if(err == null){
+                    //api get calls
+                    app.use('/api/' + things[i].name, require(apiPath));
+                }
+            });
+        }
+        
+        //404 error
+        app.use(function(request, response){
+            res.render('404.jade');
+        });
+    });
+    
     Manager.manager('drivers').on('realtime', function(msg){
         io.sockets.emit('realtime', msg);
     });
     
-
-    server.listen(3000);
-
-    
+    server.listen(3000);    
 };
 
-Web.prototype.registerThing = function(thing, meta){
-    app.get('/' + thing, function(request, response){
 
-        webContent = this.gatherContent();
-        webContent['currentThing'] = {
-            humanName: meta.name.en,
-            desc: meta.description,
-            drivers : meta.drivers
-        };
-        
-        for(var i in webContent.currentThing.drivers){
-            webContent.currentThing['devices'] = Manager.manager('drivers').getDriver(webContent.currentThing.drivers[i].id).devices;
-        }
 
-        response.render(__dirname + '/../../views/thing.jade', webContent);
-    });    
-}
-
-Web.prototype.registerApi = function(thing, file, callback){
-    var api = require(file);
-    api.forEach(function(call){
-        console.log('registering call: ' + call.description + ' for thing ' + thing);
-        if(call.method == 'GET'){
-            app.get('/api/' + thing + call.path + '/:device', function(request, response){
-                var driver = Manager.manager('drivers').getDriver(call.driver);
-                var device = driver.getDevice(request.params.device);
-
-                call.fn(driver, device, function(){
-                    console.log('api callback');
-                    response.json(driver.getStatus(device));
-                });   
-            });
-        }else if(call.method == 'POST'){
-            app.post('/api/' + thing + call.path + '/:device', function(request, response){
-                var driver = Manager.manager('drivers').getDriver(call.driver);
-                var device = driver.getDevice(request.params.device);
-
-                call.fn(driver, device, function(){
-                    console.log('api callback');
-                    response.json({ message: 'ok'});
-                });    
-            });            
-        }
-    });
-}
-
+/*
 Web.prototype.registerPage = function(thing, file, uri, meta, callback){
     app.get(uri, function(request, response){
 
@@ -150,26 +122,6 @@ Web.prototype.registerPage = function(thing, file, uri, meta, callback){
     });
 }
 
+*/
 
-Web.prototype.gatherContent = function(){
-    webContent = {}
-    var things = Manager.getThings();
-    webContent.menu = [];
-    for(var i in things){
-        webContent.menu.push( 
-            { 'humanName' : things[i].humanName,
-              'uri' : things[i].uri    
-            }
-        );
-    }
-    
-    return webContent;
-}
 
-// As with any middleware it is quintessential to call next()
-// if the user is authenticated
-Web.prototype.isAuthenticated = function (req, res, next) {
-  if (req.isAuthenticated())
-    return next();
-  res.redirect('/login');
-}

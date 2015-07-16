@@ -24,14 +24,13 @@
             "capabilities": [ "onoff" ]
 		}
 	],
-    "configPage" : "config.jade",
     "flow": {
         "actions": [
             {
-                "method": "lightOn",
+                "method": "enable",
                 "title" : {
-                    "en" : "Turn on a bulb",
-                    "nl" : "Zet een lamp aan"
+                    "en" : "Turn on",
+                    "nl" : "Zet aan"
                 },
                 "args": [
                     {
@@ -40,6 +39,71 @@
                         "placeholder":{
                             "en" : "Find a bulb...",
                             "nl" : "Vind een lamp..."
+                        },
+                        "filter": {
+                            "driverid" : "bulb"
+                        }
+                    }                        
+                ]
+            },
+            {
+                "method": "disable",
+                "title" : {
+                    "en" : "Turn off",
+                    "nl" : "Zet uit"
+                },
+                "args": [
+                    {
+                        "name": "bulb",
+                        "type": "device",
+                        "placeholder":{
+                            "en" : "Find a bulb...",
+                            "nl" : "Vind een lamp..."
+                        },
+                        "filter": {
+                            "driverid" : "bulb"
+                        }
+                    }                        
+                ]
+            }
+        ],
+        "conditions": [
+            {
+                "method": "enabled",
+                "title" : {
+                    "en" : "Is turned on",
+                    "nl" : "Is aan"
+                },
+                "args" : [
+                    {
+                        "name": "bulb",
+                        "type": "device",
+                        "placeholder":{
+                            "en" : "Find a bulb...",
+                            "nl" : "Vind een lamp..."
+                        },
+                        "filter": {
+                            "driverid" : "bulb"
+                        }
+                    }                        
+                ]
+            },
+            {
+                "method": "disabled",
+                "title" : {
+                    "en" : "Is turned off",
+                    "nl" : "Is uit"
+                },
+                "args" : [
+                    {
+                        "name": "bulb",
+                        "type": "device",
+                        "placeholder":{
+                            "en" : "Find a bulb...",
+                            "nl" : "Vind een lamp..."
+                        },
+                        "filter": {
+                            "driverid" : "bulb"
                         }
                     }                        
                 ]

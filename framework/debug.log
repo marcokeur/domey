@@ -169,3 +169,536 @@
 {"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-14T13:29:50.329Z"}
 {"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-14T13:29:50.329Z"}
 {"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.4"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-14T13:29:50.330Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T06:39:39.359Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T06:40:34.000Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T06:40:47.889Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:44:21.016Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:44:21.017Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:44:21.017Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:44:21.017Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:47:06.668Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:47:06.669Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:47:06.669Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:47:06.669Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:49:52.323Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:49:52.324Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:49:52.324Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:49:52.325Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:52:37.984Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:52:37.985Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:52:37.985Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:52:37.985Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:55:23.635Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:55:23.636Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:55:23.636Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:55:23.636Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:58:09.290Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:58:09.291Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:58:09.291Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T06:58:09.291Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T06:59:15.271Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T06:59:32.015Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T06:59:55.382Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T07:00:05.136Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T07:01:28.225Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T07:07:30.018Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:29.854Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:29.855Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:29.855Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:29.856Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:30.164Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:30.164Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:30.164Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:30.165Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:31.259Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:31.259Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:31.259Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:31.259Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:32.344Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:32.345Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:32.346Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:32.347Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:33.436Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:33.437Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:33.437Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"23.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:08:33.438Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:15:12.095Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:15:12.096Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:15:12.097Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.9"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:15:12.097Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:26:14.603Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:26:14.604Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:26:14.605Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:26:14.605Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:29:00.213Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:29:00.214Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:29:00.215Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:29:00.215Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:31:45.822Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:31:45.823Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:31:45.837Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:31:45.838Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:34:31.431Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:34:31.432Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:34:31.432Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:34:31.432Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:37:17.037Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:37:17.038Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:37:17.039Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.3"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:37:17.039Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:40:02.644Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:40:02.644Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:40:02.645Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.3"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:40:02.645Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T07:43:51.405Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T07:45:05.957Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:45:33.854Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:45:33.855Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:45:33.855Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:45:33.855Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T07:47:54.154Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:48:19.427Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:48:19.428Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:48:19.428Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.3"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:48:19.429Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:51:05.020Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:51:05.021Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:51:05.021Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.2"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:51:05.022Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:53:50.608Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:53:50.609Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:53:50.609Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.3"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:53:50.609Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"84"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:56:36.210Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:56:36.211Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:56:36.212Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.3"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T07:56:36.212Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:04:00.973Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:04:23.998Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:04:52.963Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:04:52.964Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:04:52.964Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:04:52.964Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:05:01.085Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:05:17.190Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:07:27.792Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:07:38.545Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:07:38.546Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:07:38.546Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:07:38.546Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:07:45.082Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:10:13.566Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:10:24.120Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:10:24.121Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:10:24.121Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:10:24.121Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:13:09.696Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:13:09.697Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:13:09.697Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"22.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:13:09.698Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:35:41.093Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:37:37.153Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:37:59.775Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:37:59.776Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:37:59.776Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:37:59.777Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:38:49.379Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:43:30.858Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:43:30.859Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:43:30.860Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:43:30.860Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:46:16.404Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:46:16.405Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:46:16.405Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:46:16.406Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:51:47.488Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:51:47.489Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:51:47.489Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:51:47.489Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:54:33.025Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:54:33.026Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:54:33.027Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.6"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T08:54:33.027Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:54:38.108Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T08:57:11.321Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:01:05.006Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:06:07.374Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:06:51.328Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:07:09.919Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:08:20.725Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:08:20.726Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:08:20.726Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:08:20.727Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:08:47.018Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:10:28.173Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:10:55.653Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:11:20.742Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:16:37.314Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:16:37.315Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:16:37.315Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:16:37.315Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:24:21.995Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:26:50.503Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:28:11.296Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:28:20.857Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:28:49.722Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:29:18.083Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:29:46.020Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:30:08.117Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:30:58.935Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:32:21.960Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:32:39.871Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:33:10.509Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:33:10.510Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:33:10.510Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:33:10.510Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:31.324Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:31.325Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:31.326Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:31.326Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:32.382Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:32.382Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:32.383Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:32.383Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:34.562Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:34.562Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:34.562Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:34.562Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:35.651Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:35.651Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:35.652Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:38:35.652Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:39:56.283Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:40:57.180Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:41:31.173Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:41:55.377Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:41:55.378Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:41:55.379Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:41:55.379Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:43:15.425Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:44:40.906Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:44:40.907Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:44:40.907Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:44:40.907Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T09:49:40.363Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:50.566Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:50.567Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:50.567Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:50.567Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:50.815Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:50.816Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:50.816Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:50.816Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:51.024Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:51.024Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:51.025Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:51.025Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:51.753Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:51.754Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:51.754Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:49:51.754Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:58:43.621Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:58:43.622Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:58:43.623Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.4"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T09:58:43.623Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:04:14.670Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:04:14.671Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:04:14.671Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.3"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:04:14.672Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:09:45.713Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:09:45.714Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:09:45.715Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:09:45.715Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:12:31.246Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:12:31.247Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:12:31.247Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:12:31.248Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:15:16.743Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:15:16.744Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:15:16.744Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:15:16.745Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:18:02.255Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:18:02.256Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:18:02.256Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.9"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:18:02.256Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:23:33.269Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:23:33.270Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:23:33.270Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.8"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:23:33.270Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:26:18.768Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:26:18.769Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:26:18.770Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.7"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:26:18.770Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:29:04.268Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:29:04.269Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:29:04.269Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.7"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:29:04.270Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:31:49.771Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:31:49.772Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:31:49.772Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.9"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:31:49.772Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:34:35.267Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:34:35.268Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:34:35.269Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:34:35.269Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"85"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:37:20.766Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:37:20.767Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:37:20.767Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:37:20.768Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:42:51.760Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:42:51.761Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:42:51.761Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.8"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:42:51.761Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:45:37.252Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:45:37.253Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:45:37.254Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.8"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:45:37.254Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:48:22.744Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:48:22.746Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:48:22.746Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.8"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:48:22.746Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:51:08.243Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:51:08.244Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:51:08.244Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.8"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:51:08.244Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:53:53.730Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:53:53.731Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:53:53.731Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.8"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:53:53.731Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:56:39.220Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:56:39.221Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:56:39.221Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.8"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:56:39.221Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:59:24.712Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:59:24.713Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:59:24.713Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.8"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T10:59:24.713Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:02:10.210Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:02:10.211Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:02:10.211Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.8"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:02:10.212Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:14:30.933Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:15:05.854Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:19:33.206Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:19:42.169Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:19:42.169Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:19:42.169Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:19:42.170Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"86"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:19:43.289Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:19:43.289Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:19:43.289Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:19:43.290Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:21:57.887Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:21:57.888Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:21:57.888Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:21:57.889Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:23:17.236Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:23:31.158Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:24:31.196Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:24:40.397Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:24:43.384Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:24:43.385Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:24:43.385Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:24:43.385Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:30:14.390Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:30:14.391Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:30:14.391Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.2"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:30:14.391Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:30:19.469Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:30:30.605Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:30:50.942Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:32:40.392Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:32:59.893Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:32:59.894Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:32:59.894Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:32:59.894Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:33:18.905Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:33:27.338Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:34:11.419Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:34:47.046Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:35:45.405Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:35:45.406Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:35:45.406Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:35:45.407Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:36:19.943Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:37:21.040Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:37:30.049Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:37:45.289Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:38:30.906Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:38:30.907Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:38:30.907Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:38:30.907Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:39:34.627Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:41:05.719Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:41:42.432Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:42:53.992Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:43:32.434Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:44:01.914Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:44:01.915Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:44:01.915Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:44:01.916Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:44:37.275Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:44:58.963Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:46:47.839Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:13.533Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:13.534Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:13.534Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:13.534Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:15.705Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:15.705Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:15.706Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:15.706Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:16.791Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:16.792Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:16.792Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:47:16.792Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:50:49.508Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:53:06.647Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:53:31.128Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:53:42.273Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:55:03.443Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:55:35.473Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:55:35.474Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:55:35.474Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:55:35.474Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:56:35.085Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:13.828Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:13.829Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:13.829Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:13.829Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:15.083Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:15.083Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:15.084Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:15.084Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:16.607Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:16.607Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:16.607Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:16.608Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:16.892Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:16.892Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:16.892Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:16.893Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:18.938Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:18.939Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:18.939Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:18.939Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:20.028Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:20.028Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":1},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:20.029Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T11:57:20.029Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:59:17.298Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:59:29.697Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T11:59:40.379Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T12:00:04.522Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T12:01:51.373Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:10:39.321Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:10:39.322Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:10:39.339Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:10:39.340Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:13:24.830Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:13:24.832Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:13:24.832Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:13:24.833Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:16:10.335Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:16:10.335Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:16:10.336Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:16:10.336Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:21:41.349Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:21:41.350Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:21:41.350Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:21:41.369Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:24:26.855Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:24:26.856Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:24:26.856Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.0"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:24:26.856Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:27:12.362Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:27:12.363Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:27:12.363Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"20.9"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:27:12.364Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T12:32:13.242Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:32:43.372Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:32:43.373Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:32:43.373Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:32:43.373Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T12:34:37.157Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T12:35:05.998Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:35:28.874Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:35:28.875Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:35:28.876Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:35:28.876Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T12:36:54.489Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:38:14.380Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:38:14.381Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:38:14.381Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:38:14.381Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T12:38:17.220Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:46:30.909Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:46:30.911Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:46:30.911Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:46:30.911Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T12:48:54.378Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:49:16.405Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:49:16.406Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:49:16.406Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.1"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:49:16.406Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T12:52:13.263Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:54:47.418Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:54:47.419Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:54:47.419Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.3"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T12:54:47.419Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:05:49.473Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:05:49.474Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:05:49.474Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:05:49.475Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:08:34.995Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:08:34.996Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:08:34.996Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:08:34.996Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:08:50.169Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:16:51.565Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:16:51.566Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:16:51.567Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:16:51.567Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:19:37.095Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:19:37.096Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:19:37.096Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:19:37.097Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:25:30.970Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:26:50.893Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:27:28.861Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:29:05.159Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:31:43.643Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:41:45.035Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:44:39.311Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:47:12.342Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:47:12.344Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:47:12.344Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:47:12.344Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:53:48.484Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:59:9","state":{"type":"light","value":"40"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:54:04.352Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:59:9","state":{"type":"humidity","value":62},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:54:04.352Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:59:9","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:54:04.353Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:59:9","state":{"type":"temperature","value":"51.3"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:54:04.353Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:55:28.920Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:55:28.920Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:55:28.921Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:55:28.921Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:56:31.169Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:57:36.867Z"}
+{"level":"info","message":"Realtime event emitted bulb","timestamp":"2015-07-16T13:57:37.328Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:57:58.243Z"}
+{"level":"info","message":"Realtime event emitted bulb","timestamp":"2015-07-16T13:57:58.695Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:58:14.447Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:58:14.447Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:58:14.447Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T13:58:14.448Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T13:58:28.524Z"}
+{"level":"info","message":"Realtime event emitted bulb","timestamp":"2015-07-16T13:58:28.980Z"}
+{"level":"info","message":"Realtime event emitted bulb","timestamp":"2015-07-16T13:58:28.981Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"light","value":"87"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T14:00:59.978Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"humidity","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T14:00:59.979Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"motion","value":0},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T14:00:59.979Z"}
+{"thing":"org.jeenode","driver":"roomnode","device":"rf12-868:33:2","state":{"type":"temperature","value":"21.5"},"level":"info","message":"Realtime event emitted","timestamp":"2015-07-16T14:00:59.979Z"}
+{"level":"info","message":"framework starting","timestamp":"2015-07-16T14:01:59.193Z"}
+{"level":"info","message":"Realtime event emitted bulb","timestamp":"2015-07-16T14:01:59.657Z"}
+{"level":"info","message":"Realtime event emitted bulb","timestamp":"2015-07-16T14:01:59.657Z"}
