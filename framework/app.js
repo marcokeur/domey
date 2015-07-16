@@ -29,7 +29,7 @@ Manager.on('ready', function(){
         winston.verbose('roomnode driver initialized');
         
     }));    
-    
+   
 });
 
 

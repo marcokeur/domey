@@ -1,0 +1,73 @@
+extends wrapper.jade
+
+block title
+    h1.page-header Flow Manager
+
+block content
+    .row
+            .col-lg-6
+                .panel.panel-default
+                    .panel-heading
+                        | Actions
+                    .panel-body
+                        .table-responsive
+                            table.table.table-striped.table-bordered.table-hover
+                                thead
+                                    tr
+                                        th method
+                                        th description
+                                        th arguments
+                                tbody
+                                    each item in flow
+                                        if item.type == 'action'
+                                            tr
+                                                td #{item.meta.method}
+                                                td #{item.meta.title.en}
+                                                
+                                                each arg in item.meta.args
+                                                    td #{arg.name}
+                                                                                                
+    .row
+            .col-lg-6
+                .panel.panel-default
+                    .panel-heading
+                        | Triggers
+                    .panel-body
+                        .table-responsive
+                            table.table.table-striped.table-bordered.table-hover
+                                thead
+                                    tr
+                                        th method
+                                        th description
+                                        th type
+                                tbody
+                                    each item in flow
+                                        if item.type == 'trigger'
+                                            tr
+                                                td #{item.meta.method}
+                                                td #{item.meta.title.en}
+                                                td #{item.type}      
+                                                
+    .row
+            .col-lg-6
+                .panel.panel-default
+                    .panel-heading
+                        | Conditions
+                    .panel-body
+                        .table-responsive
+                            table.table.table-striped.table-bordered.table-hover
+                                thead
+                                    tr
+                                        th method
+                                        th description
+                                        th type
+                                tbody
+                                    each item in flow
+                                        if item.type == 'condition'
+                                            tr
+                                                td #{item.meta.method}
+                                                td #{item.meta.title.en}
+                                                td #{item.type}                                                   
+                                                
+block script            
+    script(src='/js/thing.js')  
