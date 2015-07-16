@@ -91,7 +91,7 @@ Web.prototype.init = function(){
 Web.prototype.registerThing = function(thing, meta){
     app.get('/' + thing, function(request, response){
 
-        gatherContent();
+        webContent = this.gatherContent();
         webContent['currentThing'] = {
             humanName: meta.name.en,
             desc: meta.description,
@@ -137,7 +137,7 @@ Web.prototype.registerApi = function(thing, file, callback){
 Web.prototype.registerPage = function(thing, file, uri, meta, callback){
     app.get(uri, function(request, response){
 
-        gatherContent();
+        webContent = this.gatherContent();
         webContent['currentThing'] = {
             drivers : meta.drivers
         };
