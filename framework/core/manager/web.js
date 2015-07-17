@@ -10,9 +10,11 @@ var express = require('express')
 , io = require('socket.io').listen(server)
 , passport = require('passport')
 , localStrategy = require('passport-local')
+, rememberMeStrategy = require('passport-remember-me').Strategy
 , flash = require('connect-flash')
 , expressSession = require('express-session')
-, bodyParser = require('body-parser');
+, bodyParser = require('body-parser')
+, cookieParser = require('cookie-parser');
 
 var users = {}
 
@@ -61,13 +63,32 @@ Web.prototype.init = function(){
         return done(null, false, req.flash('error', 'Invalid credentials'));  
     }));
     
+    passport.use(new rememberMeStrategy(
+      function(token, done) {
+        Token.consume(token, function (err, user) {
+          if (err) { return done(err); }
+          if (!user) { return done(null, false); }
+          return done(null, user);
+        });
+      },
+      function(user, done) {
+        var token = utils.generateToken(64);
+        Token.save(token, { userId: user.id }, function(err) {
+          if (err) { return done(err); }
+          return done(null, token);
+        });
+      }
+    ));
+    
     //auth
+    app.use(cookieParser());
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(expressSession({secret: 'mySecretKey',
                             resave: true,
                             saveUninitialized: true}));
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(passport.authenticate('remember-me'));
     app.use(flash());
     
     // static file handling
