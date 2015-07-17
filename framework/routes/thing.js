@@ -3,7 +3,7 @@ module.exports = function(app) {
     //render a thing's startpage
     app.get('/things/:thing', function(request, response){
 
-        var thing = Manager.getThing(request.params.thing);
+        var thing = Domey.getThing(request.params.thing);
 
         //check if this thing is loaded
         if(thing === undefined){
@@ -17,7 +17,7 @@ module.exports = function(app) {
             };
 
             for(var i in thing.meta.drivers){
-                webContent.currentThing['devices'] = Manager.manager('drivers').getDriver(thing.meta.drivers[i].id).devices;
+                webContent.currentThing['devices'] = Domey.manager('drivers').getDriver(thing.meta.drivers[i].id).devices;
             }
 
             response.render(__dirname + '/../views/thing.jade', webContent);
@@ -35,7 +35,7 @@ function isAuthenticated(req, res, next) {
 
 function gatherContent(){
     webContent = {}
-    var things = Manager.getThings();
+    var things = Domey.getThings();
     webContent.menu = [];
     for(var i in things){
         webContent.menu.push( 

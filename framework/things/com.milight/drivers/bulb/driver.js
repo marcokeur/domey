@@ -48,7 +48,7 @@ var self = {
                     self.devices[deviceId].state.onoff = 'on';
                     
                     // emit realtime event if something has changed
-                    Manager.manager('drivers').realtime('bulb', {
+                    Domey.manager('drivers').realtime('bulb', {
                         id: self.devices[deviceId].id
                     }, 'state', self.devices[deviceId].state);
                 }else if(rxMsg[0] == self.devices[deviceId].off){
@@ -57,7 +57,7 @@ var self = {
                     //self.devices[deviceId].state.onoff = 'off';
                     self.capabilities.onoff.set( deviceId, false, function(){                    
                         // emit realtime event if something has changed
-                        Manager.manager('drivers').realtime('bulb', {
+                        Domey.manager('drivers').realtime('bulb', {
                             thing: 'com.milight',
                             driver: 'bulb',
                             device: self.devices[deviceId].id,
@@ -104,12 +104,17 @@ var self = {
 
     capabilities: {
 
-        onoff: {
+        enabled: {
             get: function( device, callback ){
                 var device = self.getDevice( device.id );
+                //console.log('device:' + device);
                 if( device instanceof Error ) return callback( device );
-
-                callback( device.state.onoff );
+                
+                if(device.state.onoff == 'on'){
+                    callback( true );
+                }else{
+                    callback( false );
+                }
             },
             set: function( device, onoff, callback ) {
                 var device = self.getDevice( device.id );
@@ -123,6 +128,19 @@ var self = {
                 self.update( device.id );
 
                 callback( device.state.onoff );
+            }
+        },
+        disabled: {
+            get: function(device, callback){
+                var device = self.getDevice( device.id );
+                //console.log('device:' + device);
+                if( device instanceof Error ) return callback( device );
+                
+                if(device.state.onoff == 'off'){
+                    callback( true );
+                }else{
+                    callback( false );
+                }
             }
         }
     }

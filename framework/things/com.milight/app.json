@@ -29,8 +29,8 @@
             {
                 "method": "enable",
                 "title" : {
-                    "en" : "Turn on",
-                    "nl" : "Zet aan"
+                    "en" : "turn light on",
+                    "nl" : "zet lamp aan"
                 },
                 "args": [
                     {
@@ -49,8 +49,8 @@
             {
                 "method": "disable",
                 "title" : {
-                    "en" : "Turn off",
-                    "nl" : "Zet uit"
+                    "en" : "turn light off",
+                    "nl" : "zet lamp uit"
                 },
                 "args": [
                     {
@@ -71,8 +71,8 @@
             {
                 "method": "enabled",
                 "title" : {
-                    "en" : "Is turned on",
-                    "nl" : "Is aan"
+                    "en" : "light is turned on",
+                    "nl" : "lamp is aan"
                 },
                 "args" : [
                     {
@@ -91,8 +91,8 @@
             {
                 "method": "disabled",
                 "title" : {
-                    "en" : "Is turned off",
-                    "nl" : "Is uit"
+                    "en" : "light is turned off",
+                    "nl" : "lamp is uit"
                 },
                 "args" : [
                     {

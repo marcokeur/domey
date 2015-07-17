@@ -16,7 +16,7 @@ module.exports = function(app) {
 
 function gatherContent(){
     webContent = {}
-    var things = Manager.getThings();
+    var things = Domey.getThings();
     webContent.menu = [];
     for(var i in things){
         webContent.menu.push( 

@@ -23,5 +23,16 @@
 			},
             "capabilities": [ "temperature", "light", "motion" ]
 		}
-	]
+	],
+    "flow": {
+		"triggers": [
+			{
+				"method": "measurement",
+				"title": {
+					"en": "a new measurement done",
+					"nl": "er is een nieuwe meting gedaan"
+				}
+			}
+		]
+    }
 }

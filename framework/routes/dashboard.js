@@ -13,7 +13,7 @@ module.exports = function(app, io){
 
 function gatherContent(){
     webContent = {}
-    var things = Manager.getThings();
+    var things = Domey.getThings();
     webContent.menu = [];
     for(var i in things){
         webContent.menu.push( 

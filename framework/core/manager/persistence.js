@@ -33,7 +33,7 @@ Persistence.prototype.init = function(){
     
     var RealtimeEvent = mongoose.model('RealtimeEvent', realtimeEventSchema);
     
-    Manager.manager('drivers').on('realtime', function(msg){
+    Domey.manager('drivers').on('realtime', function(msg){
         console.log('store in db');
         /*
         var event = new RealtimeEvent({

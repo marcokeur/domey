@@ -1,0 +1,65 @@
+{
+    "triggers": [{
+        "thing": "org.jeelabs",
+        "method": "measurement",
+        "args": [{}],
+        "conditionsets": [{
+                "conditions": [{
+                        "thing": "com.milight",
+                        "method": "disabled",
+                        "args": [{
+                            "device": {
+                                "driver": {
+                                    "id": "bulb"
+                                },
+                                "data": {
+                                    "id": 0
+                                }
+                            }
+                        }]
+                    }, {
+                        "thing": "com.milight",
+                        "method": "disabled",
+                        "args": [{
+                            "device": {
+                                "driver": {
+                                    "id": "bulb"
+                                },
+                                "data": {
+                                    "id": 1
+                                }
+                            }
+                        }]
+                    }
+
+                ],
+                "actions": [{
+                    "thing": "com.milight",
+                    "method": "enable",
+                    "args": [{
+                        "device": {
+                            "driver": {
+                                "id": "bulb"
+                            },
+                            "data": {
+                                "id": 0
+                            }
+                        }
+                    }]
+                },{
+                    "thing": "com.milight",
+                    "method": "enable",
+                    "args": [{
+                        "device": {
+                            "driver": {
+                                "id": "bulb"
+                            },
+                            "data": {
+                                "id": 1
+                            }
+                        }
+                    }]
+                }]
+            }]
+    }]
+}

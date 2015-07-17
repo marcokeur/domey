@@ -88,7 +88,7 @@ Web.prototype.init = function(){
                             saveUninitialized: true}));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(passport.authenticate('remember-me'));
+    //app.use(passport.authenticate('remember-me'));
     app.use(flash());
     
     // static file handling
@@ -97,7 +97,7 @@ Web.prototype.init = function(){
     //load routes from dir
     require(__dirname + '/../../routes')(app, io, passport);
         
-    Manager.on('all_things_registered',function(things){
+    Domey.on('all_things_registered',function(things){
         //add handles to the things api's
         for(i in things){
 
@@ -117,32 +117,9 @@ Web.prototype.init = function(){
         });
     });
     
-    Manager.manager('drivers').on('realtime', function(msg){
+    Domey.manager('drivers').on('realtime', function(msg){
         io.sockets.emit('realtime', msg);
     });
     
     server.listen(3000);    
 };
-
-
-
-/*
-Web.prototype.registerPage = function(thing, file, uri, meta, callback){
-    app.get(uri, function(request, response){
-
-        webContent = this.gatherContent();
-        webContent['currentThing'] = {
-            drivers : meta.drivers
-        };
-        
-        for(var i in webContent.currentThing.drivers){
-            webContent.currentThing['devices'] = Manager.manager('drivers').getDriver(webContent.currentThing.drivers[i].id).devices;
-        }
-
-        response.render(file, webContent);
-    });
-}
-
-*/
-
-

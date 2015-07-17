@@ -2,7 +2,9 @@ module.exports = function(app) {
 
     app.get('/flow', function(request, response){
         webContent = gatherContent();
-        webContent['flow'] = Manager.manager('flow').getItems();
+        webContent['flowitems'] = Domey.manager('flow').getItems();
+        webContent['flows'] = Domey.manager('flow').getFlows();
+        
         console.log(webContent);
         response.render(__dirname + '/../views/flow.jade', webContent);
     });
@@ -18,7 +20,7 @@ function isAuthenticated(req, res, next) {
 
 function gatherContent(){
     webContent = {}
-    var things = Manager.getThings();
+    var things = Domey.getThings();
     webContent.menu = [];
     for(var i in things){
         webContent.menu.push( 
@@ -29,4 +31,12 @@ function gatherContent(){
     }
     
     return webContent;
+}
+
+function getFlowItemByMethod(method){
+    for(i in Domey.manager('flow').getItems()){
+        if(flowItems[i].meta.method == method){
+            return flowItems[i];   
+        }
+    }
 }

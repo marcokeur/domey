@@ -18,7 +18,7 @@ block content
                                         th description
                                         th arguments
                                 tbody
-                                    each item in flow
+                                    each item in flowitems
                                         if item.type == 'action'
                                             tr
                                                 td #{item.meta.method}
@@ -41,7 +41,7 @@ block content
                                         th description
                                         th type
                                 tbody
-                                    each item in flow
+                                    each item in flowitems
                                         if item.type == 'trigger'
                                             tr
                                                 td #{item.meta.method}
@@ -62,12 +62,34 @@ block content
                                         th description
                                         th type
                                 tbody
-                                    each item in flow
+                                    each item in flowitems
                                         if item.type == 'condition'
                                             tr
                                                 td #{item.meta.method}
                                                 td #{item.meta.title.en}
                                                 td #{item.type}                                                   
+    .row
+            .col-lg-6
+                .panel.panel-default
+                    .panel-heading
+                        | Flows
+                    .panel-body
+                        .table-responsive
+                            table.table.table-striped.table-bordered.table-hover
+                                thead
+                                    tr
+                                        th trigger
+                                        th condition
+                                        th action
+                                tbody
+                                    each trigger in flows.triggers
+                                        each condition in trigger.conditions
+                                            each action in condition.actions
+                                                tr
+                                                    td #{trigger.thing}:#{trigger.method}
+                                                    td #{condition.thing}:#{condition.method}
+                                                    td #{action.thing}:#{action.method}
+                                                
                                                 
 block script            
     script(src='/js/thing.js')  

@@ -4,15 +4,15 @@ winston.add(winston.transports.File, { filename: 'debug.log' });
 winston.info('framework starting');
 
 var core = require('./core/core.js');
-GLOBAL.Manager = new core();
+GLOBAL.Domey = new core();
 
-Manager.init();
+Domey.init();
 
-Manager.on('ready', function(){
+Domey.on('ready', function(){
     winston.info('initialization done!');
     
     var devices;
-    console.log(Manager.manager('drivers').getDriver('bulb').init(devices, function(){
+    console.log(Domey.manager('drivers').getDriver('bulb').init(devices, function(){
         //console.log("done");
         
         //var device = Manager.manager('drivers').getDriver('bulb').getDevice(1);
@@ -24,13 +24,20 @@ Manager.on('ready', function(){
     }));
     
     
-    console.log(Manager.manager('drivers').getDriver('roomnode').init(devices, function(){
+    console.log(Domey.manager('drivers').getDriver('roomnode').init(devices, function(){
         //console.log("done");
         winston.verbose('roomnode driver initialized');
         
     }));    
+    
+                
+
    
 });
 
+            setTimeout(function() {
+                Domey.manager('flow').trigger('measurement', { 'light': 200 });
+                console.log('trigger fired');
+            }, 3000);
 
 

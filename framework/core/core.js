@@ -5,7 +5,7 @@ var EventEmitter = require('events').EventEmitter;
 var managerList = [];
 var things = [];
 
-function Manager(){
+function Domey(){
 	EventEmitter.call(this);
 
 	//init managers here
@@ -28,18 +28,15 @@ function Manager(){
             //if so, emit the all things registered event
             this.emit('all_things_registered', things); 
             console.log('all things registered!');
-            
-                this.emit('testflow');
-
         }    
     });
 }
 
-module.exports = Manager;
+module.exports = Domey;
 
-util.inherits(Manager, EventEmitter);
+util.inherits(Domey, EventEmitter);
 
-Manager.prototype.init = function(){
+Domey.prototype.init = function(){
 	console.log('Framework - init');
 
     for(var manager in managerList)
@@ -48,7 +45,7 @@ Manager.prototype.init = function(){
     loadThings(this);
 };
 
-Manager.prototype.manager = function ( type ){
+Domey.prototype.manager = function ( type ){
 	//get from list
 	//and return
 	if(managerList[type] == undefined){
@@ -58,11 +55,11 @@ Manager.prototype.manager = function ( type ){
 	}
 }
 
-Manager.prototype.getThings = function(){
+Domey.prototype.getThings = function(){
     return things;   
 }
 
-Manager.prototype.getThing = function(thingName){
+Domey.prototype.getThing = function(thingName){
     for(i in things){
         if(things[i].name == thingName){
             return things[i];

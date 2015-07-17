@@ -17,11 +17,11 @@ util.inherits(Drivers, EventEmitter);
 
 Drivers.prototype.init = function(){
 	//console.log("Drivers init");
-    Manager.on('thing_registered', function(thing){
+    Domey.on('thing_registered', function(thing){
         thing.meta.drivers.forEach(function(driver){
             console.log('driver: ' + driver.id + ' thingname -> ' + thing.name);
             loadDriver(thing.name, driver.id, function(){
-               Manager.manager('drivers').emit('driver_registered', driver); 
+               Domey.manager('drivers').emit('driver_registered', driver); 
             });
         }); 
     });
