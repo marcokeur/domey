@@ -65,19 +65,18 @@ Web.prototype.init = function(){
     
     passport.use(new rememberMeStrategy(
       function(token, done) {
-        Token.consume(token, function (err, user) {
+        consumeRememberMeToken(token, function(err, uid) {
           if (err) { return done(err); }
-          if (!user) { return done(null, false); }
-          return done(null, user);
+          if (!uid) { return done(null, false); }
+
+          findById(uid, function(err, user) {
+            if (err) { return done(err); }
+            if (!user) { return done(null, false); }
+            return done(null, user);
+          });
         });
       },
-      function(user, done) {
-        var token = utils.generateToken(64);
-        Token.save(token, { userId: user.id }, function(err) {
-          if (err) { return done(err); }
-          return done(null, token);
-        });
-      }
+      this.issueToken
     ));
     
     //auth
@@ -88,7 +87,7 @@ Web.prototype.init = function(){
                             saveUninitialized: true}));
     app.use(passport.initialize());
     app.use(passport.session());
-    //app.use(passport.authenticate('remember-me'));
+    app.use(passport.authenticate('remember-me'));
     app.use(flash());
     
     // static file handling
@@ -123,3 +122,43 @@ Web.prototype.init = function(){
     
     server.listen(3000);    
 };
+
+/* Fake, in-memory database of remember me tokens */
+
+var tokens = {}
+
+function consumeRememberMeToken(token, fn) {
+  var uid = tokens[token];
+  // invalidate the single-use token
+  delete tokens[token];
+  return fn(null, uid);
+}
+
+function saveRememberMeToken(token, uid, fn) {
+  tokens[token] = uid;
+  return fn();
+}
+
+function randomString(len) {
+  var buf = []
+    , chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    , charlen = chars.length;
+
+  for (var i = 0; i < len; ++i) {
+    buf.push(chars[getRandomInt(0, charlen - 1)]);
+  }
+
+  return buf.join('');
+};
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+Web.prototype.issueToken = function(user, done) {
+  var token = randomString(64);
+  saveRememberMeToken(token, user.id, function(err) {
+    if (err) { return done(err); }
+    return done(null, token);
+  });
+}

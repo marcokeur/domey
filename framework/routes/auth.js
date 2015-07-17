@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
             return next(); 
         }
         console.log('setting cookie');
-        issueToken(req.user, function(err, token) {
+        Domey.manager('web').issueToken(req.user, function(err, token) {
           if (err) { return next(err); }
           res.cookie('remember_me', token, { path: '/', httpOnly: true, maxAge: 604800000 });
           return next();
@@ -34,7 +34,7 @@ module.exports = function(app, passport) {
     });
 };
 
-/* Fake, in-memory database of remember me tokens */
+/* Fake, in-memory database of remember me tokens 
 
 var tokens = {}
 
@@ -57,19 +57,5 @@ function issueToken(user, done) {
     return done(null, token);
   });
 }
+*/
 
-function randomString(len) {
-  var buf = []
-    , chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    , charlen = chars.length;
-
-  for (var i = 0; i < len; ++i) {
-    buf.push(chars[getRandomInt(0, charlen - 1)]);
-  }
-
-  return buf.join('');
-};
-
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}

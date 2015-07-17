@@ -45,27 +45,33 @@ var self = {
                 if(rxMsg[0] == self.devices[deviceId].on){
                     console.log('Turning device ' + self.devices[deviceId].name + ' on');
                     
-                    self.devices[deviceId].state.onoff = 'on';
-                    
-                    // emit realtime event if something has changed
-                    Domey.manager('drivers').realtime('bulb', {
-                        id: self.devices[deviceId].id
-                    }, 'state', self.devices[deviceId].state);
+                    self.capabilities.enabled.set( deviceId, true, function(){
+                        // emit realtime event if something has changed
+                        Domey.manager('drivers').realtime({
+                            thing: 'com.milight',
+                            driver: 'roomnode',
+                            device: deviceId,
+                            state: {
+                                type: 'onoff',
+                                value: self.devices[deviceId].state.onoff
+                            }   
+                        });
+                    });
                 }else if(rxMsg[0] == self.devices[deviceId].off){
                     console.log('Turning device ' + self.devices[deviceId].name + ' off');
                     
-                    //self.devices[deviceId].state.onoff = 'off';
-                    self.capabilities.onoff.set( deviceId, false, function(){                    
+                    self.capabilities.capabilities.set( deviceId, false, function(){                    
                         // emit realtime event if something has changed
-                        Domey.manager('drivers').realtime('bulb', {
+                        Domey.manager('drivers').realtime({
                             thing: 'com.milight',
-                            driver: 'bulb',
-                            device: self.devices[deviceId].id,
+                            driver: 'roomnode',
+                            device: deviceId,
                             state: {
-                                'onoff' : self.devices[deviceId].state
-                            }
+                                type: 'onoff',
+                                value: self.devices[deviceId].state.onoff
+                            }   
                         });
-                    });                    
+                    });
                 }
             }
         });
