@@ -35,9 +35,8 @@ Domey.on('ready', function(){
    
 });
 
+
             setTimeout(function() {
                 Domey.manager('flow').trigger('measurement', { 'light': 200 });
                 console.log('trigger fired');
             }, 3000);
-
-

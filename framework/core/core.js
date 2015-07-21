@@ -2,32 +2,35 @@ var fs = require('fs');
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
-var managerList = [];
+var managers = [];
+var interfaces = [];
 var things = [];
 
 function Domey(){
 	EventEmitter.call(this);
-
-	//init managers here
-	//and put in list
-    var drivers = require('./manager/drivers.js');
-    managerList['drivers'] = new drivers();
     
-    var web = require('./manager/web.js');
-    managerList['web'] = new web();
+    var self = this;
     
-    var persistence = require('./manager/persistence.js');
-    managerList['persistence'] = new persistence();
+    //load all managers
+    getJSFilesInPath('core/manager').forEach(function(manager){
+        managerInst = getInstanceFromFile(manager);
+        managers[managerInst.getName()] = managerInst;
+    });
     
-    var flow = require('./manager/flow.js');
-    managerList['flow'] = new flow();
+    //load all interfaces
+    getJSFilesInPath('core/interface').forEach(function(interface){
+        interfaceInst = getInstanceFromFile(interface);
+        interfaces[interfaceInst.getName()] = interfaceInst;
+    });
     
     this.on('thing_registered', function(thing){
         //check if all items have been loaded
         if(things.length == fs.readdirSync(__dirname + '/../things/').length) {
-            //if so, emit the all things registered event
-            this.emit('all_things_registered', things); 
-            console.log('all things registered!');
+            setTimeout(function(){
+                //if so, emit the all things registered event
+                self.emit('all_things_registered', things); 
+                console.log('all things registered!');
+            }, 2000);
         }    
     });
 }
@@ -39,20 +42,26 @@ util.inherits(Domey, EventEmitter);
 Domey.prototype.init = function(){
 	console.log('Framework - init');
 
-    for(var manager in managerList)
-        managerList[manager].init();
+    callInitOnInstances(managers);
+    callInitOnInstances(interfaces);
     
     loadThings(this);
 };
 
 Domey.prototype.manager = function ( type ){
-	//get from list
-	//and return
-	if(managerList[type] == undefined){
-		return managerList;
+	if(managers[type] == undefined){
+		return undefined;
 	}else{
-		return managerList[type];
+		return managers[type];
 	}
+}
+
+Domey.prototype.interface = function ( type ){
+    if(interfaces[type] == undefined){
+        return undefined;
+    }else{
+        return interfaces[type];
+    }
 }
 
 Domey.prototype.getThings = function(){
@@ -65,6 +74,16 @@ Domey.prototype.getThing = function(thingName){
             return things[i];
         }
     }
+}
+
+Domey.prototype.getConfig = function(file, part){
+    config = JSON.parse(fs.readFileSync(__dirname + '/../config/' + file + '.json', 'utf8'));
+    config = config[file];
+    
+    if(part !== undefined){
+        config = config[part];
+    }
+    return config;
 }
 
 function loadJSON(file){
@@ -147,3 +166,40 @@ function loadThing(self,meta){
     console.log('Thing ' + meta.id + ' registered');
 }
 
+//returns list of files in path, relative to app.js
+function getJSFilesInPath( path ){
+    jsFiles = [];
+     //for each thing in dir
+    fs.readdirSync(__dirname + '/../' + path).forEach(function(file) {
+        if(endsWith(file, '.js')){
+            jsFiles.push(path + '/' + file);
+        }
+    });
+    
+    return jsFiles;                                   
+}
+    
+
+//creates an instance from .js file given in path
+function getInstanceFromFile( file ){
+    //if given path is .js file
+    if(endsWith(file, '.js')){
+        var obj = require(__dirname + '/../' + file);
+        var inst = new obj();
+    
+        return inst;
+    }else{
+        return undefined;
+    }
+}
+
+//call init on instances in list
+function callInitOnInstances( list ){
+    for(var i in list){
+        list[i].init();   
+    }
+}
+
+function endsWith(str, suffix) {
+    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}

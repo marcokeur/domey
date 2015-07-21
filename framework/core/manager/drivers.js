@@ -15,6 +15,10 @@ module.exports = Drivers;
 
 util.inherits(Drivers, EventEmitter);
 
+Drivers.prototype.getName = function(){
+    return 'drivers';   
+}
+
 Drivers.prototype.init = function(){
 	//console.log("Drivers init");
     Domey.on('thing_registered', function(thing){

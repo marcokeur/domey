@@ -1,9 +1,11 @@
 {
-    "triggers": [{
-        "thing": "org.jeelabs",
-        "method": "measurement",
-        "args": [{}],
-        "conditionsets": [{
+    "flows": [{
+        "name": "testflow",
+        "trigger": {
+            "thing": "org.jeelabs",
+            "method": "measurement",
+            "args": [{}],
+            "conditionset": {
                 "conditions": [{
                         "thing": "com.milight",
                         "method": "disabled",
@@ -60,6 +62,7 @@
                         }
                     }]
                 }]
-            }]
+            }
+        }
     }]
 }

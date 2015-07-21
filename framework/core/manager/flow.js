@@ -11,10 +11,14 @@ module.exports = Flow;
 util.inherits(Flow, EventEmitter);
 
 var flowItems = [];
-
+var flows;
 function FlowItem(type, meta) {
     this.type = type;
     this.meta = meta;
+}
+
+Flow.prototype.getName = function(){
+    return 'flow';   
 }
 
 Flow.prototype.init = function () {
@@ -54,9 +58,25 @@ Flow.prototype.init = function () {
             }
         }
     });
+    
+    Domey.on('all_things_registered', function(things){
+        //flows = JSON.parse(fs.readFileSync(__dirname + '/../../config/flows.json', 'UTF-8'));
+        
+        flows = Domey.getConfig('flows');
+        
+        for(var i in flows){
+            console.log(flows[i].trigger);
+            flows[i].trigger['item'] = getFlowItemByMethod(flows[i].trigger.method);
+            for(var j in flows[i].trigger.conditionset.conditions){
+                flows[i].trigger.conditionset.conditions[j]['item'] = getFlowItemByMethod(flows[i].trigger.conditionset.conditions[j].method);
+            }
+            for(var k in flows[i].trigger.conditionset.actions){
+                flows[i].trigger.conditionset.actions[k]['item'] = getFlowItemByMethod(flows[i].trigger.conditionset.actions[k].method);
+            }
+        }
+    });
 };
 
-var flows = JSON.parse(fs.readFileSync(__dirname + '/../../config/flows.json', 'UTF-8'));
 
 Flow.prototype.trigger = function(method, args){   
     console.log('console log: trigger received: ' + method);
@@ -64,7 +84,7 @@ Flow.prototype.trigger = function(method, args){
     var flowDescription = 'If ';
     
     //for each trigger we know
-    for(i in flows.triggers){
+    for(var i in flows.triggers){
         trigger = flows.triggers[i];
                 
         //check if it matches the method received
@@ -78,15 +98,11 @@ Flow.prototype.trigger = function(method, args){
                 var conditionSetIsTrue = true;  //this will be the result of all conditions
                 
                 conditionset = trigger.conditionsets[j];
-                console.log('conditionset');
-                console.log(conditionset);
 
                 //a condition holds a conditionset, those conditions will be AND
                 for(l in conditionset.conditions){
                     if(conditionSetIsTrue){
                         condition = conditionset.conditions[l];
-                        console.log('condition');
-                        console.log(condition);
 
                         flowItem = getFlowItemByMethod(condition.method);
                         flowDescription += ' and ';
@@ -135,7 +151,7 @@ Flow.prototype.getFlows = function(){
 function getFlowItemByMethod(method){
     for(i in flowItems){
         if(flowItems[i].meta.method == method){
-            return flowItems[i];   
+            return flowItems[i];
         }
     }
 }

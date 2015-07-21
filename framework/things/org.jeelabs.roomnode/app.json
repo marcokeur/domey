@@ -1,8 +1,8 @@
 {
-	"id": "org.jeelabs",
+	"id": "org.jeelabs.roomnode",
 	"version": "1.0",
 	"name": {
-		"en": "JeeLabs"
+		"en": "JeeLabs RoomNode"
 	},
 	"description": {
 		"en": "Computing stuff tied to the pysical world!"
@@ -12,7 +12,6 @@
 		"website": "http://github.com/marcokeur"
 	},
 	"dependencies": {
-		"serialport": "*"
 	},
     "drivers": [
 		{
@@ -29,8 +28,8 @@
 			{
 				"method": "measurement",
 				"title": {
-					"en": "a new measurement done",
-					"nl": "er is een nieuwe meting gedaan"
+					"en": "a new measurement is done",
+					"nl": "er een nieuwe meting is gedaan"
 				}
 			}
 		]

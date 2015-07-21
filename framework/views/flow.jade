@@ -68,27 +68,42 @@ block content
                                                 td #{item.meta.method}
                                                 td #{item.meta.title.en}
                                                 td #{item.type}                                                   
-    .row
-            .col-lg-6
-                .panel.panel-default
-                    .panel-heading
-                        | Flows
-                    .panel-body
-                        .table-responsive
-                            table.table.table-striped.table-bordered.table-hover
-                                thead
-                                    tr
-                                        th trigger
-                                        th condition
-                                        th action
-                                tbody
-                                    each trigger in flows.triggers
-                                        each condition in trigger.conditions
-                                            each action in condition.actions
-                                                tr
-                                                    td #{trigger.thing}:#{trigger.method}
-                                                    td #{condition.thing}:#{condition.method}
-                                                    td #{action.thing}:#{action.method}
+
+
+            .row
+                .col-lg-12
+
+                    .panel.panel-default
+                        .panel-heading
+                            | Current Flows
+                        .panel-body
+                            .table-responsive
+                                table.table.table-striped.table-bordered.table-hover
+                                    thead
+                                        tr
+                                            th Name
+                                            th When
+                                            th And
+                                            th Then
+                                    tbody
+                                        each flow in flows
+                                            tr
+                                                - console.log(flow.trigger)
+                                                td #{flow.name}
+                                                td #{flow.trigger.item.meta.title.en}
+                                                td 
+                                                    each condition in flow.trigger.conditionset.conditions
+                                                        //p #{condition.thing}:#{condition.method}
+                                                        p #{condition.item.meta.title.en}
+                                                        each arg in condition.args 
+                                                            p device #{arg.device.data.id}
+                                                td
+                                                    each action in flow.trigger.conditionset.actions
+                                                        //p #{action.thing}:#{action.method}
+                                                        p #{action.item.meta.title.en}
+                                                        each arg in action.args 
+                                                            p device #{arg.device.data.id}
+
                                                 
                                                 
 block script            

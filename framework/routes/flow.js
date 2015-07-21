@@ -1,11 +1,11 @@
 module.exports = function(app) {
 
-    app.get('/flow', function(request, response){
+    app.get('/flow', isAuthenticated, function(request, response){
         webContent = gatherContent();
         webContent['flowitems'] = Domey.manager('flow').getItems();
         webContent['flows'] = Domey.manager('flow').getFlows();
         
-        console.log(webContent);
+        console.log(JSON.stringify(webContent['flows']));
         response.render(__dirname + '/../views/flow.jade', webContent);
     });
 }

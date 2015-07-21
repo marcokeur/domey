@@ -1,0 +1,19 @@
+{
+    "interfaces": {
+        "jeelink_868": {
+            "port": "/dev/ttyUSB1"
+        },
+        "rpi_gpio": {
+            "pins": [
+                { 
+                    "number": 7,
+                    "direction": "input"
+                },
+                {
+                    "number": 8,
+                    "direction": "output"
+                }
+            ]
+        }
+    }
+}

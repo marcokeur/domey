@@ -27,6 +27,10 @@ module.exports = Web;
 
 util.inherits(Web, EventEmitter);
 
+Web.prototype.getName = function(){
+    return 'web';   
+}
+
 Web.prototype.init = function(){
 	console.log("Web manager - init");
       

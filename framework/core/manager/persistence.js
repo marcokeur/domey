@@ -24,7 +24,9 @@ function Persistence()
 
 module.exports = Persistence;
 
-
+Persistence.prototype.getName = function(){
+    return 'persistence';   
+}
 
 Persistence.prototype.init = function(){
 	console.log("Persistence init");
