@@ -1,7 +1,7 @@
 {
-  "name": "framework",
-  "version": "0.0.0",
-  "description": "",
+  "name": "Domey",
+  "version": "0.0.1",
+  "description": "Homey like home automation software",
   "main": "app.js",
   "dependencies": {
     "express": "~4.13.1",
@@ -23,6 +23,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "GPL"
+  "author": "Marco Keur",
+  "license": "GPL",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcokeur/domey"
+  },
+  "keywords": [
+    "domotica",
+    "home automation",
+    "nodejs",
+    "raspberry"
+  ],
+  "bugs": {
+    "url": "https://github.com/marcokeur/domey/issues"
+  }
 }
