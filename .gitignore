@@ -8,3 +8,4 @@
 /embedded/Roomba/esp8266/build/user/user_main.o
 /embedded/Roomba/esp8266/firmware/0x00000.bin
 /embedded/Roomba/esp8266/firmware/0x40000.bin
+/framework/debug.log
