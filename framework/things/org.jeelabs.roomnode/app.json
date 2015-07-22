@@ -32,6 +32,26 @@
 					"nl": "er een nieuwe meting is gedaan"
 				}
 			}
-		]
+		],
+        "conditions": [
+            {
+                "method": "motion",
+                "title" : {
+                    "en" : "movement was detected"
+                },
+                "args" : [
+                    {
+                        "name": "roomnode",
+                        "type": "device",
+                        "placeholder" : {
+                            "en" : "Find a roomnode..."
+                        },
+                        "filter": {
+                            "driverid" : "roomnode"
+                        }
+                    }
+                ]
+            }
+        ]
     }
 }

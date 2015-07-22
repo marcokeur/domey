@@ -7,15 +7,15 @@
             "args": [{}],
             "conditionset": {
                 "conditions": [{
-                        "thing": "com.milight",
-                        "method": "disabled",
+                        "thing": "org.jeelabs.roomnode",
+                        "method": "motion",
                         "args": [{
                             "device": {
                                 "driver": {
-                                    "id": "bulb"
+                                    "id": "roomnode"
                                 },
                                 "data": {
-                                    "id": 0
+                                    "id": "rf12-868:33:2"
                                 }
                             }
                         }]
@@ -28,12 +28,11 @@
                                     "id": "bulb"
                                 },
                                 "data": {
-                                    "id": 1
+                                    "id": 0
                                 }
                             }
                         }]
                     }
-
                 ],
                 "actions": [{
                     "thing": "com.milight",
@@ -45,19 +44,6 @@
                             },
                             "data": {
                                 "id": 0
-                            }
-                        }
-                    }]
-                },{
-                    "thing": "com.milight",
-                    "method": "enable",
-                    "args": [{
-                        "device": {
-                            "driver": {
-                                "id": "bulb"
-                            },
-                            "data": {
-                                "id": 1
                             }
                         }
                     }]

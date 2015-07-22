@@ -84,9 +84,10 @@ Flow.prototype.trigger = function(method, args){
     var flowDescription = 'If ';
     
     //for each trigger we know
-    for(var i in flows.triggers){
-        trigger = flows.triggers[i];
+    for(var i in flows){
+        trigger = flows[i].trigger;
                 
+        console.log(trigger);
         //check if it matches the method received
         if(method == trigger.method){
             //we have a match, emit the trigger to conditions        
@@ -94,15 +95,15 @@ Flow.prototype.trigger = function(method, args){
             flowItem = getFlowItemByMethod(trigger.method);
             flowDescription += flowItem.meta.title.en;
             
-            for(j in trigger.conditionsets){
+            //for(j in trigger.conditionset){
                 var conditionSetIsTrue = true;  //this will be the result of all conditions
                 
-                conditionset = trigger.conditionsets[j];
+                //conditionset = trigger.conditionsets[j];
 
                 //a condition holds a conditionset, those conditions will be AND
-                for(l in conditionset.conditions){
+                for(l in trigger.conditionset.conditions){
                     if(conditionSetIsTrue){
-                        condition = conditionset.conditions[l];
+                        condition = trigger.conditionset.conditions[l];
 
                         flowItem = getFlowItemByMethod(condition.method);
                         flowDescription += ' and ';
@@ -111,7 +112,7 @@ Flow.prototype.trigger = function(method, args){
                         Domey.manager('flow').emit('condition.' + condition.method, condition.args[0], function(conditionIsTrue){
                             //check if the response is as expected
                             flowDescription += '('+conditionIsTrue+')';
-                            if(!conditionIsTrue){
+                            if(conditionIsTrue != true){
                                 conditionSetIsTrue = false;
                                 //break;
                             }
@@ -121,8 +122,8 @@ Flow.prototype.trigger = function(method, args){
                 
                 //if all conditions were true
                 if(conditionSetIsTrue){
-                    for(k in conditionset.actions){
-                        action = conditionset.actions[k];
+                    for(k in trigger.conditionset.actions){
+                        action = trigger.conditionset.actions[k];
                            
                         flowItem = getFlowItemByMethod(action.method);
                         flowDescription += ' then ';
@@ -136,7 +137,7 @@ Flow.prototype.trigger = function(method, args){
                     console.log('Flow stopped at: ' + flowDescription);
                 }
             }
-        }
+        //}
     }
 }
 

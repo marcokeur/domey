@@ -88,21 +88,22 @@ block content
                                     tbody
                                         each flow in flows
                                             tr
-                                                - console.log(flow.trigger)
                                                 td #{flow.name}
                                                 td #{flow.trigger.item.meta.title.en}
                                                 td 
                                                     each condition in flow.trigger.conditionset.conditions
-                                                        //p #{condition.thing}:#{condition.method}
                                                         p #{condition.item.meta.title.en}
-                                                        each arg in condition.args 
-                                                            p device #{arg.device.data.id}
+                                                            each arg in condition.args 
+                                                                |(
+                                                                | #{arg.device.driver.id} #{arg.device.data.id}
+                                                                |)
                                                 td
                                                     each action in flow.trigger.conditionset.actions
-                                                        //p #{action.thing}:#{action.method}
-                                                        p #{action.item.meta.title.en}
-                                                        each arg in action.args 
-                                                            p device #{arg.device.data.id}
+                                                        p #{action.item.meta.title.en} 
+                                                            each arg in action.args 
+                                                                |(
+                                                                | #{arg.device.driver.id} #{arg.device.data.id}
+                                                                |)
 
                                                 
                                                 

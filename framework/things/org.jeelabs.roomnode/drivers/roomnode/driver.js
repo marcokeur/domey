@@ -11,7 +11,8 @@ var self = {
                         console.log(roomnodePackage);
                         stored = false;
                         for(var i in self.devices){
-                            if(self.devices[i].id == roomnodePackage.id){
+                            console.log(i);
+                            if(i == roomnodePackage.id){
                                 self.devices[i] = roomnodePackage;
                                 stored = true;
                             }
@@ -19,7 +20,7 @@ var self = {
                         
                         if(stored == false){
                             console.log("New device found! --> " + roomnodePackage.id);
-                            self.devices.push(roomnodePackage);
+                            self.devices[roomnodePackage.id] = roomnodePackage;
                         }
                         
                         // emit realtime event if something has changed
