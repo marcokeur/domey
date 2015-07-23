@@ -14,6 +14,13 @@
                     "direction": "output"
                 }
             ]
+        },
+        "mqtt_server": {
+            "port": 1883,
+            "mongo" : {
+                "url" : "mongodb://localhost:27017/mqtt",
+                "collection" : "domey_mqtt"
+            }
         }
     }
 }

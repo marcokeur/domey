@@ -6,18 +6,7 @@ var fs = require('fs');
 //interface config
 var config;
 
-var ascoltatore = {
-  //using ascoltatore
-  type: 'mongo',
-  url: 'mongodb://localhost:27017/mqtt',
-  pubsubCollection: 'ascoltatori',
-  mongo: {}
-};
 
-var settings = {
-  port: 1883,
-  backend: ascoltatore
-};
 
 function mqtt_server() 
 {
@@ -35,9 +24,22 @@ mqtt_server.prototype.getName = function(){
 
 mqtt_server.prototype.init = function(){
 	console.log("mqtt_server init");
-    
+  
     var self = this;
+    
+    config = Domey.getConfig('interfaces', 'mqtt_server');
+  
+    var mongo = {
+        type: 'mongo',
+        url: config.mongo.url,
+        pubsubCollection: config.mongo.collection,
+        mongo: {}
+    };
 
+    var settings = {
+        port: config.port,
+        backend: mongo
+    };
 
 	var server = new mosca.Server(settings);
 

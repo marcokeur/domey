@@ -128,6 +128,7 @@ function loadThings(self){
     
     //for each thing in dir
     fs.readdirSync(__dirname + '/../things/').forEach(function(thingName, index, array) {
+        try{
         //load the metadata
         var meta = loadJSON(__dirname + '/../things/' + thingName + '/app.json'); 
         
@@ -148,6 +149,9 @@ function loadThings(self){
         }else{
             //we know this one already, just load it
             loadThing(self, meta);
+        }
+        }catch(ex){
+            console.log("Thing " + thingName + " not loaded");
         }
     }); 
 }
