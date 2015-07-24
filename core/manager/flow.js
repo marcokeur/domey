@@ -63,7 +63,7 @@ Flow.prototype.init = function () {
         //flows = JSON.parse(fs.readFileSync(__dirname + '/../../config/flows.json', 'UTF-8'));
         
         flows = Domey.getConfig('flows');
-        
+        console.log("flows : " + flows);
         for(var i in flows){
             console.log(flows[i].trigger);
             flows[i].trigger['item'] = getFlowItemByMethod(flows[i].trigger.method);

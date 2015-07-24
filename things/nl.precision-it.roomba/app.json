@@ -1,0 +1,146 @@
+{
+	"id": "nl.precision-it.roomba",
+	"version": "1.0",
+	"name": {
+		"en": "Roomba Controller"
+	},
+	"description": {
+		"en": "Control Roomba via MQTT"
+	},
+	"author": {
+		"name": "Marco Keur",
+		"website": "http://github.com/marcokeur"
+	},
+	"dependencies": {
+		"dgram": "*"
+	},
+    "drivers": [
+		{
+			"id": "roomba",
+			"name": {
+				"en": "Roomba vacuum cleaner",
+				"nl": "Roomba stofzuiger"
+			},
+            "capabilities": [ "cleaning", "docked", "spot_cleaning", "charging", "battery_level" ]
+		}
+	],
+    "flow": {
+        "triggers": [
+			{
+				"method": "started",
+				"title": {
+					"en": "Started cleaning",
+					"nl": "Gestart met stofzuigen"
+				}
+			},
+			{
+				"method": "stopped",
+				"title": {
+					"en": "Stopped cleaning",
+					"nl": "Gestopt met stofzuigen"
+				}
+			},
+			{
+				"method": "docked",
+				"title": {
+					"en": "Docked",
+					"nl": "In het basisstation"
+				}
+			}
+		],
+        "actions": [
+		{
+				"method": "clean",
+				"title": {
+					"en": "Start cleaning",
+					"nl": "Ga stofzuigen"
+				},
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Find a Roomba...",
+							"nl": "Vind een Roomba..."
+						},
+						"filter": "driver_uri=homey:app:com.thinkingcleaner&driver_id=tc"
+					}
+				]
+			},
+			{
+				"method": "pause",
+				"title": {
+					"en": "Pause cleaning",
+					"nl": "Pauzeer stofzuigen"
+				},
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Find a Roomba...",
+							"nl": "Vind een Roomba..."
+						},
+						"filter": "driver_uri=homey:app:com.thinkingcleaner&driver_id=tc"
+					}
+				]
+			},
+			{
+				"method": "dock",
+				"title": {
+					"en": "Go to docking station",
+					"nl": "Ga naar basisstation"
+				},
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Find a Roomba...",
+							"nl": "Vind een Roomba..."
+						},
+						"filter": "driver_uri=homey:app:com.thinkingcleaner&driver_id=tc"
+					}
+				]
+			}
+        ],
+        "conditions": [
+			{
+				"method": "cleaning",
+				"title": {
+					"en": "Is cleaning",
+					"nl": "Aan het schoonmaken"
+				},
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Find a Roomba...",
+							"nl": "Vind een Roomba..."
+						},
+						"filter": "driver_uri=homey:app:com.thinkingcleaner&driver_id=tc"
+					}
+				]
+			},
+			{
+				"method": "docked",
+				"title": {
+					"en": "Is docked",
+					"nl": "In het basisstation"
+				},
+				"args": [
+					{
+						"name": "device",
+						"type": "device",
+						"placeholder": {
+							"en": "Find a Roomba...",
+							"nl": "Vind een Roomba..."
+						},
+						"filter": "driver_uri=homey:app:com.thinkingcleaner&driver_id=tc"
+					}
+				]
+			}
+        ]
+    }
+}

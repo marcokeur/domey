@@ -151,7 +151,7 @@ function loadThings(self){
             loadThing(self, meta);
         }
         }catch(ex){
-            console.log("Thing " + thingName + " not loaded");
+            console.log("Thing " + thingName + " not loaded: " + ex);
         }
     }); 
 }

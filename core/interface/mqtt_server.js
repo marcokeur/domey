@@ -5,7 +5,8 @@ var fs = require('fs');
 
 //interface config
 var config;
-
+//holds all subscribed topics by things
+var subscriptions = [];
 
 
 function mqtt_server() 
@@ -19,7 +20,7 @@ util.inherits(mqtt_server, EventEmitter);
 
 
 mqtt_server.prototype.getName = function(){
-    return 'mqtt_server';   
+    return 'mqtt';   
 }
 
 mqtt_server.prototype.init = function(){
@@ -49,7 +50,11 @@ mqtt_server.prototype.init = function(){
 
 	// fired when a message is received
 	server.on('published', function(packet, client) {
-	  console.log('Published', packet.payload);
+        for(var i in subscriptions){
+            if(subscriptions[i] == packet.topic){
+                self.emit(packet.topic, packet.payload);
+            }
+        }
 	});
 
 	server.on('ready', setup);
@@ -60,7 +65,11 @@ mqtt_server.prototype.init = function(){
 	}
 }
 
-mqtt_server.prototype.publish = function(topic, payload, retain){
+mqtt_server.prototype.subscribe = function(topic){
+    subscriptions.push(topic);
+}
+
+mqtt_server.prototype.publish = function(topic, payload, callback){
 	var message = {
 	  topic: topic,
 	  payload: payload, // or a Buffer
@@ -69,6 +78,6 @@ mqtt_server.prototype.publish = function(topic, payload, retain){
 	};
 
 	server.publish(message, function() {
-	  console.log('done!');
+        callback();
 	});
 }
