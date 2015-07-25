@@ -62,7 +62,7 @@ var roomba = {
                 state.spot_cleaning = false;
                 state.docked = false;
                 state.charging = false;
-        }else if(data[0] == "spot cleaning"){
+        }else if(data[0] == "spot_cleaning"){
                 state.cleaning = true;
                 state.spot_cleaning = true;
                 state.docked = false;
@@ -77,7 +77,7 @@ var roomba = {
                 state.spot_cleaning = false;
                 state.docked = true;
                 state.charging = true;
-        }   
+        }
 
         if( typeof roomba.statusCache[ device.id ] == 'undefined' ) {
             roomba.statusCache[ device.id ] = JSON.stringify(state);   
