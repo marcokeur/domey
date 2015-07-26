@@ -17,13 +17,13 @@ function init( devices, callback ) {
                     id: tokens[1],
                     name: tokens[2],
                     ip: tokens[3]
-                }
+                };
                 console.log('Found new cleaner ' + tokens[2] + ' at ' + tokens[3]);
             }
         }else{
             console.log(cleaners);
             //first token is device id
-            var device = roomba.getDevice(tokens[1])
+            var device = roomba.getDevice(tokens[1]);
             console.log(device);
             if( !(device instanceof Error )){
                 roomba.updateStatus(device, tokens);
@@ -94,7 +94,7 @@ var roomba = {
         }
         console.log("roomba state: " + JSON.stringify(roomba.statusCache));
     }
-}
+};
 
 
 var capabilites = {
@@ -211,9 +211,9 @@ var capabilites = {
                     callback( state.battery_level );
                 });
             }
-        },
+        }
     }
-}
+};
 
 module.exports.init = init;    
 module.exports.capabilites = capabilites;    
