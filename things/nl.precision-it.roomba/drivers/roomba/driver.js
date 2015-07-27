@@ -1,9 +1,13 @@
 var dgram       = require('dgram');
 var client;
 
-var cleaners = { };
+//var devices = { };
+
+module.exports.devices = {};
 
 function init( devices, callback ) {
+    var self = this;
+
     console.log('roomba driver init');
     Domey.interface('mqtt').subscribe('pit/roomba/state');
     Domey.interface('mqtt').on('pit/roomba/state', function(data){
@@ -13,15 +17,22 @@ function init( devices, callback ) {
         var tokens = data.toString().split(' ');
         if(tokens[0] == 'advertise'){
             if(tokens.length == 4){
-                cleaners [ tokens[1] ] = {
+                self.devices [ tokens[1] ] = {
                     id: tokens[1],
                     name: tokens[2],
-                    ip: tokens[3]
+                    ip: tokens[3],
+		    state: { 
+			cleaning : false,
+                	spot_cleaning : false,
+                	docked : false,
+                	charging : false
+			}
                 };
                 console.log('Found new cleaner ' + tokens[2] + ' at ' + tokens[3]);
+		console.log('cleaners: ' + self.devices);
             }
         }else{
-            console.log(cleaners);
+            console.log(devices);
             //first token is device id
             var device = roomba.getDevice(tokens[1]);
             console.log(device);
@@ -40,8 +51,9 @@ var roomba = {
     statusCache: {},
 
 	getDevice: function( id ) {
-		if( typeof cleaners[id] == 'undefined' ) return new Error("device is not connected (yet)");
-		return cleaners[id];
+		if( typeof this.devices[id] == 'undefined' ) return new Error("device is not connected (yet)");
+		console.log('getDevice: ' + JSON.stringify(this.devices));
+		return this.devices[id];
 	},
     
     getStatus: function( device ) {
@@ -97,7 +109,7 @@ var roomba = {
 };
 
 
-var capabilites = {
+var capabilities = {
     state: {
 		get: function( device, callback ){
 			var device = roomba.getDevice( device.id );
@@ -118,8 +130,6 @@ var capabilites = {
 			roomba.getStatus( device, callback );	
 		}
 	},
-
-    capabilities: {
 
         cleaning: {
             get: function( device, callback ){
@@ -212,8 +222,8 @@ var capabilites = {
                 });
             }
         }
-    }
+    
 };
 
 module.exports.init = init;    
-module.exports.capabilites = capabilites;    
+module.exports.capabilities = capabilities;    
