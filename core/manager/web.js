@@ -85,6 +85,7 @@ Web.prototype.init = function(){
     
     //auth
     app.use(cookieParser());
+    app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(expressSession({secret: 'mySecretKey',
                             resave: true,
@@ -115,9 +116,9 @@ Web.prototype.init = function(){
         }
         
         //404 error
-        app.use(function(request, response){
-            res.render('404.jade');
-        });
+        //app.use(function(request, response){
+        //    response.render('404.jade');
+        //});
     });
     
     Domey.manager('drivers').on('realtime', function(msg){

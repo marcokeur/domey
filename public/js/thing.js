@@ -15,3 +15,30 @@ socket.on('realtime', function(msg) {
 socket.on('dashboard_items', function(msg) {
     console.log(msg);
 });
+
+function callFlowItem(type, id, driver, deviceId){
+
+    var args = { "args" : [
+                        {
+                           "device": {
+                               "driver": {
+                                   "id": driver
+                               },
+                               "data": {
+                                   "id": deviceId
+                               }
+                           }
+                       }
+                       ]};
+    $.ajax
+    ({
+        type: "POST",
+        url: '/api/flow/'+ type +'/call/' + id,
+        dataType: 'json',
+        async: false,
+        data:  args,
+        success: function (response) {
+            alert('response was: ' + JSON.stringify(response));
+        }
+    })
+}

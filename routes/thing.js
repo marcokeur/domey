@@ -17,8 +17,13 @@ module.exports = function(app) {
             };
 
             for(var i in thing.meta.drivers){
+            console.log('devices : ' + JSON.stringify(Domey.manager('drivers').getDriver(thing.meta.drivers[i].id)));
                 webContent.currentThing['devices'] = Domey.manager('drivers').getDriver(thing.meta.drivers[i].id).devices;
             }
+
+            webContent['flowitems'] = Domey.manager('flow').getFlowItemsByThing(thing.meta.id);
+
+            console.log("webContent %j", webContent);
 
             response.render(__dirname + '/../views/thing.jade', webContent);
         }

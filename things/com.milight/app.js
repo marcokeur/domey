@@ -6,7 +6,7 @@ function App()
 module.exports = App;
 
 App.prototype.init = function(){
-    
+
     Domey.manager('flow').on('condition.enabled', function( args, callback ){
         if( typeof args.device == 'undefined' ) return;
         var driver = Domey.manager('drivers').getDriver( args.device.driver.id );

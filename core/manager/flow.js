@@ -12,9 +12,16 @@ util.inherits(Flow, EventEmitter);
 
 var flowItems = [];
 var flows;
-function FlowItem(type, meta) {
+
+var flowIdCounter = 0;
+
+var self;
+
+function FlowItem(type, meta, thingId, id) {
     this.type = type;
     this.meta = meta;
+    this.thingId = thingId;
+    this.id = id;
 }
 
 Flow.prototype.getName = function(){
@@ -23,7 +30,9 @@ Flow.prototype.getName = function(){
 
 Flow.prototype.init = function () {
 	console.log("flow mamanger - init");
-    
+
+    self = this;
+
     Domey.on('thing_registered', function (thing) {
         
         if (thing.meta.hasOwnProperty('flow')) {
@@ -32,7 +41,7 @@ Flow.prototype.init = function () {
                     var action = thing.meta.flow.actions[i];
                     console.log('flow manager - registering action: ' + action.title.en);
 
-                    var item = new FlowItem('action', action);
+                    var item = new FlowItem('action', action, thing.meta.id, ++flowIdCounter);
                     flowItems.push(item);
                 }
             }
@@ -42,7 +51,7 @@ Flow.prototype.init = function () {
                     var trigger = thing.meta.flow.triggers[i];
                     console.log('flow manager - registering trigger: ' + trigger.title.en);
 
-                    var item = new FlowItem('trigger', trigger);
+                    var item = new FlowItem('trigger', trigger, thing.meta.id, ++flowIdCounter);
                     flowItems.push(item);
                 }
             }
@@ -52,7 +61,7 @@ Flow.prototype.init = function () {
                     var condition = thing.meta.flow.conditions[i];
                     console.log('flow manager - registering condition: ' + condition.title.en);
 
-                    var item = new FlowItem('condition', condition);
+                    var item = new FlowItem('condition', condition, thing.meta.id, ++flowIdCounter);
                     flowItems.push(item);
                 }
             }
@@ -60,8 +69,6 @@ Flow.prototype.init = function () {
     });
     
     Domey.on('all_things_registered', function(things){
-        //flows = JSON.parse(fs.readFileSync(__dirname + '/../../config/flows.json', 'UTF-8'));
-        
         flows = Domey.getConfig('flows');
         console.log("flows : " + flows);
         for(var i in flows){
@@ -97,8 +104,6 @@ Flow.prototype.trigger = function(method, args){
             
             //for(j in trigger.conditionset){
                 var conditionSetIsTrue = true;  //this will be the result of all conditions
-                
-                //conditionset = trigger.conditionsets[j];
 
                 //a condition holds a conditionset, those conditions will be AND
                 for(l in trigger.conditionset.conditions){
@@ -114,7 +119,6 @@ Flow.prototype.trigger = function(method, args){
                             flowDescription += '('+conditionIsTrue+')';
                             if(conditionIsTrue != true){
                                 conditionSetIsTrue = false;
-                                //break;
                             }
                         });
                     }
@@ -129,7 +133,7 @@ Flow.prototype.trigger = function(method, args){
                         flowDescription += ' then ';
                         flowDescription += flowItem.meta.title.en;
                               
-                        Domey.manager('flow').emit('action.' + action.method, action.args[0], function(response){
+                        this.callItem('action', action, action.args[0], function(response){
                            console.log(flowDescription);
                         });
                     }
@@ -139,6 +143,12 @@ Flow.prototype.trigger = function(method, args){
             }
         //}
     }
+}
+
+Flow.prototype.callItem = function(type, flowItem, args, callback){
+    self.emit(type + '.' + flowItem.method, args, function(response){
+        callback(response);
+    });
 }
 
 Flow.prototype.getItems = function(type){
@@ -155,4 +165,25 @@ function getFlowItemByMethod(method){
             return flowItems[i];
         }
     }
+}
+
+Flow.prototype.getFlowItemById = function(id){
+    for(i in flowItems){
+        if(flowItems[i].id == id){
+            return flowItems[i];
+        }
+    }
+}
+
+Flow.prototype.getFlowItemsByThing = function(thingId){
+    var matches = [];
+
+    for(i in flowItems){
+    console.log(flowItems[i].thingId);
+        if(flowItems[i].thingId == thingId){
+            matches.push(flowItems[i]);
+        }
+    }
+
+    return matches;
 }

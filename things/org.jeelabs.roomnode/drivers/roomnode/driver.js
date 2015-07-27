@@ -1,7 +1,7 @@
 var self = {
     
     //holds all known devices
-    devices: [ ],
+    devices: {},
 
     init: function( devices, callback ) {
         console.log('driver: ' + Domey.interface('jeelink_868').getName());
@@ -21,6 +21,8 @@ var self = {
                         if(stored == false){
                             console.log("New device found! --> " + roomnodePackage.id);
                             self.devices[roomnodePackage.id] = roomnodePackage;
+
+                            console.log(JSON.stringify(self.devices));
                         }
                         
                         // emit realtime event if something has changed

@@ -12,8 +12,9 @@ Domey.on('ready', function () {
     winston.info('initialization done!');
 });
 
-
+/*
 setTimeout(function () {
     Domey.manager('flow').trigger('measurement', {'light': 200});
     console.log('trigger fired');
 }, 3000);
+*/

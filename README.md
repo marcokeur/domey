@@ -1,25 +1,23 @@
-Domotica
+Domey
 ========
-This repository holds all code that is used for my home domotica system. It consists of various components that will be explained here.
+Based on the idea's behind Homey, i've developed a system called Domey. Domey is a NodeJS based home automation
+framework. Currently there is support for the following interfaces;
+* MQTT
+* JeeNode
+* Raspberries GPIO
 
-The nodejs stuff depends on the following packages; 
-*  nodejs
-*  mongodb
-*  npm
-*  python
-*  build-essential (ubuntu) / base-devel (arch)
+Modules for various devices can be created on top of these interfaces. A Domey module is called a Thing. The following
+things are currently build in.
+* Milight
+* ESP8266 MQTT roomba controller
+* JeeLabs RoomNode
 
-The embedded parts are build using Arduino IDE and ESP8266 SDK
+A Thing consists of a driver for a physical device (a Domey device is an instance of a driver) and callbacks to support
+flow behavoir (like "If this then that").
 
-##dashboard
-contains the frontend and middleware (mqtt stuff and mongodb database)
- 
-##connector
-The connector folder holds a nodejs application that is used to connect MQTT with the physical world. It has various drivers i.e. a jee driver to connect with jeenodes, a MiLight driver to connect with my MiLights and a driver that pulls the weather forecast from the internet and publishes it on MQTT.
+Currently working on support for the following:
+* HomeKit
+* Graphing
+* Calling flow actions from web UI
 
-The jee driver is a bit special. Because a single jeenode on the raspberry side can communicatie with multiple jeenodes that send and receive data in various ways, there are decoders that can decode the data from a type of node. For example the roomnode has a decoder that decodes the incoming datapackets to a javascript array with topics and payload for each sensor in the roomnode.
-
-##embedded
-contains sourcecode from various sensors & acutators
-
-[![Build Status](https://travis-ci.org/marcokeur/domotica.svg?branch=master)](https://travis-ci.org/marcokeur/domotica)
+[![Build Status](https://travis-ci.org/marcokeur/domey.svg?branch=master)](https://travis-ci.org/marcokeur/domey)

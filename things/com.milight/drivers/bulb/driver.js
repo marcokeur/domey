@@ -113,7 +113,7 @@ var self = {
         enabled: {
             get: function( device, callback ){
                 var device = self.getDevice( device.id );
-                //console.log('device:' + device);
+                console.log('device:' + device);
                 if( device instanceof Error ) return callback( device );
                 
                 if(device.state.onoff == 'on'){
@@ -139,7 +139,7 @@ var self = {
         disabled: {
             get: function(device, callback){
                 var device = self.getDevice( device.id );
-                //console.log('device:' + device);
+                console.log('device:' + device);
                 if( device instanceof Error ) return callback( device );
                 
                 if(device.state.onoff == 'off'){
