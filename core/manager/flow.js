@@ -179,7 +179,6 @@ Flow.prototype.getFlowItemsByThing = function(thingId){
     var matches = [];
 
     for(i in flowItems){
-    console.log(flowItems[i].thingId);
         if(flowItems[i].thingId == thingId){
             matches.push(flowItems[i]);
         }

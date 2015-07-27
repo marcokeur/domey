@@ -9,3 +9,12 @@
 /embedded/Roomba/esp8266/firmware/0x00000.bin
 /embedded/Roomba/esp8266/firmware/0x40000.bin
 /framework/debug.log
+/domey.iml
+/.idea/compiler.xml
+/.idea/copyright/profiles_settings.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/.name
+/.idea/vcs.xml
+/.idea/workspace.xml
+/debug.log
