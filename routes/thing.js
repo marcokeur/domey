@@ -17,7 +17,7 @@ module.exports = function(app) {
             };
 
             for(var i in thing.meta.drivers){
-            console.log('devices : ' + JSON.stringify(Domey.manager('drivers').getDriver(thing.meta.drivers[i].id)));
+                //console.log('devices : ' + JSON.stringify(Domey.manager('drivers').getDriver(thing.meta.drivers[i].id)));
                 webContent.currentThing['devices'] = Domey.manager('drivers').getDriver(thing.meta.drivers[i].id).devices;
             }
 

@@ -1,10 +1,3 @@
-var dgram       = require('dgram');
-var client;
-
-
-
-
-
 var self = {
     devices : {},
 
@@ -157,8 +150,10 @@ var self = {
                     if( (state.cleaning && value) || (!state.cleaning && !value) ) {
                         callback( value );
                     } else if( (state.cleaning && !value) || (!state.cleaning && value) ) {
-                        self.command( device, 'clean', function(){
-                            callback( value );
+                        self.command( device, 'wakeup', function(){
+                            self.command( device, 'clean', function(){
+                                callback( value );
+                            });
                         });
                     }
                 });
