@@ -1,68 +1,72 @@
 var dgram       = require('dgram');
 var client;
 
-//var devices = { };
 
-module.exports.devices = {};
 
-function init( devices, callback ) {
-    var self = this;
 
-    console.log('roomba driver init');
-    Domey.interface('mqtt').subscribe('pit/roomba/state');
-    Domey.interface('mqtt').on('pit/roomba/state', function(data){
-        //received data from roomba!
-        console.log('received from roomba: ' + data);
-    
-        var tokens = data.toString().split(' ');
-        if(tokens[0] == 'advertise'){
-            if(tokens.length == 4){
-                self.devices [ tokens[1] ] = {
-                    id: tokens[1],
-                    name: tokens[2],
-                    ip: tokens[3],
-		    state: { 
-			cleaning : false,
-                	spot_cleaning : false,
-                	docked : false,
-                	charging : false
-			}
-                };
-                console.log('Found new cleaner ' + tokens[2] + ' at ' + tokens[3]);
-		console.log('cleaners: ' + self.devices);
+
+var self = {
+    devices : {},
+
+    init: function( init_devices, callback ) {
+        //var self = this;
+
+        console.log('roomba driver init');
+        Domey.interface('mqtt').subscribe('pit/roomba/state');
+        Domey.interface('mqtt').on('pit/roomba/state', function(data){
+            //received data from roomba!
+            console.log('received from roomba: ' + data);
+
+            var tokens = data.toString().split(' ');
+            if(tokens[0] == 'advertise'){
+                if(tokens.length == 4){
+                    self.devices [ tokens[1] ] = {
+                        id: tokens[1],
+                        name: tokens[2],
+                        ip: tokens[3],
+                        state: {
+                            cleaning : false,
+                            spot_cleaning : false,
+                            docked : false,
+                            charging : false
+                        }
+                    };
+                    console.log('Found new cleaner ' + tokens[2] + ' at ' + tokens[3]);
+                    console.log('cleaners: ' + self.devices);
+                    console.log('cleaner: ' + JSON.stringify(self.devices[tokens[1]]));
+                }
+            }else{
+                console.log(self.devices);
+                //first token is device id
+                var device = roomba.getDevice(tokens[1]);
+                console.log(device);
+                if( !(device instanceof Error )){
+                    roomba.updateStatus(device, tokens);
+                }
             }
-        }else{
-            console.log(devices);
-            //first token is device id
-            var device = roomba.getDevice(tokens[1]);
-            console.log(device);
-            if( !(device instanceof Error )){
-                roomba.updateStatus(device, tokens);
-            }
-        }
-    });
-        
-    callback();
-}
+        });
 
-var roomba = {
+        callback();
+    },
     
     //holds roomba data
     statusCache: {},
 
 	getDevice: function( id ) {
+	    console.log('getDevice: ' + JSON.stringify(this));
 		if( typeof this.devices[id] == 'undefined' ) return new Error("device is not connected (yet)");
 		console.log('getDevice: ' + JSON.stringify(this.devices));
 		return this.devices[id];
 	},
     
-    getStatus: function( device ) {
-        return this.statusCache[device.id];
+    getStatus: function( device, callback) {
+        callback(device.state);
     },
     
     command: function(device, command, callback ){
         Domey.interface('mqtt').publish('pit/roomba/cmd', command, function(){
             console.log('Roomba command: ' + command + ' published');
+            callback();
         });
     },
     
@@ -105,57 +109,57 @@ var roomba = {
                             });
         }
         console.log("roomba state: " + JSON.stringify(roomba.statusCache));
-    }
-};
+    },
 
 
-var capabilities = {
-    state: {
-		get: function( device, callback ){
-			var device = roomba.getDevice( device.id );
-			if( device instanceof Error ) return callback( device );
-	
-			roomba.getStatus( device, callback );		
-		},
-		set: function( device, state, callback ) {
-			if( typeof state.cleaning != 'undefined' )
-                module.exports.cleaning.set(device, state.cleaning, function(){} );
-			if( typeof state.spot_cleaning != 'undefined' ) 
-                module.exports.spot_cleaning.set( device, state.spot_cleaning, function(){} );
-			if( typeof state.docked != 'undefined' ) module.exports.docked.set(device, state.docked, function(){} );
-			
-			var device = roomba.getDevice( device.id );
-			if( device instanceof Error ) return callback( device );
-	
-			roomba.getStatus( device, callback );	
-		}
-	},
 
-        cleaning: {
+    capabilities : {
+        state: {
             get: function( device, callback ){
                 var device = roomba.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
 
-                roomba.getStatus( device, function(state){
-                    callback( state.cleaning );			
+                roomba.getStatus( device, callback );
+            },
+            set: function( device, state, callback ) {
+                if( typeof state.cleaning != 'undefined' )
+                    module.exports.cleaning.set(device, state.cleaning, function(){} );
+                if( typeof state.spot_cleaning != 'undefined' )
+                    module.exports.spot_cleaning.set( device, state.spot_cleaning, function(){} );
+                if( typeof state.docked != 'undefined' ) module.exports.docked.set(device, state.docked, function(){} );
+
+                var device = roomba.getDevice( device.id );
+                if( device instanceof Error ) return callback( device );
+
+                self.getStatus( device, callback );
+            }
+        },
+
+        cleaning: {
+            get: function( device, callback ){
+                var device = self.getDevice( device.id );
+                if( device instanceof Error ) return callback( device );
+
+                self.getStatus( device, function(state){
+                    callback( state.cleaning );
                 });
 
             },
             set: function( device, value, callback ){
 
-                var device = roomba.getDevice( device.id );
+                var device = self.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
 
                 // first, get the status
-                roomba.getStatus( device, function(state){
-
+                self.getStatus( device, function(state){
+                    console.log('roomba status: ' + state);
                     // then, set the status (because clean simulates a button press, not really start/stop)
                     if( (state.cleaning && value) || (!state.cleaning && !value) ) {
                         callback( value );
                     } else if( (state.cleaning && !value) || (!state.cleaning && value) ) {
-                        roomba.command( device, 'clean', function(state){
+                        self.command( device, 'clean', function(){
                             callback( value );
-                        });				
+                        });
                     }
                 });
 
@@ -163,11 +167,11 @@ var capabilities = {
         },
         spot_cleaning: {
             get: function( device, callback ){
-                var device = roomba.getDevice( device.id );
+                var device = self.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
 
-                roomba.getStatus( device, function(state){
-                    callback( state.spot_cleaning );			
+                self.getStatus( device, function(state){
+                    callback( state.spot_cleaning );
                 });
 
             },
@@ -177,25 +181,25 @@ var capabilities = {
         },
         docked: {
             get: function( device, callback ){
-                var device = roomba.getDevice( device.id );
+                var device = self.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
 
-                roomba.getStatus( device, function(state){
-                    callback( state.docked );			
+                self.getStatus( device, function(state){
+                    callback( state.docked );
                 });
 
             },
             set: function( device, value, callback ) {
-                var device = roomba.getDevice( device.id );
+                var device = self.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
 
                 // first, get the status
-                roomba.getStatus( device, function(state){
+                self.getStatus( device, function(state){
 
                     if( (state.docked != value) && (value == true)) {
-                        roomba.command( device, 'dock', function(state){
+                        self.command( device, 'dock', function(state){
                             callback( value );
-                        });				
+                        });
                     }else{
                             callback( false );
                     }
@@ -204,26 +208,25 @@ var capabilities = {
         },
         charging: {
             get: function( device, callback ){
-                var device = roomba.getDevice( device.id );
+                var device = self.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
-			
-                roomba.getStatus( device, function(state){
-                    callback( state.charging );			
-                });			
+
+                self.getStatus( device, function(state){
+                    callback( state.charging );
+                });
             }
         },
         battery_level: {
             get: function( device, callback ){
-                var device = roomba.getDevice( device.id );
+                var device = self.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
 
-                roomba.getStatus( device, function(state){
+                self.getStatus( device, function(state){
                     callback( state.battery_level );
                 });
             }
         }
-    
+    }
 };
 
-module.exports.init = init;    
-module.exports.capabilities = capabilities;    
+module.exports = self;

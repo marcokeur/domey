@@ -8,6 +8,7 @@ var config;
 //holds all subscribed topics by things
 var subscriptions = [];
 
+var server;
 
 function mqtt_server() 
 {
@@ -42,7 +43,7 @@ mqtt_server.prototype.init = function(){
         backend: mongo
     };
 
-	var server = new mosca.Server(settings);
+	server = new mosca.Server(settings);
 
 	server.on('clientConnected', function(client) {
 		console.log('client connected', client.id);

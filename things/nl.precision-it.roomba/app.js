@@ -24,6 +24,7 @@ App.prototype.init = function(){
 	
 	// flow:action:start
 	Domey.manager('flow').on('action.clean', function( args, callback ){
+	console.log('start cleaning');
 		if( typeof args.device == 'undefined' ) return;
 		var driver = Domey.manager('drivers').getDriver( args.device.driver.id );
 		console.log(JSON.stringify(driver));
