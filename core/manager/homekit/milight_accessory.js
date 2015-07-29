@@ -1,74 +1,39 @@
 var types = require("HAP-NodeJS/accessories/types.js");
-//var Milight = require('node-milight-promise').MilightController;
-//var commands = require('node-milight-promise').commands;
 
-function MiLight(log, config) {
-	this.log = log;
-	this.ip_address = config["ip_address"];
-	this.port = config["port"];
+function MiLight(config) {
 	this.name = config["name"];
-	this.zone = config["zone"];
+	this.id = config["id"];
 	this.type = config["type"];
-	this.delay = config["delay"];
-	this.repeat = config["repeat"];
+	this.driver = Domey.manager('drivers').getDriver( 'bulb' );
 }
-
-/*
-var light = new Milight({
-	ip: this.ip_address,
-	port: this.port,
-	delayBetweenCommands: this.delay,
-	commandRepeat: this.repeat
-});
-*/
 
 MiLight.prototype = {
 
 	setPowerState: function(powerOn) {
+		console.log("Setting power state of zone " + this.id + " to " + powerOn);
 
-		var binaryState = powerOn ? "on" : "off";
-		var that = this;
-
-		if (binaryState === "on") {
-			this.log("Setting power state of zone " + this.zone + " to " + powerOn);
-
-			var data = { "id": 0 }
-			var driver = Domey.manager('drivers').getDriver( 'bulb' );
-            driver.capabilities.enabled.set( data, true, function(){
-            	console.log('done');
-            } );
-		} else {
-			this.log("Setting power state of zone " + this.zone + " to " + powerOn);
-
-			var data = { "id": 0 }
-            var driver = Domey.manager('drivers').getDriver( 'bulb' );
-            driver.capabilities.enabled.set( data, false, function(){
-            	console.log('done');
-            } );
-		}
-
+		var data = { "id": this.id }
+		this.driver.capabilities.enabled.set( data, powerOn, function(){
+			console.log('done');
+		});
 	},
 
 	setBrightnessLevel: function(value) {
+		console.log("Setting brightness level of zone " + this.id + " to " + value);
 
-		var that = this;
-
-		this.log("Setting brightness level of zone " + this.zone + " to " + value);
-
-		//light.sendCommands(commands[this.type].brightness(value));
+		var data = { "id": this.id }
+		this.driver.capabilities.brightness.set( data, value, function(){
+			console.log('done');
+        });
 	},
 
 	setHue: function(value) {
+		console.log("Setting hue of zone " + this.id + " to " + value);
 
-		var that = this;
-
-		this.log("Setting hue of zone " + this.zone + " to " + value);
-
-		if (value == "0") {
-			//light.sendCommands(commands.rgbw.whiteMode(this.zone));
-		} else {
-			//light.sendCommands(commands.rgbw.hue(commands.rgbw.hsvToMilightColor(Array(value, 0, 0))));
-		}
+		var data = { "id": this.id }
+		this.driver.capabilities.hue.set( data, value, function(){
+			console.log('done');
+		});
 	},
 
 

@@ -1,5 +1,9 @@
-var dgram       = require('dgram');
-var client;
+//var dgram       = require('dgram');
+//var client;
+var Milight = require('node-milight-promise').MilightController;
+var commands = require('node-milight-promise').commands;
+
+var light;
 
 var self = {
     
@@ -7,75 +11,28 @@ var self = {
     devices: [
         {   id:     0,
             name:   'group1',
-            on:     0x45,
-            off:    0x46,
+            type:   'rgbw',
             state: {
-                onoff:  'off'
+                enabled:  false
             }
         },
         {   id:     1,
             name:   'group2',
-            on:     0x47,
-            off:    0x48,
+            type:   'rgbw',
             state: {
-                onoff: 'off'
+                enabled: false
             }
         }
     ],
 
     init: function( devices, callback ) {
-        
-        client = dgram.createSocket('udp4');
+        this.light =  new Milight({
+                     	ip: '255.255.255.255',
+                     	port: 8899,
+                     	delayBetweenCommands: 50,
+                     	commandRepeat: 1
+                     });
 
-        client.bind(8899, "255.255.255.255");
-        client.on("listening", function () {
-            client.setBroadcast(true);
-            var address = client.address();
-            console.log('UDP Server listening on ' + address.address + ":" + address.port);
-        });
-
-        client.on('message', function (message, remote) {
-            var rxMsg = Array();
-
-            rxMsg.push(message[0]);
-            rxMsg.push(message[1]);
-            rxMsg.push(message[2]);
-
-            for(var deviceId in self.devices){
-                if(rxMsg[0] == self.devices[deviceId].on){
-                    console.log('Turning device ' + self.devices[deviceId].name + ' on');
-                    
-                    self.capabilities.enabled.set( deviceId, true, function(){
-                        // emit realtime event if something has changed
-                        Domey.manager('drivers').realtime({
-                            thing: 'com.milight',
-                            driver: 'roomnode',
-                            device: deviceId,
-                            state: {
-                                type: 'onoff',
-                                value: self.devices[deviceId].state.onoff
-                            }   
-                        });
-                    });
-                }else if(rxMsg[0] == self.devices[deviceId].off){
-                    console.log('Turning device ' + self.devices[deviceId].name + ' off');
-                    
-                    self.capabilities.enabled.set( deviceId, false, function(){                    
-                        // emit realtime event if something has changed
-                        Domey.manager('drivers').realtime({
-                            thing: 'com.milight',
-                            driver: 'roomnode',
-                            device: deviceId,
-                            state: {
-                                type: 'onoff',
-                                value: self.devices[deviceId].state.onoff
-                            }   
-                        });
-                    });
-                }
-            }
-        });
-        
         callback();
     },
 
@@ -90,22 +47,27 @@ var self = {
     
     update: function( id ) {
         var device = self.getDevice( id );
-        var message = [];
-        if ( device.state.onoff == 'on') {
-            message.push(device.on);
+
+        console.log(JSON.stringify(device.state));
+
+        if(device.state.enabled){
+            this.light.sendCommands(commands['rgbw'].on(device.id));
+            console.log('set on');
         }else{
-            message.push(device.off);
+            this.light.sendCommands(commands['rgbw'].off(device.id));
+            console.log('set off');
         }
-        
-        message.push(0x00);
-        message.push(0x55);
-        
-        var buf = new Buffer(message);
-        
-        console.log(buf.toString('hex'));
-        client.send(buf, 0, buf.length, 8899, '255.255.255.255', function(err, bytes){
-            console.log('data send');
-        });
+
+        console.log('set brightness');
+        this.light.sendCommands(commands['rgbw'].brightness(device.state.brightness));
+
+
+        console.log('set hue');
+        if (device.state.hue == "0") {
+            this.light.sendCommands(commands.rgbw.whiteMode(device.id));
+        } else {
+            this.light.sendCommands(commands.rgbw.hue(commands.rgbw.hsvToMilightColor(Array(device.state.hue, 0, 0))));
+        }
     },
 
     capabilities: {
@@ -123,19 +85,15 @@ var self = {
                 }
             },
             set: function( device, onoff, callback ) {
-		console.log(device);
-		console.log(onoff);
+
                 var device = self.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
-		console.log(device);
-                if(onoff){
-                    device.state.onoff = 'on';
-                }else{
-                    device.state.onoff = 'off';
-                }
+
+                device.state.enabled = onoff;
+
                 self.update( device.id );
 
-                callback( device.state.onoff );
+                callback( device.state.enabled );
             }
         },
         disabled: {
@@ -144,12 +102,44 @@ var self = {
                 console.log('device:' + device);
                 if( device instanceof Error ) return callback( device );
                 
-                if(device.state.onoff == 'off'){
+                if(device.state.enabled == false){
                     callback( true );
                 }else{
                     callback( false );
                 }
             }
+        },
+        brightness: {
+            get: function( device, callback ){
+                callback( device.state.brightness );
+            },
+            set: function( device, value, callback ){
+                var device = self.getDevice( device.id );
+                if( device instanceof Error ) return callback( device );
+
+                device.state.brightness = value;
+
+                self.update( device.id );
+
+                callback( device.state.brightness );
+            }
+
+        },
+        hue: {
+            get: function( device, callback ){
+                callback( device.state.hue );
+            },
+            set: function( device, value, callback ){
+                var device = self.getDevice( device.id );
+                if( device instanceof Error ) return callback( device );
+
+                device.state.hue = value;
+
+                self.update( device.id );
+
+                callback( device.state.hue );
+            }
+
         }
     }
 }

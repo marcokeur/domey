@@ -27,40 +27,27 @@ HomeKit.prototype.init = function () {
 
 
     Domey.on('all_things_registered', function(things){
-        //for(var i in things){
-        //    var thing = things[i];
+        var devices = Domey.manager('drivers').getDriver('bulb').devices;
 
-        //    for(var i in thing.meta.drivers){
-        //        console.log('devices : ' + JSON.stringify(Domey.manager('drivers').getDriver(thing.meta.drivers[i].id)));
-        //    }
+        for(var i in devices){
             var accessoryConfig = {
-                            "accessory": "MiLight",
-                            "name": "Lamp",
-                            "ip_address": "255.255.255.255", // IP Address of the WiFi Bridge, or 255.255.255.255 to broadcast to all
-                            "port": 8899, // Default port 8899 (50000 for v1 or v2 bridge)
-                            "zone": 1, // Zone to address commands to (not used for rgb only bulbs)
-                            "type": "rgbw", // Bulb type (rgbw, rgb, white)
-                            "delay": 35, // Delay between commands sent to the WiFi bridge (default 35)
-                            "repeat": 3 // Number of times each command is repeated for reliability (default 3)
-                        };
+                "name" : devices[i].name,
+                "id" : devices[i].id,
+                "type" : devices[i].type
+            };
 
-            var accessoryName = accessoryConfig["accessory"];
+            var accessoryName = accessoryConfig['name'];
             var accessoryModule = require(__dirname + '/homekit/milight_accessory.js');
             var accessoryConstructor = accessoryModule.accessory;
 
-             // Create a custom logging function that prepends the device display name for debugging
-            var name = 'milight 1';
-            var log = function(name) { return function(s) { console.log("[" + name + "] " + s); }; }(name);
-
-            log("Initializing " + accessoryName + " accessory...");
-            var accessory = new accessoryConstructor(log, accessoryConfig);
-            //accessories.push(accessory);
+            console.log("Initializing " + accessoryName + " accessory...");
+            var accessory = new accessoryConstructor(accessoryConfig);
 
             // Extract the raw "services" for this accessory which is a big array of objects describing the various
             // hooks in and out of HomeKit for the HAP-NodeJS server.
             var services = accessory.getServices();
-            console.log(JSON.stringify(services));
             createHAPServer(accessory.name, services, accessory.transportCategory);
+        }
     });
 };
 
