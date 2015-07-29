@@ -32,7 +32,7 @@ MiLight.prototype = {
 		if (binaryState === "on") {
 			this.log("Setting power state of zone " + this.zone + " to " + powerOn);
 
-			var data = { "data": { "id": 0 } }
+			var data = { "id": 0 }
 			var driver = Domey.manager('drivers').getDriver( 'bulb' );
             driver.capabilities.enabled.set( data, true, function(){
             	console.log('done');
@@ -40,9 +40,9 @@ MiLight.prototype = {
 		} else {
 			this.log("Setting power state of zone " + this.zone + " to " + powerOn);
 
-			var data = { "data": { "id": 0 } }
+			var data = { "id": 0 }
             var driver = Domey.manager('drivers').getDriver( 'bulb' );
-            driver.capabilities.enabled.set( data, true, function(){
+            driver.capabilities.enabled.set( data, false, function(){
             	console.log('done');
             } );
 		}

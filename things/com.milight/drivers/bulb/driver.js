@@ -60,7 +60,7 @@ var self = {
                 }else if(rxMsg[0] == self.devices[deviceId].off){
                     console.log('Turning device ' + self.devices[deviceId].name + ' off');
                     
-                    self.capabilities.capabilities.set( deviceId, false, function(){                    
+                    self.capabilities.enabled.set( deviceId, false, function(){                    
                         // emit realtime event if something has changed
                         Domey.manager('drivers').realtime({
                             thing: 'com.milight',
@@ -91,10 +91,10 @@ var self = {
     update: function( id ) {
         var device = self.getDevice( id );
         var message = [];
-        if ( device.state.onoff ) {
-            message.push(device.on);  
+        if ( device.state.onoff == 'on') {
+            message.push(device.on);
         }else{
-            message.push(device.off);    
+            message.push(device.off);
         }
         
         message.push(0x00);
@@ -111,7 +111,7 @@ var self = {
     capabilities: {
 
         enabled: {
-            get: function( device, callback ){
+            get: function( device, callback ) {
                 var device = self.getDevice( device.id );
                 console.log('device:' + device);
                 if( device instanceof Error ) return callback( device );
@@ -123,9 +123,11 @@ var self = {
                 }
             },
             set: function( device, onoff, callback ) {
+		console.log(device);
+		console.log(onoff);
                 var device = self.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
-
+		console.log(device);
                 if(onoff){
                     device.state.onoff = 'on';
                 }else{
