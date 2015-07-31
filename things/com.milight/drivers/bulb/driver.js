@@ -29,7 +29,7 @@ var self = {
         this.light =  new Milight({
                      	ip: '255.255.255.255',
                      	port: 8899,
-                     	delayBetweenCommands: 50,
+                     	delayBetweenCommands: 100,
                      	commandRepeat: 1
                      });
 
@@ -52,6 +52,7 @@ var self = {
 
         if(device.state.enabled){
             this.light.sendCommands(commands['rgbw'].on(device.id));
+            this.light.sendCommands(commands.rgbw.whiteMode(device.id));
             console.log('set on');
         }else{
             this.light.sendCommands(commands['rgbw'].off(device.id));
