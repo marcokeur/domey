@@ -134,7 +134,7 @@ function loadThings(self){
         
         //check if the thing already has been installed
         if(installedThings.indexOf(meta.id) == -1){
-            console.log('Unknown thing, lets installed dependencies');
+            console.log('Unknown thing, lets install it\'s dependencies');
             //if not, install dependencies
                 installDependencies(meta.dependencies, function(){
                     //dependencies installed

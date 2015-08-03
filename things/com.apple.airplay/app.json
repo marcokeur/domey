@@ -1,11 +1,11 @@
 {
-	"id": "com.milight",
+	"id": "com.apple.airplay",
 	"version": "1.0",
 	"name": {
-		"en": "MiLight"
+		"en": "AirPlay"
 	},
 	"description": {
-		"en": "Control your MiLights"
+		"en": "Stream to airplay speakers"
 	},
 	"author": {
 		"name": "Marco Keur",
@@ -16,12 +16,12 @@
 	},
     "drivers": [
 		{
-			"id": "bulb",
+			"id": "airplay",
 			"name": {
-				"en": "Milight Bulb",
-				"nl": "Milight Lamp"
+				"en": "AirPlay Speaker",
+				"nl": "AirPlay Speaker"
 			},
-            "class": "light",
+            "class": "speaker",
             "capabilities": [ "onoff" ]
 		}
 	],
@@ -54,48 +54,6 @@
                     "nl" : "zet lamp uit"
                 },
                 "args": [
-                    {
-                        "name": "bulb",
-                        "type": "device",
-                        "placeholder":{
-                            "en" : "Find a bulb...",
-                            "nl" : "Vind een lamp..."
-                        },
-                        "filter": {
-                            "driverid" : "bulb"
-                        }
-                    }                        
-                ]
-            }
-        ],
-        "conditions": [
-            {
-                "method": "enabled",
-                "title" : {
-                    "en" : "light is turned on",
-                    "nl" : "lamp is aan"
-                },
-                "args" : [
-                    {
-                        "name": "bulb",
-                        "type": "device",
-                        "placeholder":{
-                            "en" : "Find a bulb...",
-                            "nl" : "Vind een lamp..."
-                        },
-                        "filter": {
-                            "driverid" : "bulb"
-                        }
-                    }                        
-                ]
-            },
-            {
-                "method": "disabled",
-                "title" : {
-                    "en" : "light is turned off",
-                    "nl" : "lamp is uit"
-                },
-                "args" : [
                     {
                         "name": "bulb",
                         "type": "device",

@@ -1,5 +1,3 @@
-//var dgram       = require('dgram');
-//var client;
 var Milight = require('node-milight-promise').MilightController;
 var commands = require('node-milight-promise').commands;
 
@@ -9,14 +7,14 @@ var self = {
     
     //holds all known devices
     devices: [
-        {   id:     0,
+        {   id:     1,
             name:   'group1',
             type:   'rgbw',
             state: {
                 enabled:  false
             }
         },
-        {   id:     1,
+        {   id:     2,
             name:   'group2',
             type:   'rgbw',
             state: {

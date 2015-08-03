@@ -35,6 +35,10 @@ Drivers.prototype.getDriver = function( id ){
     return driverList[id];
 };
 
+Drivers.prototype.getDrivers = function(){
+    return driverList;
+}
+
 Drivers.prototype.realtime = function(msg){
     this.emit('realtime', msg);
     winston.info('Realtime event emitted', msg);

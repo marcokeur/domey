@@ -12,9 +12,21 @@ Domey.on('ready', function () {
     winston.info('initialization done!');
 });
 
-/*
+
 setTimeout(function () {
-    Domey.manager('flow').trigger('measurement', {'light': 200});
-    console.log('trigger fired');
+    var ip;
+    require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+        ip = add;
+        console.log('addr: '+add);
+    });
+
+    var device = Domey.manager('drivers').getDriver('airplay').getDevice(0);
+    console.log((device));
+    if(device instanceof Error){
+
+    }else{
+        Domey.manager('drivers').getDriver('airplay').capabilities.play.set(device, 'http://' + ip +'/airplay/wakeup.mp3', function(response){
+            console.log('airplay response: ' + response);
+        });
+    }
 }, 3000);
-*/

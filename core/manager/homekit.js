@@ -27,29 +27,43 @@ HomeKit.prototype.init = function () {
 
 
     Domey.on('all_things_registered', function(things){
-        var devices = Domey.manager('drivers').getDriver('bulb').devices;
+        var drivers = Domey.manager('drivers').getDrivers();
 
-        for(var i in devices){
-            var accessoryConfig = {
-                "name" : devices[i].name,
-                "id" : devices[i].id,
-                "type" : devices[i].type
-            };
+        for(var driverName in drivers){
 
-            var accessoryName = accessoryConfig['name'];
-            var accessoryModule = require(__dirname + '/homekit/milight_accessory.js');
-            var accessoryConstructor = accessoryModule.accessory;
-
-            console.log("Initializing " + accessoryName + " accessory...");
-            var accessory = new accessoryConstructor(accessoryConfig);
-
-            // Extract the raw "services" for this accessory which is a big array of objects describing the various
-            // hooks in and out of HomeKit for the HAP-NodeJS server.
-            var services = accessory.getServices();
-            createHAPServer(accessory.name, services, accessory.transportCategory);
+            //if(driver.getClass() == 'light'){
+            if(driverName == 'bulb'){           //nasty ass hack, should look at class and capabilities of driver
+                for(var j in drivers[driverName].devices){
+                    registerHomekitAccessory(driverName, drivers[driverName].devices[j], function(accessoryName){
+                        console.log("Registered " + accessoryName + " accessory...");
+                    });
+                }
+            }
         }
     });
 };
+
+function registerHomekitAccessory(driverName, device, callback){
+        var accessoryConfig = {
+            "name" : driverName + "_" + device.name,
+            "id" : device.id,
+            "type" : device.type
+        };
+
+        var accessoryName = accessoryConfig['name'];
+        var accessoryModule = require(__dirname + '/homekit/milight_accessory.js');
+        var accessoryConstructor = accessoryModule.accessory;
+
+
+        var accessory = new accessoryConstructor(accessoryConfig);
+
+        // Extract the raw "services" for this accessory which is a big array of objects describing the various
+        // hooks in and out of HomeKit for the HAP-NodeJS server.
+        var services = accessory.getServices();
+        createHAPServer(accessory.name, services, accessory.transportCategory);
+
+        callback(accessoryName);
+}
 
 
 //STUFF BENEED IS FROM "homebridge" PROJECT
