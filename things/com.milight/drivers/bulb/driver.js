@@ -35,8 +35,14 @@ var self = {
     },
 
 	getDevice: function( id ) {
-		if( typeof this.devices[id] == 'undefined' ) return new Error("device is not connected (yet)");
-		return this.devices[id];
+	    for(var i in this.devices){
+	        if(this.devices[i].id == id){
+	            return this.devices[i];
+	        }
+	    }
+
+		return new Error("device is not connected (yet)");
+
 	},
     
     getStatus: function( device ) {

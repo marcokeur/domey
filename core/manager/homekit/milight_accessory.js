@@ -10,7 +10,7 @@ function MiLight(config) {
 MiLight.prototype = {
 
 	setPowerState: function(powerOn) {
-		console.log("Setting power state of zone " + this.id + " to " + powerOn);
+		console.log("Setting power state of zone " + this.name + " to " + powerOn);
 
 		var data = { "id": this.id }
 		this.driver.capabilities.enabled.set( data, powerOn, function(){
@@ -19,7 +19,7 @@ MiLight.prototype = {
 	},
 
 	setBrightnessLevel: function(value) {
-		console.log("Setting brightness level of zone " + this.id + " to " + value);
+		console.log("Setting brightness level of zone " + this.name + " to " + value);
 
 		var data = { "id": this.id }
 		this.driver.capabilities.brightness.set( data, value, function(){
@@ -28,7 +28,7 @@ MiLight.prototype = {
 	},
 
 	setHue: function(value) {
-		console.log("Setting hue of zone " + this.id + " to " + value);
+		console.log("Setting hue of zone " + this.name + " to " + value);
 
 		var data = { "id": this.id }
 		this.driver.capabilities.hue.set( data, value, function(){
