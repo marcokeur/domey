@@ -14,19 +14,18 @@ Domey.on('ready', function () {
 
 
 setTimeout(function () {
-    var ip;
-    require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-        ip = add;
-        console.log('addr: '+add);
+    var driver = Domey.manager('drivers').getDriver('airplay');
+
+    driver.capabilities.play.set(null, __dirname + '/public/airplay/wakeup.mp3', function(res){
+        console.log(res);
+        setTimeout(function(){driver.capabilities.stop.set(null, null)}, 4000);
     });
 
-    var device = Domey.manager('drivers').getDriver('airplay').getDevice(0);
-    console.log((device));
-    if(device instanceof Error){
-
-    }else{
-        Domey.manager('drivers').getDriver('airplay').capabilities.play.set(device, 'http://' + ip +'/airplay/wakeup.mp3', function(response){
-            console.log('airplay response: ' + response);
-        });
-    }
+    setInterval(function(){
+        driver.capabilities.play.set(null, __dirname + '/public/airplay/wakeup.mp3', function(res){
+            console.log(res);
+            setTimeout(function(){driver.capabilities.stop.set(null, null)}, 4000);
+        }
+    );
+    }, 6000);
 }, 3000);

@@ -1,30 +1,42 @@
+var airtunes = require('airtunes');
+var spawn = require('child_process').spawn;
+
 var self = {
     
     //holds all known devices
-    devices: [ ],
+    devices: {
+        1: {
+            name: 'Slaapkamer',
+            ip: '192.168.14.179',
+            port: '5002'
+        },
+        2: {
+        name: 'Woonkamer',
+        ip: '192.168.1.51',
+        port: '5002'
+        }
+    },
+
+    status : 'initializing',
 
     init: function( devices, callback ) {
 
-        var self = this;
+        //var self = this;
 
         console.log('airplay init');
 
-        self.browser = require('airplay').createBrowser();
-
-        devices = self.browser.getDevices();
-
-        console.log(self.browser.getDevices());
-
-        self.browser.on('deviceOnline', function(device) {
-          console.log('device online: ' + device.id);
-          self.devices.push(device);
+        airtunes.on('buffer', function(status){
+          // after the playback ends, give some time to AirTunes devices
+          if(status === 'end') {
+            console.log('playback ended, waiting for AirTunes devices');
+            //setTimeout(function() {
+                stopStream(self.status, function(res){
+                    self.status = res;
+                });
+            //}, 2000);
+          }
         });
 
-        self.browser.on('deviceOffline', function(device) {
-          console.log('device offline: ' + device.id);
-          self.devices.pop(device);
-        });
-        self.browser.start();
         console.log('airplay devices: ' + devices);
 
         callback();
@@ -34,31 +46,72 @@ var self = {
 		if( typeof this.devices[id] == 'undefined' ) return new Error("device is not connected (yet)");
 		return this.devices[id];
 	},
-    
+
     getStatus: function( device ) {
         return device;
-    },
-    
-    update: function( id ) {
-
     },
 
     capabilities: {
         play: {
-            set: function( device, content, callback){
-                var startPosition = 0;
+            set: function( device, file, callback){
+                if(self.status != 'playing'){
+                    self.status = 'playing';
 
-                device.play(content, startPosition, function(res){
-                    callback(res);
-                });
+                    for(var i in self.devices){
+                        airtunes.add(self.devices[i].ip, {'port': self.devices[i].port});
+                    }
+
+                    playUsingFFMPEG(file);
+                    callback('playback started');
+                }else{
+                    callback('still playing!');
+                }
             }
         },
         stop: {
             set: function(device, callback){
-                device.stop();
+                stopStream(self.status, function(status){
+                    self.status = status;
+                });
             }
         }
     }
+}
+
+function stopStream(status, callback){
+    if(status == 'playing'){
+        airtunes.stopAll(function() {
+            console.log('end');
+            airtunes.reset();
+
+            callback('stopped');
+        });
+    }else{
+        callback(status);
+    }
+}
+
+
+function playUsingFFMPEG(file){
+    this.ffmpeg = spawn('/usr/bin/ffmpeg', [
+        '-i', file,
+        '-f', 's16le',        // PCM 16bits, little-endian
+        '-ar', '44100',       // Sampling rate
+        '-ac', 2,             // Stereo
+        'pipe:1'              // Output on stdout
+    ]);
+
+    // pipe data to AirTunes
+    this.ffmpeg.stdout.pipe(airtunes);
+
+    // detect if ffmpeg was not spawned correctly
+    this.ffmpeg.stderr.setEncoding('utf8');
+    this.ffmpeg.stderr.on('data', function(data) {
+        if(/^execvp\(\)/.test(data)) {
+              console.log('failed to start ' + argv.ffmpeg);
+              process.exit(1);
+        }
+    });
 }
 
 module.exports = self;
