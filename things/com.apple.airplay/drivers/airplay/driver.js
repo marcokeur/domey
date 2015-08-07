@@ -15,6 +15,7 @@ var self = {
         console.log('airplay init');
 
         self.devices = Domey.getThingConfig('com.apple.airplay', 'devices');
+        self.settings = Domey.getThingConfig('com.apple.airplay', 'settings');
 
         airtunes.on('buffer', function(status){
           // after the playback ends, give some time to AirTunes devices
@@ -82,7 +83,7 @@ function stopStream(status, callback){
 
 
 function playUsingFFMPEG(file){
-    this.ffmpeg = spawn('/usr/bin/ffmpeg', [
+    this.ffmpeg = spawn(this.settings.ffmpeg, [
         '-i', file,
         '-f', 's16le',        // PCM 16bits, little-endian
         '-ar', '44100',       // Sampling rate

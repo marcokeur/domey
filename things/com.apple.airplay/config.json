@@ -1,5 +1,8 @@
 {
   "com.apple.airplay": {
+    "settings": {
+      "ffmpeg" : "/usr/bin/ffmpeg"
+    },
     "devices": {
       "1": {
         "name": "Slaapkamer",
