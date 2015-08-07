@@ -14,18 +14,65 @@ Domey.on('ready', function () {
 
 
 setTimeout(function () {
-    var driver = Domey.manager('drivers').getDriver('airplay');
+    var args = {
+            device: {
+                data: {
+                    id: '1'
+                },
+                driver: {
+                    id: 'airplay'
+                },
+                args: {
+                    file: __dirname + '/wakeup.mp3'
+                }
+            }
+        }
 
-    driver.capabilities.play.set(null, __dirname + '/public/airplay/wakeup.mp3', function(res){
-        console.log(res);
-        setTimeout(function(){driver.capabilities.stop.set(null, null)}, 4000);
+    Domey.manager('flow').callItem('action', {method: 'play'}, args, function(res){
+        console.log('event emitted: ' + res);
     });
 
-    setInterval(function(){
-        driver.capabilities.play.set(null, __dirname + '/public/airplay/wakeup.mp3', function(res){
-            console.log(res);
-            setTimeout(function(){driver.capabilities.stop.set(null, null)}, 4000);
-        }
-    );
-    }, 6000);
 }, 3000);
+
+setTimeout(function () {
+    var args = {
+            device: {
+                data: {
+                    id: '1'
+                },
+                driver: {
+                    id: 'airplay'
+                },
+                args: {
+                    file: __dirname + '/wakeup.mp3'
+                }
+            }
+        }
+
+    Domey.manager('flow').callItem('action', {method: 'play'}, args, function(res){
+        console.log('event emitted: ' + res);
+    });
+
+    var args = {
+            device: {
+                data: {
+                    id: 1
+                },
+                driver: {
+                    id: 'airplay'
+                },
+                args: {
+                    file: __dirname + '/wakeup.mp3'
+                }
+            }
+        }
+
+    setTimeout(function(){
+        Domey.manager('flow').callItem('action', {method: 'stop'}, args, function(res){
+            console.log('stopped');
+        });
+    }, 5000);
+
+}, 20000);
+
+

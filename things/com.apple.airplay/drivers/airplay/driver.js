@@ -1,8 +1,10 @@
-var airtunes = require('airtunes');
 var spawn = require('child_process').spawn;
 
 var self = {
-    
+
+    //holds the players
+    players: [ ],
+
     //holds all known devices
     devices: { },
 
@@ -16,16 +18,6 @@ var self = {
 
         self.devices = Domey.getThingConfig('com.apple.airplay', 'devices');
         self.settings = Domey.getThingConfig('com.apple.airplay', 'settings');
-
-        airtunes.on('buffer', function(status){
-            // after the playback ends, give some time to AirTunes devices
-            if(status === 'end') {
-                console.log('playback ended, waiting for AirTunes devices');
-                stopStream(self.status, function(res){
-                    self.status = res;
-                });
-            }
-        });
 
         console.log('airplay devices: ' + devices);
 
@@ -44,46 +36,75 @@ var self = {
     capabilities: {
         play: {
             set: function( device, file, callback){
-                if(self.status != 'playing'){
-                    self.status = 'playing';
+                var device = self.getDevice( device.id );
+                if( device instanceof Error ) return callback( device );
 
-                    for(var i in self.devices){
-                        airtunes.add(self.devices[i].ip, {'port': self.devices[i].port});
+                addPlayer(function(player){
+                    self.players.push(player);
+
+                    var airtunes_device = player.airtunes.add(device.ip, {'port': device.port});
+
+                    if(player.status != 'play'){
+                        player.status = 'play';
+
+                        airtunes_device.on('status', function(status){
+                            console.log("Device status ->" + status);
+                            if(status == 'ready'){
+                                playFile(player, file);
+                                callback('playback started: ' + file);
+                            }
+                        });
+
+                        player.airtunes.on('buffer', function(status){
+                            // after the playback ends, give some time to AirTunes devices
+                            if(status === 'end') {
+                                console.log('playback ended, waiting for AirTunes devices');
+
+                                setTimeout(function(){
+                                    player.airtunes.stopAll(function(){
+                                        player.airtunes.reset();
+                                        console.log('all done, buffer reset');
+                                    });
+                                }, 2000);
+                            }
+                        });
+
+                        callback();
+                    }else{
+                        callback(new Error("still playing"));
                     }
+                });
 
-                    playFile(file);
-                    callback('playback started');
-                }else{
-                    callback('still playing!');
-                }
             }
         },
         stop: {
-            set: function(device, callback){
-                stopStream(self.status, function(status){
-                    self.status = status;
+            set: function(playerid, callback){
+                console.log(self.players);
+                console.log(playerid);
+                self.players[playerid.id].airtunes.stopAll(function(){
+                    callback();
                 });
+            }
+        },
+        volume:{
+            set: function(device, value, callback){
+                device.setVolume(volume);
+                callback();
             }
         }
     }
 }
 
-function stopStream(status, callback){
-    if(status == 'playing'){
-        airtunes.stopAll(function() {
-            console.log('end');
-            airtunes.reset();
+function addPlayer(cb){
+    var player = {};
+    player.airtunes = require('airtunes');
 
-            callback('stopped');
-        });
-    }else{
-        callback(status);
-    }
+    player.status = 'stop';
+
+    cb(player);
 }
 
-
-function playFile(file){
-    console.log(self.settings);
+function playFile(player, file){
     ffmpeg = spawn(self.settings.ffmpeg, [
         '-i', file,
         '-f', 's16le',        // PCM 16bits, little-endian
@@ -92,8 +113,7 @@ function playFile(file){
         'pipe:1'              // Output on stdout
     ]);
 
-    // pipe data to AirTunes
-    ffmpeg.stdout.pipe(airtunes);
+    ffmpeg.stdout.pipe(player.airtunes);
 
     // detect if ffmpeg was not spawned correctly
     ffmpeg.stderr.setEncoding('utf8');

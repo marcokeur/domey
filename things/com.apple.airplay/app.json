@@ -28,43 +28,43 @@
     "flow": {
         "actions": [
             {
-                "method": "enable",
+                "method": "play",
                 "title" : {
-                    "en" : "turn light on",
-                    "nl" : "zet lamp aan"
+                    "en" : "play a song",
+                    "nl" : "speel muziek"
                 },
                 "args": [
                     {
-                        "name": "bulb",
+                        "name": "airplay",
                         "type": "device",
                         "placeholder":{
-                            "en" : "Find a bulb...",
-                            "nl" : "Vind een lamp..."
+                            "en" : "Find a speaker...",
+                            "nl" : "Vind een luidspreker..."
                         },
                         "filter": {
-                            "driverid" : "bulb"
+                            "driverid" : "airplay"
                         }
                     }                        
                 ]
             },
             {
-                "method": "disable",
+                "method": "stop",
                 "title" : {
-                    "en" : "turn light off",
-                    "nl" : "zet lamp uit"
+                    "en" : "stop playing",
+                    "nl" : "stop met afspelen"
                 },
                 "args": [
                     {
-                        "name": "bulb",
+                        "name": "airplay",
                         "type": "device",
                         "placeholder":{
-                            "en" : "Find a bulb...",
-                            "nl" : "Vind een lamp..."
+                            "en" : "Find a speaker...",
+                            "nl" : "Vind een luidspreker..."
                         },
                         "filter": {
-                            "driverid" : "bulb"
+                            "driverid" : "airplay"
                         }
-                    }                        
+                    }
                 ]
             }
         ]
