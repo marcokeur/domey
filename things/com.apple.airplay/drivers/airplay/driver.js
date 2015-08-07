@@ -6,11 +6,11 @@ var self = {
     //holds all known devices
     devices: { },
 
+    settings: { },
+
     status : 'initializing',
 
     init: function( devices, callback ) {
-
-        //var self = this;
 
         console.log('airplay init');
 
@@ -18,13 +18,13 @@ var self = {
         self.settings = Domey.getThingConfig('com.apple.airplay', 'settings');
 
         airtunes.on('buffer', function(status){
-          // after the playback ends, give some time to AirTunes devices
-          if(status === 'end') {
-            console.log('playback ended, waiting for AirTunes devices');
+            // after the playback ends, give some time to AirTunes devices
+            if(status === 'end') {
+                console.log('playback ended, waiting for AirTunes devices');
                 stopStream(self.status, function(res){
                     self.status = res;
                 });
-          }
+            }
         });
 
         console.log('airplay devices: ' + devices);
@@ -51,7 +51,7 @@ var self = {
                         airtunes.add(self.devices[i].ip, {'port': self.devices[i].port});
                     }
 
-                    playUsingFFMPEG(file);
+                    playFile(file);
                     callback('playback started');
                 }else{
                     callback('still playing!');
@@ -82,8 +82,9 @@ function stopStream(status, callback){
 }
 
 
-function playUsingFFMPEG(file){
-    this.ffmpeg = spawn(this.settings.ffmpeg, [
+function playFile(file){
+    console.log(self.settings);
+    ffmpeg = spawn(self.settings.ffmpeg, [
         '-i', file,
         '-f', 's16le',        // PCM 16bits, little-endian
         '-ar', '44100',       // Sampling rate
@@ -92,11 +93,11 @@ function playUsingFFMPEG(file){
     ]);
 
     // pipe data to AirTunes
-    this.ffmpeg.stdout.pipe(airtunes);
+    ffmpeg.stdout.pipe(airtunes);
 
     // detect if ffmpeg was not spawned correctly
-    this.ffmpeg.stderr.setEncoding('utf8');
-    this.ffmpeg.stderr.on('data', function(data) {
+    ffmpeg.stderr.setEncoding('utf8');
+    ffmpeg.stderr.on('data', function(data) {
         if(/^execvp\(\)/.test(data)) {
               console.log('failed to start ' + argv.ffmpeg);
               process.exit(1);
