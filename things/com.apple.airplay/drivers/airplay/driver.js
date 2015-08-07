@@ -4,18 +4,7 @@ var spawn = require('child_process').spawn;
 var self = {
     
     //holds all known devices
-    devices: {
-        1: {
-            name: 'Slaapkamer',
-            ip: '192.168.14.179',
-            port: '5002'
-        },
-        2: {
-        name: 'Woonkamer',
-        ip: '192.168.1.51',
-        port: '5002'
-        }
-    },
+    devices: { },
 
     status : 'initializing',
 
@@ -25,15 +14,15 @@ var self = {
 
         console.log('airplay init');
 
+        self.devices = Domey.getThingConfig('com.apple.airplay', 'devices');
+
         airtunes.on('buffer', function(status){
           // after the playback ends, give some time to AirTunes devices
           if(status === 'end') {
             console.log('playback ended, waiting for AirTunes devices');
-            //setTimeout(function() {
                 stopStream(self.status, function(res){
                     self.status = res;
                 });
-            //}, 2000);
           }
         });
 

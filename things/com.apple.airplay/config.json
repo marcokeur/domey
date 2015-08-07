@@ -1,0 +1,16 @@
+{
+  "com.apple.airplay": {
+    "devices": {
+      "1": {
+        "name": "Slaapkamer",
+        "ip": "192.168.14.179",
+        "port": 5002
+      },
+      "2": {
+        "name": "Woonkamer",
+        "ip": "192.168.1.51",
+        "port": 5002
+      }
+    }
+  }
+}

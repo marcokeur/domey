@@ -86,6 +86,16 @@ Domey.prototype.getConfig = function(file, part){
     return config;
 }
 
+Domey.prototype.getThingConfig = function(thingName, part){
+    config = JSON.parse(fs.readFileSync(__dirname + '/../things/' + thingName + '/config.json', 'utf8'));
+    config = config[thingName];
+
+    if(part !== undefined){
+        config = config[part];
+    }
+    return config;
+}
+
 function loadJSON(file){
     return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
