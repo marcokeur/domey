@@ -12,7 +12,6 @@
 		"website": "http://github.com/marcokeur"
 	},
 	"dependencies": {
-		"dgram": "*"
 	},
     "drivers": [
 		{

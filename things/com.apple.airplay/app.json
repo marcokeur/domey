@@ -12,7 +12,7 @@
 		"website": "http://github.com/marcokeur"
 	},
 	"dependencies": {
-		"dgram": "*"
+        "airtunes": "git+https://github.com/marcokeur/node_airtunes#b1ded8dd4d298e7d7c7db5b6349581df04b75ea8"
 	},
     "drivers": [
 		{
