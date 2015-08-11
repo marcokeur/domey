@@ -96,14 +96,25 @@ Domey.prototype.getThingConfig = function(thingName, part){
     return config;
 }
 
-function loadJSON(file){
-    return JSON.parse(fs.readFileSync(file, 'utf8'));
+function getThingMetaData(thingName, part){
+    meta = JSON.parse(fs.readFileSync(__dirname + '/../things/' + thingName + '/app.json', 'utf8'));
+    //config = config[thingName];
+
+    if(part !== undefined){
+        meta = meta[part];
+    }
+    return meta;
 }
+
+//function loadJSON(file){
+//    return JSON.parse(fs.readFileSync(file, 'utf8'));
+//}
 
 function installDependencies( dependencies, callback ){
     var depList = [];
     for(var dep in dependencies){
-        depList.push(dep);
+        console.log(dep + "@" + dependencies[dep]);
+        depList.push(dep + "@" + dependencies[dep]);
     }
 
     var npm = require("npm");
@@ -116,7 +127,7 @@ function installDependencies( dependencies, callback ){
         });
         npm.on("log", function (message) {
             // log the progress of the installation
-            console.log(message);
+            //console.log(message);
         });
     });   
 }
@@ -133,33 +144,29 @@ var loadedDrivers = [];
 
 
 function loadThings(self){
-    var installedThingsFile = __dirname + '/../config/installed_things.json';
-    var installedThings = loadJSON(installedThingsFile);
-    
     //for each thing in dir
     fs.readdirSync(__dirname + '/../things/').forEach(function(thingName, index, array) {
         try{
-        //load the metadata
-        var meta = loadJSON(__dirname + '/../things/' + thingName + '/app.json'); 
-        
-        //check if the thing already has been installed
-        if(installedThings.indexOf(meta.id) == -1){
-            console.log('Unknown thing, lets install it\'s dependencies');
-            //if not, install dependencies
-                installDependencies(meta.dependencies, function(){
-                    //dependencies installed
-                    installedThings.push(meta.id);
-                    
-                    //write to file    
-                    fs.writeFileSync(installedThingsFile, JSON.stringify(installedThings));
-                    
-                    //lets load the drivers
-                    loadThing(self, meta);
-                });
-        }else{
-            //we know this one already, just load it
-            loadThing(self, meta);
-        }
+            var thingDir = __dirname + '/../things/' + thingName + '/';
+
+            //load the metadata
+            var meta = getThingMetaData(thingName);
+
+            //check if the thing already has been installed
+            if(!fs.existsSync(thingDir + '.installed')){
+                console.log('Unknown thing, lets install it\'s dependencies');
+                //if not, install dependencies
+                    installDependencies(meta.dependencies, function(){
+                        //lets mark the thing as installed
+                        fs.closeSync(fs.openSync(thingDir + '.installed', 'w'));
+
+                        //lets load the drivers
+                        loadThing(self, meta);
+                    });
+            }else{
+                //we know this one already, just load it
+                loadThing(self, meta);
+            }
         }catch(ex){
             console.log("Thing " + thingName + " not loaded: " + ex);
         }
