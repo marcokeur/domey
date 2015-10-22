@@ -1,0 +1,33 @@
+{
+    "scenes": [{
+        "name": "romance",
+        "id" : 1,
+        "things": [{
+            "thing": "com.milight",
+            "method": "enable",
+            "args": [{
+                "device": {
+                    "driver": {
+                        "id": "bulb"
+                    },
+                    "data": {
+                        "id": 0
+                    }
+                }
+            }]
+        },{
+        "thing": "com.milight",
+        "method": "enable",
+        "args": [{
+            "device": {
+                "driver": {
+                    "id": "bulb"
+                    },
+                    "data": {
+                        "id": 1
+                    }
+                }
+            }]
+        }]
+    }]
+}

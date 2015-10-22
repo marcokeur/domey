@@ -12,7 +12,7 @@ Domey.on('ready', function () {
     winston.info('initialization done!');
 });
 
-
+/*
 setTimeout(function () {
     var args = {
             device: {
@@ -74,5 +74,7 @@ setTimeout(function () {
     }, 5000);
 
 }, 20000);
+
+*/
 
 

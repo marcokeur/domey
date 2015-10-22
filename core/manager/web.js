@@ -18,6 +18,8 @@ var express = require('express')
 
 var users = {}
 
+var apiItems = [];
+
 function Web() 
 {
 	EventEmitter.call(this);
@@ -100,6 +102,22 @@ Web.prototype.init = function(){
 
     //load routes from dir
     require(__dirname + '/../../routes')(app, io, passport);
+
+    //some testing
+    app.get('/api/:m/:f/:p', function(request, response){
+        var m = request.params.m;
+        var f = request.params.f;
+
+        for(var i in apiItems){
+            if((apiItems[i].module == m) && (apiItems[i].func == f)){
+                //console.log('match!!');
+                //console.log(JSON.stringify(request.params));
+                response.send(apiItems[i].call(request.params.p));
+            }
+        }
+
+        response.status(404).end();
+    });
         
     Domey.on('all_things_registered',function(things){
         //add handles to the things api's
@@ -114,19 +132,25 @@ Web.prototype.init = function(){
                 }
             });
         }
-        
-        //404 error
-        //app.use(function(request, response){
-        //    response.render('404.jade');
-        //});
     });
     
     Domey.manager('drivers').on('realtime', function(msg){
         io.sockets.emit('realtime', msg);
     });
-    
+
     server.listen(3000);    
 };
+
+Web.prototype.addApiCall = function(module, func, call) {
+    var item = new ApiItem(module, func, call);
+    apiItems.push(item);
+}
+
+function ApiItem(module, func, call) {
+    this.module = module;
+    this.func = func;
+    this.call = call;
+}
 
 /* Fake, in-memory database of remember me tokens */
 
