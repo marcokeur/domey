@@ -34,26 +34,32 @@ Scene.prototype.init = function () {
         }
     });
 
-    Domey.manager('web').addApiCall('scene', 'set', self.setScene);
-    Domey.manager('web').addApiCall('scene', 'get', self.getScene);
+    Domey.manager('web').addApiCall('GET', 'scene', 'set', self.setScene);
+    Domey.manager('web').addApiCall('GET', 'scene', 'get', self.getScene);
+    Domey.manager('web').addApiCall('GET', 'scene', 'activate', self.activateScene);
 
 };
 
-Scene.prototype.getScene = function(id){
+//RETURN FOR JADE
+Scene.prototype.getDashboardContent = function(){
+    return self.scenes;
+}
 
-    console.log(self.scenes);
+//API STUFF CRUD
+/* get the scene object from id */
+Scene.prototype.getScene = function(params){
+    var id = params[2];
 
     for(var i in self.scenes){
         if(self.scenes[i].id == id){
-            return JSON.stringify(self.scenes[i]);
+            return self.scenes[i];
         }
     }
 
-    console.log(self.scenes);
-
-    return JSON.stringify(self.scenes);
+    return self.scenes;
 }
 
+/* set the scene object by id */
 Scene.prototype.setScene = function(id){
     for(i in self.scenes){
         if(self.scenes[i].id == id){
@@ -64,3 +70,17 @@ Scene.prototype.setScene = function(id){
 
     return 'nok';
 }
+
+Scene.prototype.activateScene = function(params){
+    var id = params[2];
+
+    for(i in self.scenes){
+        if(self.scenes[i].id == id){
+            self.emit('scene.set', i);
+            return 'ok';
+        }
+    }
+
+    return 'nok';
+}
+

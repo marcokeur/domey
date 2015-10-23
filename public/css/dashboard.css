@@ -1,0 +1,12 @@
+div.container {
+    padding-top: 50px;
+}
+
+.col-centered{
+  width: 100%;
+  text-align: center;
+  }
+
+span.glyphicon {
+    font-size: 5em;
+}

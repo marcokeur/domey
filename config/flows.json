@@ -1,6 +1,8 @@
 {
     "flows": [{
+        "id": 1,
         "name": "testflow",
+        "desc": "Enable the lights when there is motion in the room.",
         "trigger": {
             "thing": "org.jeelabs",
             "method": "measurement",

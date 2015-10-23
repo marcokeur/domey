@@ -1,7 +1,9 @@
-module.exports = function(app, io, passport){
-    require('./auth')(app, passport);
-    require('./misc')(app);
-    require('./dashboard')(app, io);
-    require('./thing')(app);
-    require('./flow')(app);
+module.exports = function(app){
+    /* redirect / to dashboard */
+    app.get('/', function(request, response) {
+        response.redirect('/dashboard');
+    });
+
+    /* require routes for dashboard */
+    require('./dashboard')(app);
 };

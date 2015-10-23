@@ -33,6 +33,10 @@ Flow.prototype.init = function () {
 
     self = this;
 
+    Domey.manager('web').addApiCall('GET', self.getName(), 'get', self.getFlowByApi);
+    //Domey.manager('web').addApiCall(self.getName, 'condition', callConditionViaApi);
+    //Domey.manager('web').addApiCall(self.getName, 'trigger', callTriggerViaApi);
+
     Domey.on('thing_registered', function (thing) {
         
         if (thing.meta.hasOwnProperty('flow')) {
@@ -69,16 +73,16 @@ Flow.prototype.init = function () {
     });
     
     Domey.on('all_things_registered', function(things){
-        flows = Domey.getConfig('flows');
-        console.log("flows : " + flows);
-        for(var i in flows){
-            console.log(flows[i].trigger);
-            flows[i].trigger['item'] = getFlowItemByMethod(flows[i].trigger.method);
-            for(var j in flows[i].trigger.conditionset.conditions){
-                flows[i].trigger.conditionset.conditions[j]['item'] = getFlowItemByMethod(flows[i].trigger.conditionset.conditions[j].method);
+        self.flows = Domey.getConfig('flows');
+        console.log("flows : " + self.flows);
+        for(var i in self.flows){
+            console.log(self.flows[i].trigger);
+            self.flows[i].trigger['item'] = getFlowItemByMethod(self.flows[i].trigger.method);
+            for(var j in self.flows[i].trigger.conditionset.conditions){
+                self.flows[i].trigger.conditionset.conditions[j]['item'] = getFlowItemByMethod(self.flows[i].trigger.conditionset.conditions[j].method);
             }
-            for(var k in flows[i].trigger.conditionset.actions){
-                flows[i].trigger.conditionset.actions[k]['item'] = getFlowItemByMethod(flows[i].trigger.conditionset.actions[k].method);
+            for(var k in self.flows[i].trigger.conditionset.actions){
+                self.flows[i].trigger.conditionset.actions[k]['item'] = getFlowItemByMethod(self.flows[i].trigger.conditionset.actions[k].method);
             }
         }
     });
@@ -101,48 +105,68 @@ Flow.prototype.trigger = function(method, args){
             
             flowItem = getFlowItemByMethod(trigger.method);
             flowDescription += flowItem.meta.title.en;
-            
-            //for(j in trigger.conditionset){
-                var conditionSetIsTrue = true;  //this will be the result of all conditions
 
-                //a condition holds a conditionset, those conditions will be AND
-                for(l in trigger.conditionset.conditions){
-                    if(conditionSetIsTrue){
-                        condition = trigger.conditionset.conditions[l];
+            var conditionSetIsTrue = true;  //this will be the result of all conditions
 
-                        flowItem = getFlowItemByMethod(condition.method);
-                        flowDescription += ' and ';
-                        flowDescription += flowItem.meta.title.en;
-
-                        Domey.manager('flow').emit('condition.' + condition.method, condition.args[0], function(conditionIsTrue){
-                            //check if the response is as expected
-                            flowDescription += '('+conditionIsTrue+')';
-                            if(conditionIsTrue != true){
-                                conditionSetIsTrue = false;
-                            }
-                        });
-                    }
-                }
-                
-                //if all conditions were true
+            //a condition holds a conditionset, those conditions will be AND
+            for(l in trigger.conditionset.conditions){
                 if(conditionSetIsTrue){
-                    for(k in trigger.conditionset.actions){
-                        action = trigger.conditionset.actions[k];
-                           
-                        flowItem = getFlowItemByMethod(action.method);
-                        flowDescription += ' then ';
-                        flowDescription += flowItem.meta.title.en;
-                              
-                        this.callItem('action', action, action.args[0], function(response){
-                           console.log(flowDescription);
-                        });
-                    }
-                }else{
-                    console.log('Flow stopped at: ' + flowDescription);
+                    condition = trigger.conditionset.conditions[l];
+
+                    flowItem = getFlowItemByMethod(condition.method);
+                    flowDescription += ' and ';
+                    flowDescription += flowItem.meta.title.en;
+
+                    Domey.manager('flow').emit('condition.' + condition.method, condition.args[0], function(conditionIsTrue){
+                        //check if the response is as expected
+                        flowDescription += '('+conditionIsTrue+')';
+                        if(conditionIsTrue != true){
+                            conditionSetIsTrue = false;
+                        }
+                    });
                 }
             }
-        //}
+
+            //if all conditions were true
+            if(conditionSetIsTrue){
+                for(k in trigger.conditionset.actions){
+                    action = trigger.conditionset.actions[k];
+
+                    flowItem = getFlowItemByMethod(action.method);
+                    flowDescription += ' then ';
+                    flowDescription += flowItem.meta.title.en;
+
+                    this.callItem('action', action, action.args[0], function(response){
+                       console.log(flowDescription);
+                    });
+                }
+            }else{
+                console.log('Flow stopped at: ' + flowDescription);
+            }
+        }
     }
+}
+
+Flow.prototype.getFlowByApi = function(params){
+    var id = params[2];
+
+    var response = [];
+
+    for(var i in self.flows){
+        var flow = [];
+        flow['id'] = self.flows[i].id;
+        flow['name'] = self.flows[i].name;
+        flow['desc'] = self.flows[i].desc;
+
+        if(self.flows[i].id == id){
+            //return JSON.stringify(self.flows[i]);
+            return flow;
+        }
+
+        response.push(flow);
+    }
+    console.log(response);
+    return response;
 }
 
 Flow.prototype.callItem = function(type, flowItem, args, callback){

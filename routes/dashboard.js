@@ -1,35 +1,15 @@
 var fs = require('fs');
 var dashboardConfig = JSON.parse(fs.readFileSync(__dirname + "/../config/dashboard.json", "utf8"));
 
-module.exports = function(app, io){
+module.exports = function(app){
     //serve the dashboard
-    app.get('/dashboard', isAuthenticated, function(request, response) {
-        webContent = gatherContent();
-        webContent['dashboard'] = dashboardConfig.dashboard;
+    app.get('/dashboard', function(request, response) {
+        response.redirect('/dashboard/scenes');
+    });
 
-        response.render('dashboard', webContent);    
+    app.get('/dashboard/scenes', function(request, response){
+        //var webContent = [];
+        //webContent['scenes'] = Domey.manager('scene').getDashboardContent();
+        response.render('dashboard_scenes');
     });
 };
-
-function gatherContent(){
-    webContent = {}
-    var things = Domey.getThings();
-    webContent.menu = [];
-    for(var i in things){
-        webContent.menu.push( 
-            { 'humanName' : things[i].humanName,
-              'uri' : things[i].uri    
-            }
-        );
-    }
-    
-    return webContent;
-}
-
-// As with any middleware it is quintessential to call next()
-// if the user is authenticated
-function isAuthenticated(req, res, next) {
-  if (req.isAuthenticated())
-    return next();
-  res.redirect('/login');
-}
