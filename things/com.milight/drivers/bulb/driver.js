@@ -31,7 +31,39 @@ var self = {
                      	commandRepeat: 1
                      });
 
+        //for test
+        Domey.manager('web').addApiCall("GET", 'com.milight', self.apiGetCollection, self.apiGetElement);
+
         callback();
+    },
+
+    apiGetCollection: function() {
+        var response = [];
+
+        //set http response code
+        response['status'] = 200;
+        response['data'] = self.devices;
+
+        return response;
+    },
+
+    apiGetElement: function(element){
+        var response = [];
+
+        //find the specific flow
+        for(var i in self.devices){
+            //if correct flow is found
+            if(self.devices[i].id == element){
+                //set http response code
+                response['status'] = 200;
+                response['data'] = self.devices[i];
+
+                return response;
+            }
+        }
+
+        response['status'] = 404;
+        return response;
     },
 
 	getDevice: function( id ) {

@@ -1,7 +1,7 @@
 extends layout
 
 block title
-    h1.page-header Dashboard Scenes
+    h1.page-header Dashboard Flows
 
 block content
     .container
@@ -10,7 +10,7 @@ block content
 block script
     script.
         $(document).ready(function(){
-            getCollection('scene', '.row', function(){ console.log('loading done'); });
+            getCollection('flow', '.row', function(){ console.log('loading done'); });
         });
     script(src='/js/dashboard.js')
-    script(src='/js/dashboard_scenes.js')
+    script(src='/js/dashboard_flows.js')

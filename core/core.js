@@ -76,6 +76,30 @@ Domey.prototype.getThing = function(thingName){
     }
 }
 
+//loglevel 0 is critical, 1 is important, 2 is info, 3 is verbose
+Domey.prototype.log = function(level, indent, line){
+    switch(level){
+        case 0:
+            process.stdout.write('[CRITICAL]');
+            break;
+        case 1:
+            process.stdout.write('[IMPORTANT]');
+            break;
+        case 2:
+            process.stdout.write('[INFO]');
+            break;
+        case 3:
+            process.stdout.write('[VERBOSE]');
+            break;
+    }
+
+    for(var i = 0; i < indent; i++){
+        process.stdout.write('    ');
+    }
+    process.stdout.write(line);
+    process.stdout.write('\n');
+}
+
 Domey.prototype.getConfig = function(file, part){
     config = JSON.parse(fs.readFileSync(__dirname + '/../config/' + file + '.json', 'utf8'));
     config = config[file];
@@ -105,10 +129,6 @@ function getThingMetaData(thingName, part){
     }
     return meta;
 }
-
-//function loadJSON(file){
-//    return JSON.parse(fs.readFileSync(file, 'utf8'));
-//}
 
 function installDependencies( dependencies, callback ){
     var depList = [];

@@ -52,5 +52,58 @@
                 }]
             }
         }
+    },{
+        "id": 2,
+        "name": "testflow2123",
+        "desc": "Enable the lblaapights when there is motion in the room.",
+        "trigger": {
+            "thing": "org.jeelabs",
+            "method": "measurement",
+            "args": [{}],
+            "conditionset": {
+                "conditions": [{
+                    "thing": "org.jeelabs.roomnode",
+                    "method": "motion",
+                    "args": [{
+                        "device": {
+                            "driver": {
+                                "id": "roomnode"
+                            },
+                            "data": {
+                                "id": "rf12-868:33:2"
+                            }
+                        }
+                    }]
+                }, {
+                    "thing": "com.milight",
+                    "method": "disabled",
+                    "args": [{
+                        "device": {
+                            "driver": {
+                                "id": "bulb"
+                            },
+                            "data": {
+                                "id": 0
+                            }
+                        }
+                    }]
+                }
+                ],
+                "actions": [{
+                    "thing": "com.milight",
+                    "method": "enable",
+                    "args": [{
+                        "device": {
+                            "driver": {
+                                "id": "bulb"
+                            },
+                            "data": {
+                                "id": 0
+                            }
+                        }
+                    }]
+                }]
+            }
+        }
     }]
 }

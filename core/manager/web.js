@@ -6,10 +6,7 @@ var express = require('express')
 , app = express()
 , http = require('http')
 , server = http.createServer(app)
-, jade = require('jade')
-, io = require('socket.io').listen(server);
-
-var users = {}
+, jade = require('jade');
 
 var apiItems = [];
 
@@ -39,39 +36,69 @@ Web.prototype.init = function(){
     //load routes from dir
     require(__dirname + '/../../routes')(app);
 
+    /* print all known api calls */
+    app.all('/api', function(request, response){
+        for(var i in apiItems){
+            if(apiItems[i].collection != undefined)
+                response.write(apiItems[i].method + ' /api/' + apiItems[i].collection + '/\n');
+
+            if(apiItems[i].elementFunction != undefined)
+                response.write(apiItems[i].method + ' /api/' + apiItems[i].collection + '/:elementId\n');
+
+            if(apiItems[i].routerFunction != undefined)
+                response.write(apiItems[i].method + ' /api/' + apiItems[i].collection + '/:elementId/:routerCall\n');
+
+        }
+
+        response.end();
+    })
+
     /* add handler for api */
     app.all('/api/*', function(request, response){
         console.log(JSON.stringify(apiItems));
         var params = request.params[0].split('/');
-        var m = params[0];
-        var f = params[1];
+        var httpMethod = request.method;
+        var collection = params[0];
+        var element = params[1];
 
         for(var i in apiItems){
-            if((apiItems[i].module == m) && (apiItems[i].func == f) && (apiItems[i].type == request.method)){
-                var data = apiItems[i].call(params);
+            if((apiItems[i].method == httpMethod) && (apiItems[i].collection == collection)){
+                var data;
 
-                response.writeHead(200, {"Content-Type": "application/json"});
-                response.end(JSON.stringify({'response' : data}));
+                //if no element is defined, call collectionF
+                if(params[1] == undefined || params[1].length == 0){
+                    data = apiItems[i].collectionFunction();
+                }else if(params[2] == undefined || params[2].length == 0){
+                    data = apiItems[i].elementFunction(element);
+                }else if(apiItems[i].routerFunction != undefined){
+                    data = apiItems[i].routerFunction(params);
+                }
+
+                if(data != undefined){
+                    console.log(data);
+                    response.writeHead(data.status, {"Content-Type": "application/json"});
+                    response.end(JSON.stringify({'response' : data.data}));
+                    break;
+                }else{
+                    response.status(404).end();
+                }
             }
         }
-        response.status(404).end();
     });
 
-    Domey.manager('drivers').on('realtime', function(msg){
-        io.sockets.emit('realtime', msg);
-    });
-
-    server.listen(3000);    
+    server.listen(3000);
 };
 
-Web.prototype.addApiCall = function(type, module, func, call) {
-    var item = new ApiItem(type, module, func, call);
+//register to api: METHOD, collection, function for collection, function for element
+Web.prototype.addApiCall = function(method, collection, collectionFunction, elementFunction, routerFunction) {
+    var item = new ApiItem(method, collection, collectionFunction, elementFunction, routerFunction);
     apiItems.push(item);
 }
 
-function ApiItem(type, module, func, call) {
-    this.type = type;
-    this.module = module;
-    this.func = func;
-    this.call = call;
+function ApiItem(method, collection, collectionFunction, elementFunction, routerFunction) {
+    this.method = method;
+    this.collection = collection;
+    this.collectionFunction = collectionFunction;
+    this.elementFunction = elementFunction;
+    this.routerFunction = routerFunction;
 }

@@ -3,33 +3,49 @@
         "id" : 1,
         "name": "romance",
         "icon": "glyphicon-heart",
-        "things": [{
+        "enable" : {
+            "things": [{
+                "thing": "com.milight",
+                "method": "enable",
+                "args": [{
+                    "device": {
+                        "driver": {
+                            "id": "bulb"
+                        },
+                        "data": {
+                            "id": 0
+                        }
+                    }
+                }]
+            },{
             "thing": "com.milight",
             "method": "enable",
             "args": [{
                 "device": {
                     "driver": {
                         "id": "bulb"
-                    },
-                    "data": {
-                        "id": 0
+                        },
+                        "data": {
+                            "id": 1
+                        }
                     }
-                }
-            }]
-        },{
-        "thing": "com.milight",
-        "method": "enable",
-        "args": [{
-            "device": {
-                "driver": {
-                    "id": "bulb"
-                    },
-                    "data": {
-                        "id": 1
+                }]
+            },{
+                "thing": "com.sonos",
+                "method": "play",
+                "args": [{
+                    "device": {
+                        "driver": {
+                            "id": "speaker"
+                        },
+                        "data": {
+                            "id": 1,
+                            "uri": "http://icecast.omroep.nl/3fm-bb-mp3"
+                        }
                     }
-                }
+                }]
             }]
-        }]
+        }
     },{
         "id": 2,
         "name": "work",

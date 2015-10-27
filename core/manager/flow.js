@@ -33,27 +33,27 @@ Flow.prototype.init = function () {
 
     self = this;
 
-    Domey.manager('web').addApiCall('GET', self.getName(), 'get', self.getFlowByApi);
-    //Domey.manager('web').addApiCall(self.getName, 'condition', callConditionViaApi);
-    //Domey.manager('web').addApiCall(self.getName, 'trigger', callTriggerViaApi);
+    Domey.manager('web').addApiCall('GET', 'flow', self.apiGetCollection, self.apiGetElement);
 
     Domey.on('thing_registered', function (thing) {
-        
+        /* parse metadata from a registered 'thing' and register callbacks
+        */
         if (thing.meta.hasOwnProperty('flow')) {
             if (thing.meta.flow.hasOwnProperty('actions') && thing.meta.flow.actions.length > 0) {
                 for (var i in thing.meta.flow.actions) {
                     var action = thing.meta.flow.actions[i];
-                    console.log('flow manager - registering action: ' + action.title.en);
+                    Domey.log(3, 1, 'flow manager - registering action: ' + action.title.en);
 
                     var item = new FlowItem('action', action, thing.meta.id, ++flowIdCounter);
                     flowItems.push(item);
+
                 }
             }
         
             if(thing.meta.flow.hasOwnProperty('triggers') && thing.meta.flow.triggers.length > 0){
                 for(var i in thing.meta.flow.triggers){
                     var trigger = thing.meta.flow.triggers[i];
-                    console.log('flow manager - registering trigger: ' + trigger.title.en);
+                    Domey.log(3, 1, 'flow manager - registering trigger: ' + trigger.title.en);
 
                     var item = new FlowItem('trigger', trigger, thing.meta.id, ++flowIdCounter);
                     flowItems.push(item);
@@ -63,7 +63,7 @@ Flow.prototype.init = function () {
             if(thing.meta.flow.hasOwnProperty('conditions') && thing.meta.flow.conditions.length > 0){
                 for(var i in thing.meta.flow.conditions){
                     var condition = thing.meta.flow.conditions[i];
-                    console.log('flow manager - registering condition: ' + condition.title.en);
+                    Domey.log(3, 1, 'flow manager - registering condition: ' + condition.title.en);
 
                     var item = new FlowItem('condition', condition, thing.meta.id, ++flowIdCounter);
                     flowItems.push(item);
@@ -74,9 +74,8 @@ Flow.prototype.init = function () {
     
     Domey.on('all_things_registered', function(things){
         self.flows = Domey.getConfig('flows');
-        console.log("flows : " + self.flows);
+
         for(var i in self.flows){
-            console.log(self.flows[i].trigger);
             self.flows[i].trigger['item'] = getFlowItemByMethod(self.flows[i].trigger.method);
             for(var j in self.flows[i].trigger.conditionset.conditions){
                 self.flows[i].trigger.conditionset.conditions[j]['item'] = getFlowItemByMethod(self.flows[i].trigger.conditionset.conditions[j].method);
@@ -147,40 +146,12 @@ Flow.prototype.trigger = function(method, args){
     }
 }
 
-Flow.prototype.getFlowByApi = function(params){
-    var id = params[2];
 
-    var response = [];
-
-    for(var i in self.flows){
-        var flow = [];
-        flow['id'] = self.flows[i].id;
-        flow['name'] = self.flows[i].name;
-        flow['desc'] = self.flows[i].desc;
-
-        if(self.flows[i].id == id){
-            //return JSON.stringify(self.flows[i]);
-            return flow;
-        }
-
-        response.push(flow);
-    }
-    console.log(response);
-    return response;
-}
 
 Flow.prototype.callItem = function(type, flowItem, args, callback){
     self.emit(type + '.' + flowItem.method, args, function(response){
         callback(response);
     });
-}
-
-Flow.prototype.getItems = function(type){
-    return flowItems;
-}
-
-Flow.prototype.getFlows = function(){
-    return flows;   
 }
 
 function getFlowItemByMethod(method){
@@ -191,22 +162,49 @@ function getFlowItemByMethod(method){
     }
 }
 
-Flow.prototype.getFlowItemById = function(id){
-    for(i in flowItems){
-        if(flowItems[i].id == id){
-            return flowItems[i];
-        }
+Flow.prototype.apiGetCollection = function(){
+    var response = [];
+
+    //set http response code
+    response['status'] = 200;
+    response['data'] = [];
+
+    //find the specific flow
+    for(var i in self.flows){
+        var element = {};
+
+        //add data
+        element.id = self.flows[i].id;
+        element.name = self.flows[i].name;
+        element.desc = self.flows[i].desc;
+
+        response['data'].push(element);
+
     }
+
+    return response;
 }
 
-Flow.prototype.getFlowItemsByThing = function(thingId){
-    var matches = [];
+Flow.prototype.apiGetElement = function(element){
+    var response = [];
 
-    for(i in flowItems){
-        if(flowItems[i].thingId == thingId){
-            matches.push(flowItems[i]);
+    //find the specific flow
+    for(var i in self.flows){
+        //if correct flow is found
+        if(self.flows[i].id == element){
+            //set http response code
+            response['status'] = 200;
+            response['data'] = {};
+
+            //add data
+            response['data'].id = self.flows[i].id;
+            response['data'].name = self.flows[i].name;
+            response['data'].desc = self.flows[i].desc;
+
+            return response;
         }
     }
 
-    return matches;
+    response['status'] = 404;
+    return response;
 }

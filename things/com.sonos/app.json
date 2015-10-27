@@ -1,0 +1,31 @@
+{
+  "id": "com.sonos",
+  "version": "1.0",
+  "name": {
+    "en": "Sonos"
+  },
+  "description": {
+    "en": "Control your Sonos"
+  },
+  "author": {
+    "name": "Marco Keur",
+    "website": "http://github.com/marcokeur"
+  },
+  "dependencies": {
+    "sonos": "*"
+  },
+  "drivers": [
+    {
+      "id": "speaker",
+      "name": {
+        "en": "Sonos Speaker",
+        "nl": "Sonos Speaker"
+      },
+      "class": "speaker",
+      "capabilities": [ "onoff" ]
+    }
+  ],
+  "flow": {
+
+  }
+}

@@ -12,4 +12,10 @@ module.exports = function(app){
         //webContent['scenes'] = Domey.manager('scene').getDashboardContent();
         response.render('dashboard_scenes');
     });
+
+    app.get('/dashboard/flows', function(request, response){
+        //var webContent = [];
+        //webContent['scenes'] = Domey.manager('scene').getDashboardContent();
+        response.render('dashboard_flows');
+    });
 };

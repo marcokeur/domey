@@ -34,53 +34,65 @@ Scene.prototype.init = function () {
         }
     });
 
-    Domey.manager('web').addApiCall('GET', 'scene', 'set', self.setScene);
-    Domey.manager('web').addApiCall('GET', 'scene', 'get', self.getScene);
-    Domey.manager('web').addApiCall('GET', 'scene', 'activate', self.activateScene);
+    Domey.manager('web').addApiCall('GET', 'scene', self.apiGetCollection, self.apiGetElement, self.apiGetRouter);
 
 };
 
-//RETURN FOR JADE
-Scene.prototype.getDashboardContent = function(){
-    return self.scenes;
+Scene.prototype.apiGetCollection = function(){
+    var response = [];
+
+    //set http response code
+    response['status'] = 200;
+    response['data'] = self.scenes;
+
+    return response;
 }
 
-//API STUFF CRUD
-/* get the scene object from id */
-Scene.prototype.getScene = function(params){
-    var id = params[2];
+Scene.prototype.apiGetElement = function(element){
+    var response = [];
 
+    //find the specific flow
     for(var i in self.scenes){
-        if(self.scenes[i].id == id){
-            return self.scenes[i];
+        //if correct flow is found
+        if(self.scenes[i].id == element){
+            //set http response code
+            response['status'] = 200;
+            response['data'] = self.scenes[i];
+
+            return response;
         }
     }
 
-    return self.scenes;
+    response['status'] = 404;
+    return response;
 }
 
-/* set the scene object by id */
-Scene.prototype.setScene = function(id){
+Scene.prototype.apiGetRouter = function(params){
+    var element = params[1];
+    var action = params[2];
+
+    switch(action){
+        case 'activate':
+            return self.apiActivateScene(element);
+            break;
+        default:
+            console.log('unknown action');
+            break;
+    }
+}
+
+Scene.prototype.apiActivateScene = function(id){
+    var response = [];
+    response['status'] = 404;
+
     for(i in self.scenes){
         if(self.scenes[i].id == id){
             self.emit('scene.set', i);
-            return 'ok';
+            response['status'] = 200;
+            break;
         }
     }
 
-    return 'nok';
-}
-
-Scene.prototype.activateScene = function(params){
-    var id = params[2];
-
-    for(i in self.scenes){
-        if(self.scenes[i].id == id){
-            self.emit('scene.set', i);
-            return 'ok';
-        }
-    }
-
-    return 'nok';
+    return response;
 }
 

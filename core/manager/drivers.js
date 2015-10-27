@@ -1,5 +1,3 @@
-var winston = require('winston');
-
 var driverList = {};
 
 var util = require('util');
@@ -20,10 +18,8 @@ Drivers.prototype.getName = function(){
 }
 
 Drivers.prototype.init = function(){
-	//console.log("Drivers init");
     Domey.on('thing_registered', function(thing){
         thing.meta.drivers.forEach(function(driver){
-            console.log('driver: ' + driver.id + ' thingname -> ' + thing.name);
             loadDriver(thing.name, driver.id, function(){
                Domey.manager('drivers').emit('driver_registered', driver); 
             });
@@ -41,7 +37,6 @@ Drivers.prototype.getDrivers = function(){
 
 Drivers.prototype.realtime = function(msg){
     this.emit('realtime', msg);
-    winston.info('Realtime event emitted', msg);
 };
 
 function loadDriver( thing, driverId, callback){
