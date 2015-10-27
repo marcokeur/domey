@@ -5,32 +5,6 @@
         "icon": "glyphicon-heart",
         "enable" : {
             "things": [{
-                "thing": "com.milight",
-                "method": "enable",
-                "args": [{
-                    "device": {
-                        "driver": {
-                            "id": "bulb"
-                        },
-                        "data": {
-                            "id": 0
-                        }
-                    }
-                }]
-            },{
-            "thing": "com.milight",
-            "method": "enable",
-            "args": [{
-                "device": {
-                    "driver": {
-                        "id": "bulb"
-                        },
-                        "data": {
-                            "id": 1
-                        }
-                    }
-                }]
-            },{
                 "thing": "com.sonos",
                 "method": "play",
                 "args": [{
@@ -39,7 +13,7 @@
                             "id": "speaker"
                         },
                         "data": {
-                            "id": 1,
+                            "host": "192.168.1.102",
                             "uri": "http://icecast.omroep.nl/3fm-bb-mp3"
                         }
                     }

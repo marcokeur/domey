@@ -15,8 +15,8 @@ var scenes;
 var self;
 
 Scene.prototype.getName = function(){
-    return 'scene';   
-}
+    return 'scene';
+};
 
 Scene.prototype.init = function () {
     
@@ -26,13 +26,7 @@ Scene.prototype.init = function () {
 
     self.scenes = Domey.getConfig('scenes');
 
-    self.on('scene.set', function(sceneId){
-        for(var i in self.scenes[sceneId].things){
-            self.emit('action.' + self.scenes[sceneId].things[i].method, self.scenes[sceneId].things[i].args, function(response){
-                    console.log('action emitted for scene!');
-            });
-        }
-    });
+
 
     Domey.manager('web').addApiCall('GET', 'scene', self.apiGetCollection, self.apiGetElement, self.apiGetRouter);
 
@@ -46,7 +40,7 @@ Scene.prototype.apiGetCollection = function(){
     response['data'] = self.scenes;
 
     return response;
-}
+};
 
 Scene.prototype.apiGetElement = function(element){
     var response = [];
@@ -65,7 +59,7 @@ Scene.prototype.apiGetElement = function(element){
 
     response['status'] = 404;
     return response;
-}
+};
 
 Scene.prototype.apiGetRouter = function(params){
     var element = params[1];
@@ -79,7 +73,7 @@ Scene.prototype.apiGetRouter = function(params){
             console.log('unknown action');
             break;
     }
-}
+};
 
 Scene.prototype.apiActivateScene = function(id){
     var response = [];
@@ -87,12 +81,23 @@ Scene.prototype.apiActivateScene = function(id){
 
     for(i in self.scenes){
         if(self.scenes[i].id == id){
-            self.emit('scene.set', i);
+            activateScene(self.scenes[i]);
             response['status'] = 200;
             break;
         }
     }
 
     return response;
+};
+
+function activateScene(scene) {
+    console.log('bla ' + JSON.stringify(scene.enable));
+    for (var i in scene.enable.things) {
+        console.log('action.' + scene.enable.things[i].method);
+        self.emit('action.' + scene.enable.things[i].method, scene.enable.things[i].args, function (response) {
+            console.log('action emitted for scene!: ' + response);
+        });
+    }
+
 }
 

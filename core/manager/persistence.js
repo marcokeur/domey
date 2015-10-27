@@ -25,13 +25,13 @@ function Persistence()
 module.exports = Persistence;
 
 Persistence.prototype.getName = function(){
-    return 'persistence';   
-}
+    return 'persistence';
+};
 
 Persistence.prototype.init = function(){
 	console.log("Persistence init");
-    
-    mongoose.connect('mongodb://localhost/domotica');
+
+    //mongoose.connect('mongodb://localhost/domotica');
     
     var RealtimeEvent = mongoose.model('RealtimeEvent', realtimeEventSchema);
     

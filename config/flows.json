@@ -54,8 +54,8 @@
         }
     },{
         "id": 2,
-        "name": "testflow2123",
-        "desc": "Enable the lblaapights when there is motion in the room.",
+        "name": "audio_on",
+        "desc": "Play some music",
         "trigger": {
             "thing": "org.jeelabs",
             "method": "measurement",

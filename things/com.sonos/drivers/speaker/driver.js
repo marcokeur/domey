@@ -10,8 +10,8 @@ var self = {
 
 		sonos
 			.search()
-			.on('DeviceAvailable', function(device){
-				console.log('DeviceAvailable: ' + JSON.stringify(device));
+			.on('DeviceAvailable', function (device, model) {
+				console.log('DeviceAvailable ' + model + ': ' + JSON.stringify(device));
 
 				device.deviceDescription(function(err, metadata){
 					if( err ) return;
@@ -27,10 +27,8 @@ var self = {
 
 				})
 
-			})
+			});
 
-		Domey.manager('web').addApiCall("GET", 'com.sonos', self.apiGetCollection, self.apiGetElement);
-	
 		// we're ready
 		callback();
 	},
@@ -64,19 +62,13 @@ var self = {
 		return response;
 	},
 
-	capabilities: {
-		radio: {
-			get: function( device, name, callback ){
-				var sonos = new Sonos('192.168.1.100');
-				sonos.play('http://icecast.omroep.nl/3fm-bb-mp3', function(err, playing){
-					console.log([err, playing]);
-				})
-			},
-			set: function( device, name, callback ){
+	play: function (host, uri) {
+		var sonosDevice = new sonos.Sonos(host);
 
-			}
-		}
+		sonosDevice.play(uri, function (err, playing) {
+			console.log([err, playing]);
+		});
 	}
-}
+};
 
 module.exports = self;
