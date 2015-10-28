@@ -1,4 +1,4 @@
-var sonos			= require('sonos');
+var sonos = require('sonos');
 
 var speakers = [];
 	
@@ -67,6 +67,22 @@ var self = {
 
 		sonosDevice.play(uri, function (err, playing) {
 			console.log([err, playing]);
+		});
+	},
+
+	stop: function(host, uri) {
+		var sonosDevice = new sonos.Sonos(host);
+
+		sonosDevice.stop(function (err) {
+			console.log(err);
+		});
+	},
+
+	pause: function(host, uri) {
+		var sonosDevice = new sonos.Sonos(host);
+
+		sonosDevice.pause(function (err) {
+			console.log(err);
 		});
 	}
 };

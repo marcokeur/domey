@@ -3,23 +3,18 @@
         "id" : 1,
         "name": "romance",
         "icon": "glyphicon-heart",
-        "enable" : {
-            "things": [{
-                "thing": "com.sonos",
-                "method": "play",
-                "args": [{
-                    "device": {
-                        "driver": {
-                            "id": "speaker"
-                        },
-                        "data": {
-                            "host": "192.168.1.102",
-                            "uri": "http://icecast.omroep.nl/3fm-bb-mp3"
-                        }
-                    }
-                }]
-            }]
-        }
+        "enable" : [{
+            "action": "playMusic",
+            "args": {
+                "host": "192.168.1.102",
+                "uri": "http://icecast.omroep.nl/3fm-bb-mp3"
+            }
+        },{
+            "action": "enableBulb",
+            "args": {
+                "id": 1
+            }
+        }]
     },{
         "id": 2,
         "name": "work",

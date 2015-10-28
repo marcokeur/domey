@@ -26,8 +26,6 @@ Scene.prototype.init = function () {
 
     self.scenes = Domey.getConfig('scenes');
 
-
-
     Domey.manager('web').addApiCall('GET', 'scene', self.apiGetCollection, self.apiGetElement, self.apiGetRouter);
 
 };
@@ -92,12 +90,9 @@ Scene.prototype.apiActivateScene = function(id){
 
 function activateScene(scene) {
     console.log('bla ' + JSON.stringify(scene.enable));
-    for (var i in scene.enable.things) {
-        console.log('action.' + scene.enable.things[i].method);
-        self.emit('action.' + scene.enable.things[i].method, scene.enable.things[i].args, function (response) {
-            console.log('action emitted for scene!: ' + response);
-        });
+    for (var i in scene.enable) {
+        console.log('action.' + scene.enable[i].action);
+        Domey.triggerAction(scene.enable[i].action, scene.enable[i].args);
     }
-
 }
 

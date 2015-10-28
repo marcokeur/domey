@@ -120,6 +120,10 @@ Domey.prototype.getThingConfig = function(thingName, part){
     return config;
 }
 
+Domey.prototype.triggerAction = function(method, args){
+    this.emit('action.' + method, args);
+}
+
 function getThingMetaData(thingName, part){
     meta = JSON.parse(fs.readFileSync(__dirname + '/../things/' + thingName + '/app.json', 'utf8'));
     //config = config[thingName];

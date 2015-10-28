@@ -41,8 +41,8 @@ Drivers.prototype.realtime = function(msg){
 
 function loadDriver( thing, driverId, callback){
     var driver = require(__dirname + '/../../things/' + thing +   '/drivers/' + driverId + '/driver.js');
-    driverList[driverId] = driver;
-    driverList[driverId].init('devices...', function(){
+    driverList[thing + '.' + driverId] = driver;
+    driverList[thing + '.' + driverId].init('devices...', function(){
         //callback when driver is loaded
         callback();
     });
