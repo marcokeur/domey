@@ -14,6 +14,17 @@
             "args": {
                 "id": 1
             }
+        }],
+        "disable" : [{
+            "action": "stopMusic",
+            "args": {
+                "host": "192.168.1.102"
+            }
+        },{
+            "action": "disableBulb",
+            "args": {
+                "id": 1
+            }
         }]
     },{
         "id": 2,

@@ -11,6 +11,7 @@ module.exports = Scene;
 util.inherits(Scene, EventEmitter);
 
 var scenes;
+var activeSceneId;
 
 var self;
 
@@ -25,6 +26,8 @@ Scene.prototype.init = function () {
     self = this;
 
     self.scenes = Domey.getConfig('scenes');
+
+    self.activeSceneId = 0;
 
     Domey.manager('web').addApiCall('GET', 'scene', self.apiGetCollection, self.apiGetElement, self.apiGetRouter);
 
@@ -67,8 +70,11 @@ Scene.prototype.apiGetRouter = function(params){
         case 'activate':
             return self.apiActivateScene(element);
             break;
+        case 'deactivate':
+            return self.apiDeactivateScene(element);
+            break;
         default:
-            console.log('unknown action');
+            console.log('unknown action: ' + action);
             break;
     }
 };
@@ -88,11 +94,47 @@ Scene.prototype.apiActivateScene = function(id){
     return response;
 };
 
+Scene.prototype.apiDeactivateScene = function(id){
+    var response = [];
+    response['status'] = 404;
+
+    for(i in self.scenes){
+        if(self.scenes[i].id == id){
+            deactivateScene(self.scenes[i]);
+            response['status'] = 200;
+            break;
+        }
+    }
+
+    return response;
+};
+
 function activateScene(scene) {
-    console.log('bla ' + JSON.stringify(scene.enable));
+    //if there is a scene active
+    if(activeSceneId > 0){
+        //deactivate first
+        for(i in self.scenes){
+            if(self.scenes[i].id == activeSceneId){
+                deactivateScene(self.scenes[i]);
+            }
+        }
+    }
+
+    //set the new scene as active
+    activeSceneId = scene.id;
+
     for (var i in scene.enable) {
         console.log('action.' + scene.enable[i].action);
         Domey.triggerAction(scene.enable[i].action, scene.enable[i].args);
     }
+}
+
+function deactivateScene(scene){
+    for (var i in scene.enable) {
+        console.log('action.' + scene.disable[i].action);
+        Domey.triggerAction(scene.disable[i].action, scene.disable[i].args);
+    }
+
+    activeSceneId = 0;
 }
 

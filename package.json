@@ -5,15 +5,22 @@
   "main": "app.js",
   "dependencies": {
     "express": "~4.13.1",
+    "istanbul": "^0.4.0",
     "jade": "~1.11.0",
+    "jasmine-node": "^1.14.5",
     "mongoose": "~4.0.7",
     "mosca": "~0.31.0",
     "npm": "^2.13.3",
     "serialport": "~1.7.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "blanket": "^1.1.9",
+    "mocha": "^2.3.3"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run unit && npm run integration",
+    "unit": "mocha -R spec",
+    "integration": "istanbul cover _mocha -- -R spec test/integration"
   },
   "author": "Marco Keur",
   "license": "GPL-3.0",

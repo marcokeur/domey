@@ -11,3 +11,5 @@
 /.idea/workspace.xml
 /debug.log
 /**/.installed
+
+coverage/

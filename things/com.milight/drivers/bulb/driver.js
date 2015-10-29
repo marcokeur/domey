@@ -32,11 +32,11 @@ var self = {
                      });
 
         //for test
-        Domey.manager('web').addApiCall("GET", 'com.milight', self.apiGetCollection, self.apiGetElement);
+        //Domey.manager('web').addApiCall("GET", 'com.milight', self.apiGetCollection, self.apiGetElement);
 
         callback();
     },
-
+/*
     apiGetCollection: function() {
         var response = [];
 
@@ -65,7 +65,7 @@ var self = {
         response['status'] = 404;
         return response;
     },
-
+*/
 	getDevice: function( id ) {
 	    for(var i in this.devices){
 	        if(this.devices[i].id == id){
