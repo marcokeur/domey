@@ -84,22 +84,15 @@ var self = {
     update: function( id ) {
         var device = self.getDevice( id );
 
-        console.log(JSON.stringify(device.state));
-
         if(device.state.enabled){
             this.light.sendCommands(commands['rgbw'].on(device.id));
             this.light.sendCommands(commands.rgbw.whiteMode(device.id));
-            console.log('set on');
         }else{
             this.light.sendCommands(commands['rgbw'].off(device.id));
-            console.log('set off');
         }
 
-        console.log('set brightness');
         this.light.sendCommands(commands['rgbw'].brightness(device.state.brightness));
 
-
-        console.log('set hue');
         if (device.state.hue == "0") {
             this.light.sendCommands(commands.rgbw.whiteMode(device.id));
         } else {
@@ -136,7 +129,7 @@ var self = {
         disabled: {
             get: function(device, callback){
                 var device = self.getDevice( device.id );
-                console.log('device:' + device);
+
                 if( device instanceof Error ) return callback( device );
                 
                 if(device.state.enabled == false){

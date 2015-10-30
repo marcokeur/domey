@@ -4,14 +4,13 @@ var self = {
     devices: {},
 
     init: function( devices, callback ) {
-        console.log('driver: ' + Domey.interface('jeelink_868').getName());
+
         //we listen to jeelabs type data
         Domey.interface('jeelink_868').on('jeelabs', function(package){
                     decodeRoomNodeMessage(package, function(roomnodePackage){
                         console.log(roomnodePackage);
                         stored = false;
                         for(var i in self.devices){
-                            console.log(i);
                             if(i == roomnodePackage.id){
                                 self.devices[i] = roomnodePackage;
                                 stored = true;
@@ -21,8 +20,6 @@ var self = {
                         if(stored == false){
                             console.log("New device found! --> " + roomnodePackage.id);
                             self.devices[roomnodePackage.id] = roomnodePackage;
-
-                            console.log(JSON.stringify(self.devices));
                         }
                         
                         // emit realtime event if something has changed

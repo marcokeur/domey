@@ -4,7 +4,6 @@ var self = {
     init: function( init_devices, callback ) {
         //var self = this;
 
-        console.log('roomba driver init');
         Domey.interface('mqtt').subscribe('pit/roomba/state');
         Domey.interface('mqtt').on('pit/roomba/state', function(data){
             //received data from roomba!
@@ -24,15 +23,12 @@ var self = {
                             charging : false
                         }
                     };
-                    console.log('Found new cleaner ' + tokens[2] + ' at ' + tokens[3]);
-                    console.log('cleaners: ' + self.devices);
-                    console.log('cleaner: ' + JSON.stringify(self.devices[tokens[1]]));
+                    Domey.log(3, 2, 'Found new cleaner ' + tokens[2] + ' at ' + tokens[3]);
                 }
             }else{
-                console.log(self.devices);
                 //first token is device id
                 var device = roomba.getDevice(tokens[1]);
-                console.log(device);
+
                 if( !(device instanceof Error )){
                     roomba.updateStatus(device, tokens);
                 }
@@ -48,7 +44,7 @@ var self = {
 	getDevice: function( id ) {
 	    console.log('getDevice: ' + JSON.stringify(this));
 		if( typeof this.devices[id] == 'undefined' ) return new Error("device is not connected (yet)");
-		console.log('getDevice: ' + JSON.stringify(this.devices));
+
 		return this.devices[id];
 	},
     
@@ -101,7 +97,6 @@ var self = {
                                 state: state
                             });
         }
-        console.log("roomba state: " + JSON.stringify(roomba.statusCache));
     },
 
 

@@ -11,7 +11,6 @@ var self = {
 		sonos
 			.search()
 			.on('DeviceAvailable', function (device, model) {
-				console.log('DeviceAvailable ' + model + ': ' + JSON.stringify(device));
 
 				device.deviceDescription(function(err, metadata){
 					if( err ) return;

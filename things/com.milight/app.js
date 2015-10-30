@@ -24,7 +24,6 @@ function bulbEnabled(args, callback ){
 }
 
 function enableBulb( args, callback ){
-    console.log('enableBulb' + args);
      var driver = Domey.manager('drivers').getDriver( 'com.milight.bulb' );
      driver.capabilities.enabled.set( args, true, function(){} );
 }

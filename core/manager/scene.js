@@ -38,8 +38,17 @@ Scene.prototype.apiGetCollection = function(){
 
     //set http response code
     response['status'] = 200;
-    response['data'] = self.scenes;
+    response['data'] = JSON.parse(JSON.stringify(self.scenes));
 
+    if(activeSceneId > 0){
+        for(var i in response['data']){
+            if(response['data'][i].id == activeSceneId){
+                response['data'][i].active = true;
+                console.log(activeSceneId);
+            }
+        }
+    }
+    console.log(JSON.stringify(self.scenes));
     return response;
 };
 
@@ -52,7 +61,11 @@ Scene.prototype.apiGetElement = function(element){
         if(self.scenes[i].id == element){
             //set http response code
             response['status'] = 200;
-            response['data'] = self.scenes[i];
+            response['data'] = JSON.parse(JSON.stringify(self.scenes[i]));
+
+            if(response['data'].id == activeSceneId){
+                response['data'].active == true;
+            }
 
             return response;
         }

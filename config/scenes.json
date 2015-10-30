@@ -2,7 +2,7 @@
     "scenes": [{
         "id" : 1,
         "name": "romance",
-        "icon": "glyphicon-heart",
+        "icon": "/img/scene_romance.png",
         "enable" : [{
             "action": "playMusic",
             "args": {
@@ -29,17 +29,17 @@
     },{
         "id": 2,
         "name": "work",
-        "icon": "glyphicon-asterisk",
+        "icon": "/img/scene_work.png",
         "things": []
     },{
         "id": 3,
         "name": "lounge",
-        "icon": "glyphicon-glass",
+        "icon": "/img/scene_lounge.png",
         "things": []
     },{
         "id": 4,
         "name": "Off",
-        "icon": "glyphicon-off",
+        "icon": "/img/scene_off.png",
         "things": []
     }]
 }
