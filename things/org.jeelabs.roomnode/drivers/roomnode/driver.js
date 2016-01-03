@@ -9,7 +9,7 @@ var self = {
         Domey.interface('jeelink_868').on('jeelabs', function(package){
                     decodeRoomNodeMessage(package, function(roomnodePackage){
                         console.log(roomnodePackage);
-                        stored = false;
+                        var stored = false;
                         for(var i in self.devices){
                             if(i == roomnodePackage.id){
                                 self.devices[i] = roomnodePackage;
@@ -44,6 +44,16 @@ var self = {
                 });
         callback();
     },
+
+    getDeviceIdList: function() {
+        var deviceIdList = [];
+
+        for(var i in this.devices){
+            deviceIdList.push(i);
+        }
+
+        return deviceIdList;
+    },
     
 	getDevice: function( id ) {
 		if( typeof this.devices[id] == 'undefined' ) return new Error("device is not connected (yet)");
@@ -57,24 +67,24 @@ var self = {
     capabilities: {
 
         temperature: {
-            get: function( device, callback ){
-                var device = self.getDevice( device.id );
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 callback( device.state.temperature );
             }
         },
         light: {
-            get: function( device, callback ){
-                var device = self.getDevice( device.id );
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 callback( device.state.light );
             }
         },
         motion: {
-            get: function( device, callback ){
-                var device = self.getDevice( device.id );
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 callback( device.state.motion );

@@ -1,0 +1,26 @@
+extends layout
+
+block title
+    h1.page-header Dashboard Things
+
+block content
+    .container
+        .row
+            table(id="thingsTable" style="width: 100%")
+                thead
+                    tr
+                        td Thing
+                        td Driver
+                        td DeviceId
+                        td Capability
+                        td Value
+
+block script
+    script.
+        $(document).ready(function(){
+            loadScenes('#thingsTable', function(){ console.log('loading done'); });
+            openWebSocketConnection();
+        });
+    script(src='/js/dashboard.js')
+    script(src='/js/dashboard_things.js')
+    script(src="https://cdn.socket.io/socket.io-1.3.7.js")

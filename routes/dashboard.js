@@ -1,21 +1,19 @@
-var fs = require('fs');
-var dashboardConfig = JSON.parse(fs.readFileSync(__dirname + "/../config/dashboard.json", "utf8"));
-
 module.exports = function(app){
     //serve the dashboard
     app.get('/dashboard', function(request, response) {
-        response.redirect('/dashboard/scenes');
+        //response.redirect('/dashboard/scenes');
+        response.render('dashboard');
+    });
+
+    app.get('/dashboard/things', function(request, response){
+        response.render('dashboard_things');
     });
 
     app.get('/dashboard/scenes', function(request, response){
-        //var webContent = [];
-        //webContent['scenes'] = Domey.manager('scene').getDashboardContent();
         response.render('dashboard_scenes');
     });
 
     app.get('/dashboard/flows', function(request, response){
-        //var webContent = [];
-        //webContent['scenes'] = Domey.manager('scene').getDashboardContent();
         response.render('dashboard_flows');
     });
 };

@@ -41,8 +41,17 @@ var self = {
     //holds roomba data
     statusCache: {},
 
+    getDeviceIdList: function() {
+        var deviceIdList = [];
+
+        for(var i in this.devices){
+            deviceIdList.push(i);
+        }
+
+        return deviceIdList;
+    },
+
 	getDevice: function( id ) {
-	    console.log('getDevice: ' + JSON.stringify(this));
 		if( typeof this.devices[id] == 'undefined' ) return new Error("device is not connected (yet)");
 
 		return this.devices[id];
@@ -103,20 +112,21 @@ var self = {
 
     capabilities : {
         state: {
-            get: function( device, callback ){
-                var device = roomba.getDevice( device.id );
+            get: function( deviceId, callback ){
+                var device = roomba.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
-                roomba.getStatus( device, callback );
+                self.getStatus( device, callback );
             },
-            set: function( device, state, callback ) {
+            set: function( deviceId, state, callback ) {
+                var device = roomba.getDevice( deviceId );
+
                 if( typeof state.cleaning != 'undefined' )
                     module.exports.cleaning.set(device, state.cleaning, function(){} );
                 if( typeof state.spot_cleaning != 'undefined' )
                     module.exports.spot_cleaning.set( device, state.spot_cleaning, function(){} );
                 if( typeof state.docked != 'undefined' ) module.exports.docked.set(device, state.docked, function(){} );
 
-                var device = roomba.getDevice( device.id );
                 if( device instanceof Error ) return callback( device );
 
                 self.getStatus( device, callback );
@@ -124,8 +134,8 @@ var self = {
         },
 
         cleaning: {
-            get: function( device, callback ){
-                var device = self.getDevice( device.id );
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 self.getStatus( device, function(state){
@@ -133,9 +143,9 @@ var self = {
                 });
 
             },
-            set: function( device, value, callback ){
+            set: function( deviceId, value, callback ){
 
-                var device = self.getDevice( device.id );
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 // first, get the status
@@ -156,8 +166,8 @@ var self = {
             }
         },
         spot_cleaning: {
-            get: function( device, callback ){
-                var device = self.getDevice( device.id );
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 self.getStatus( device, function(state){
@@ -165,13 +175,13 @@ var self = {
                 });
 
             },
-            set: function( device, value, callback ) {
+            set: function( deviceId, value, callback ) {
                 // TODO
             }
         },
         docked: {
-            get: function( device, callback ){
-                var device = self.getDevice( device.id );
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 self.getStatus( device, function(state){
@@ -179,8 +189,8 @@ var self = {
                 });
 
             },
-            set: function( device, value, callback ) {
-                var device = self.getDevice( device.id );
+            set: function( deviceId, value, callback ) {
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 // first, get the status
@@ -197,8 +207,8 @@ var self = {
             }
         },
         charging: {
-            get: function( device, callback ){
-                var device = self.getDevice( device.id );
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 self.getStatus( device, function(state){
@@ -207,8 +217,8 @@ var self = {
             }
         },
         battery_level: {
-            get: function( device, callback ){
-                var device = self.getDevice( device.id );
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 self.getStatus( device, function(state){

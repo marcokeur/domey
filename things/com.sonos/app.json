@@ -22,7 +22,7 @@
         "nl": "Sonos Speaker"
       },
       "class": "speaker",
-      "capabilities": [ "onoff" ]
+      "capabilities": [ ]
     }
   ],
   "flow": {

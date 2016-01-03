@@ -48,7 +48,6 @@ Scene.prototype.apiGetCollection = function(){
             }
         }
     }
-    console.log(JSON.stringify(self.scenes));
     return response;
 };
 

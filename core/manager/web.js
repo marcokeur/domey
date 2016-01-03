@@ -1,11 +1,10 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
-var fs = require('fs');
 
 var express = require('express')
 , app = express()
-, http = require('http')
-, server = http.createServer(app)
+, http = require('http').Server(app)
+, io = require('socket.io')(http)
 , jade = require('jade');
 
 var apiItems = [];
@@ -25,7 +24,7 @@ Web.prototype.getName = function(){
 
 Web.prototype.init = function(){
 	console.log("Web manager - init");
-      
+
     app.set('views', __dirname + '/../../views');
     app.set('view engine', 'jade');
     app.locals.pretty = true;
@@ -55,7 +54,6 @@ Web.prototype.init = function(){
 
     /* add handler for api */
     app.all('/api/*', function(request, response){
-        console.log(JSON.stringify(apiItems));
         var params = request.params[0].split('/');
         var httpMethod = request.method;
         var collection = params[0];
@@ -63,31 +61,39 @@ Web.prototype.init = function(){
 
         for(var i in apiItems){
             if((apiItems[i].method == httpMethod) && (apiItems[i].collection == collection)){
-                var data;
 
                 //if no element is defined, call collectionF
                 if(params[1] == undefined || params[1].length == 0){
-                    data = apiItems[i].collectionFunction();
+                    apiItems[i].collectionFunction(apiCallback, response);
                 }else if(params[2] == undefined || params[2].length == 0){
-                    data = apiItems[i].elementFunction(element);
+                    apiItems[i].elementFunction(element, apiCallback, response);
                 }else if(apiItems[i].routerFunction != undefined){
-                    data = apiItems[i].routerFunction(params);
+                    apiItems[i].routerFunction(params, apiCallback, response);
                 }
-
-                if(data != undefined){
-                    console.log(data);
-                    response.writeHead(data.status, {"Content-Type": "application/json"});
-                    response.end(JSON.stringify({'response' : data.data}));
-                    break;
-                }else{
-                    response.status(404).end();
-                }
+                break;
             }
         }
     });
 
-    server.listen(3000);
+    io.on('connection', function(socket){
+        console.log('a user connected');
+    });
+
+    Domey.on('capabilityUpdated', function(data){
+        io.emit('capabilityUpdated', data);
+    });
+
+    http.listen(3000);
 };
+
+function apiCallback(data, response){
+    if(data != undefined){
+        response.writeHead(data.status, {"Content-Type": "application/json"});
+        response.end(JSON.stringify({'response' : data.data}));
+    }else{
+        response.status(404).end();
+    }
+}
 
 //register to api: METHOD, collection, function for collection, function for element
 Web.prototype.addApiCall = function(method, collection, collectionFunction, elementFunction, routerFunction) {
@@ -102,3 +108,4 @@ function ApiItem(method, collection, collectionFunction, elementFunction, router
     this.elementFunction = elementFunction;
     this.routerFunction = routerFunction;
 }
+

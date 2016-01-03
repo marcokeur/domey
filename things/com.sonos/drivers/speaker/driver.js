@@ -32,33 +32,10 @@ var self = {
 		callback();
 	},
 
-	apiGetCollection: function() {
-		var response = [];
+	getDeviceIdList: function() {
+		var deviceIdList = [];
 
-		//set http response code
-		response['status'] = 200;
-		response['data'] = self.speakers;
-
-		return response;
-	},
-
-	apiGetElement: function(element){
-		var response = [];
-
-		//find the specific flow
-		for(var i in self.speakers){
-			//if correct flow is found
-			if(self.speakers[i].id == element){
-				//set http response code
-				response['status'] = 200;
-				response['data'] = self.speakers[i];
-
-				return response;
-			}
-		}
-
-		response['status'] = 404;
-		return response;
+		return deviceIdList;
 	},
 
 	play: function (host, uri) {

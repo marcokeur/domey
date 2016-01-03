@@ -10,3 +10,4 @@ function getCollection(collection, target, addElement, callback){
         }
     });
 }
+

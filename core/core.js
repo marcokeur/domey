@@ -4,13 +4,10 @@ var EventEmitter = require('events').EventEmitter;
 
 var managers = [];
 var interfaces = [];
-var things = [];
 
 function Domey(){
 	EventEmitter.call(this);
-    
-    var self = this;
-    
+
     //load all managers
     getJSFilesInPath('core/manager').forEach(function(manager){
         managerInst = getInstanceFromFile(manager);
@@ -21,17 +18,6 @@ function Domey(){
     getJSFilesInPath('core/interface').forEach(function(interface){
         interfaceInst = getInstanceFromFile(interface);
         interfaces[interfaceInst.getName()] = interfaceInst;
-    });
-    
-    this.on('thing_registered', function(thing){
-        //check if all items have been loaded
-        if(things.length == fs.readdirSync(__dirname + '/../things/').length) {
-            setTimeout(function(){
-                //if so, emit the all things registered event
-                self.emit('all_things_registered', things); 
-                console.log('all things registered!');
-            }, 2000);
-        }    
     });
 }
 
@@ -44,8 +30,6 @@ Domey.prototype.init = function(){
 
     callInitOnInstances(managers);
     callInitOnInstances(interfaces);
-    
-    loadThings(this);
 };
 
 Domey.prototype.manager = function ( type ){
@@ -61,18 +45,6 @@ Domey.prototype.interface = function ( type ){
         return undefined;
     }else{
         return interfaces[type];
-    }
-}
-
-Domey.prototype.getThings = function(){
-    return things;   
-}
-
-Domey.prototype.getThing = function(thingName){
-    for(i in things){
-        if(things[i].name == thingName){
-            return things[i];
-        }
     }
 }
 
@@ -101,19 +73,9 @@ Domey.prototype.log = function(level, indent, line){
 }
 
 Domey.prototype.getConfig = function(file, part){
-    config = JSON.parse(fs.readFileSync(__dirname + '/../config/' + file + '.json', 'utf8'));
+    var config = JSON.parse(fs.readFileSync(__dirname + '/../config/' + file + '.json', 'utf8'));
     config = config[file];
     
-    if(part !== undefined){
-        config = config[part];
-    }
-    return config;
-}
-
-Domey.prototype.getThingConfig = function(thingName, part){
-    config = JSON.parse(fs.readFileSync(__dirname + '/../things/' + thingName + '/config.json', 'utf8'));
-    config = config[thingName];
-
     if(part !== undefined){
         config = config[part];
     }
@@ -124,91 +86,18 @@ Domey.prototype.triggerAction = function(method, args){
     this.emit('action.' + method, args);
 }
 
-function getThingMetaData(thingName, part){
-    meta = JSON.parse(fs.readFileSync(__dirname + '/../things/' + thingName + '/app.json', 'utf8'));
-    //config = config[thingName];
-
-    if(part !== undefined){
-        meta = meta[part];
-    }
-    return meta;
-}
-
-function installDependencies( dependencies, callback ){
-    var depList = [];
-    for(var dep in dependencies){
-        console.log(dep + "@" + dependencies[dep]);
-        depList.push(dep + "@" + dependencies[dep]);
-    }
-
-    var npm = require("npm");
-    npm.load(function (err) {
-        // catch errors
-        npm.commands.install(depList, function (er, data) {
-            // log the error or data
-            console.log('npm install done');
-            callback();
-        });
-        npm.on("log", function (message) {
-            // log the progress of the installation
-            //console.log(message);
-        });
-    });   
-}
-
-function Thing(name, humanName, uri, meta, obj){
-    this.name = name;
-    this.humanName = humanName;
-    this.uri = uri;
-    this.meta = meta;
-    this.obj = obj;
-}
-
-var loadedDrivers = [];
-
-
-function loadThings(self){
-    //for each thing in dir
-    fs.readdirSync(__dirname + '/../things/').forEach(function(thingName, index, array) {
-        try{
-            var thingDir = __dirname + '/../things/' + thingName + '/';
-
-            //load the metadata
-            var meta = getThingMetaData(thingName);
-
-            //check if the thing already has been installed
-            if(!fs.existsSync(thingDir + '.installed')){
-                console.log('Unknown thing, lets install it\'s dependencies');
-                //if not, install dependencies
-                    installDependencies(meta.dependencies, function(){
-                        //lets mark the thing as installed
-                        fs.closeSync(fs.openSync(thingDir + '.installed', 'w'));
-
-                        //lets load the drivers
-                        loadThing(self, meta);
-                    });
-            }else{
-                //we know this one already, just load it
-                loadThing(self, meta);
+Domey.prototype.capabilityUpdated = function(thingName, driverName, deviceId, capabilityName, capabilityValue){
+    this.emit('capabilityUpdated', { 'thing' : {
+        'name': thingName,
+        'driver': {
+            'name': driverName,
+            'deviceId': deviceId,
+            'capability': {
+                'name': capabilityName,
+                'value': capabilityValue
             }
-        }catch(ex){
-            console.log("Thing " + thingName + " not loaded: " + ex);
         }
-    }); 
-}
-
-function loadThing(self,meta){
-    //instantiate the thing
-    var obj = require(__dirname + '/../things/' + meta.id + '/app.js');
-    var inst = new obj();
-    inst.init();
-    //add the 'thing' to the list for menu
-    thing = new Thing(meta.id, meta.name.en, '/things/' + meta.id, meta, inst);
-    things.push(thing);
-    
-    //emit that this thing has been loaded
-    self.emit('thing_registered', thing); 
-    console.log('Thing ' + meta.id + ' registered');
+    }});
 }
 
 //returns list of files in path, relative to app.js
@@ -223,7 +112,6 @@ function getJSFilesInPath( path ){
     
     return jsFiles;                                   
 }
-    
 
 //creates an instance from .js file given in path
 function getInstanceFromFile( file ){

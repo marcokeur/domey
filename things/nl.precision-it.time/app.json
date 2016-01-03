@@ -1,0 +1,23 @@
+{
+  "id": "nl.precision-it.time",
+  "version": "1.0",
+  "name": {
+    "en": "Time"
+  },
+  "description": {
+    "en": "Control your Sonos"
+  },
+  "author": {
+    "name": "Marco Keur",
+    "website": "http://github.com/marcokeur"
+  },
+  "drivers": [
+    {
+      "id": "time",
+      "capabilities": [ "time", "date", "sunrise", "sunset" ]
+    }
+  ],
+  "flow": {
+
+  }
+}

@@ -30,42 +30,19 @@ var self = {
                      	delayBetweenCommands: 100,
                      	commandRepeat: 1
                      });
-
-        //for test
-        //Domey.manager('web').addApiCall("GET", 'com.milight', self.apiGetCollection, self.apiGetElement);
-
         callback();
     },
-/*
-    apiGetCollection: function() {
-        var response = [];
 
-        //set http response code
-        response['status'] = 200;
-        response['data'] = self.devices;
+    getDeviceIdList: function() {
+        var deviceIdList = [];
 
-        return response;
-    },
-
-    apiGetElement: function(element){
-        var response = [];
-
-        //find the specific flow
-        for(var i in self.devices){
-            //if correct flow is found
-            if(self.devices[i].id == element){
-                //set http response code
-                response['status'] = 200;
-                response['data'] = self.devices[i];
-
-                return response;
-            }
+        for(var i in this.devices){
+            deviceIdList.push(this.devices[i].id);
         }
 
-        response['status'] = 404;
-        return response;
+        return deviceIdList;
     },
-*/
+
 	getDevice: function( id ) {
 	    for(var i in this.devices){
 	        if(this.devices[i].id == id){
@@ -103,20 +80,20 @@ var self = {
     capabilities: {
 
         enabled: {
-            get: function( device, callback ) {
-                var device = self.getDevice( device.id );
-                console.log('device:' + device);
+            get: function( deviceId, callback ) {
+                var device = self.getDevice( deviceId );
+
                 if( device instanceof Error ) return callback( device );
                 
-                if(device.state.onoff == 'on'){
+                if(device.state.enabled == 'on'){
                     callback( true );
                 }else{
                     callback( false );
                 }
             },
-            set: function( device, onoff, callback ) {
+            set: function( deviceId, onoff, callback ) {
 
-                var device = self.getDevice( device.id );
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 device.state.enabled = onoff;
@@ -127,8 +104,8 @@ var self = {
             }
         },
         disabled: {
-            get: function(device, callback){
-                var device = self.getDevice( device.id );
+            get: function(deviceId, callback){
+                var device = self.getDevice( deviceId );
 
                 if( device instanceof Error ) return callback( device );
                 
@@ -140,11 +117,15 @@ var self = {
             }
         },
         brightness: {
-            get: function( device, callback ){
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
+
+                if( device instanceof Error ) return callback( device );
+
                 callback( device.state.brightness );
             },
-            set: function( device, value, callback ){
-                var device = self.getDevice( device.id );
+            set: function( deviceId, value, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 device.state.brightness = value;
@@ -156,11 +137,15 @@ var self = {
 
         },
         hue: {
-            get: function( device, callback ){
+            get: function( deviceId, callback ){
+                var device = self.getDevice( deviceId );
+
+                if( device instanceof Error ) return callback( device );
+
                 callback( device.state.hue );
             },
-            set: function( device, value, callback ){
-                var device = self.getDevice( device.id );
+            set: function( deviceId, value, callback ){
+                var device = self.getDevice( deviceId );
                 if( device instanceof Error ) return callback( device );
 
                 device.state.hue = value;
@@ -169,7 +154,6 @@ var self = {
 
                 callback( device.state.hue );
             }
-
         }
     }
 }

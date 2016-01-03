@@ -18,9 +18,15 @@ Drivers.prototype.getName = function(){
 }
 
 Drivers.prototype.init = function(){
-    Domey.on('thing_registered', function(thing){
-        thing.meta.drivers.forEach(function(driver){
-            loadDriver(thing.name, driver.id, function(){
+    console.log("driver mamanger - init");
+
+    Domey.on('thing_registered', function(thingName){
+        console.log('thingdriver ' + thingName);
+
+        var metaData = Domey.manager('things').getThingMetaData(thingName);
+
+        metaData.drivers.forEach(function(driver){
+            loadDriver(thingName, driver.id, function(){
                Domey.manager('drivers').emit('driver_registered', driver); 
             });
         }); 
@@ -31,9 +37,9 @@ Drivers.prototype.getDriver = function( id ){
     return driverList[id];
 };
 
-Drivers.prototype.getDrivers = function(){
-    return driverList;
-}
+Drivers.prototype.getDriver = function(thingName, driverName){
+    return driverList[thingName + '.' + driverName];
+};
 
 Drivers.prototype.realtime = function(msg){
     this.emit('realtime', msg);

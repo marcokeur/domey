@@ -35,37 +35,39 @@ Flow.prototype.init = function () {
 
     Domey.manager('web').addApiCall('GET', 'flow', self.apiGetCollection, self.apiGetElement);
 
-    Domey.on('thing_registered', function (thing) {
+    Domey.on('thing_registered', function (thingName) {
+        var metaData = Domey.manager('things').getThingMetaData(thingName);
+
         /* parse metadata from a registered 'thing' and register callbacks
         */
-        if (thing.meta.hasOwnProperty('flow')) {
-            if (thing.meta.flow.hasOwnProperty('actions') && thing.meta.flow.actions.length > 0) {
-                for (var i in thing.meta.flow.actions) {
-                    var action = thing.meta.flow.actions[i];
+        if (metaData.hasOwnProperty('flow')) {
+            if (metaData.flow.hasOwnProperty('actions') && metaData.flow.actions.length > 0) {
+                for (var i in metaData.flow.actions) {
+                    var action = metaData.flow.actions[i];
                     Domey.log(3, 1, 'flow manager - registering action: ' + action.title.en);
 
-                    var item = new FlowItem('action', action, thing.meta.id, ++flowIdCounter);
+                    var item = new FlowItem('action', action, metaData.id, ++flowIdCounter);
                     flowItems.push(item);
 
                 }
             }
         
-            if(thing.meta.flow.hasOwnProperty('triggers') && thing.meta.flow.triggers.length > 0){
-                for(var i in thing.meta.flow.triggers){
-                    var trigger = thing.meta.flow.triggers[i];
+            if(metaData.flow.hasOwnProperty('triggers') && metaData.flow.triggers.length > 0){
+                for(var i in metaData.flow.triggers){
+                    var trigger = metaData.flow.triggers[i];
                     Domey.log(3, 1, 'flow manager - registering trigger: ' + trigger.title.en);
 
-                    var item = new FlowItem('trigger', trigger, thing.meta.id, ++flowIdCounter);
+                    var item = new FlowItem('trigger', trigger, metaData.id, ++flowIdCounter);
                     flowItems.push(item);
                 }
             }
             
-            if(thing.meta.flow.hasOwnProperty('conditions') && thing.meta.flow.conditions.length > 0){
-                for(var i in thing.meta.flow.conditions){
-                    var condition = thing.meta.flow.conditions[i];
+            if(metaData.flow.hasOwnProperty('conditions') && metaData.flow.conditions.length > 0){
+                for(var i in metaData.flow.conditions){
+                    var condition = metaData.flow.conditions[i];
                     Domey.log(3, 1, 'flow manager - registering condition: ' + condition.title.en);
 
-                    var item = new FlowItem('condition', condition, thing.meta.id, ++flowIdCounter);
+                    var item = new FlowItem('condition', condition, metaData.id, ++flowIdCounter);
                     flowItems.push(item);
                 }
             }
@@ -89,7 +91,7 @@ Flow.prototype.init = function () {
 
 
 Flow.prototype.trigger = function(method, args){   
-    console.log('console log: trigger received: ' + method);
+    Domey.log(3, 0, 'Trigger received: ' + method);
     
     var flowDescription = 'If ';
     
