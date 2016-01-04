@@ -19,7 +19,6 @@ function openWebSocketConnection(){
     var socket = io();
 
     socket.on('capabilityUpdated', function(data){
-        console.log(data);
         updateElement(data, '#thingsTable');
     });
 }
@@ -31,29 +30,21 @@ function updateElement(data, target){
 }
 
 function deleteElement(data, target){
-    var selector = "#" + data.thing.name+
-        "_"+data.thing.driver.name+
-        "_"+data.thing.driver.deviceId+
-        "_"+data.thing.driver.capability.name;
+    var selector = "#" + createCssIdFromThingObject(data.thing);
     $(selector).remove();
 }
 
 function addElement(data, target){
-    $(target).append("<tr id=\""+
-    data.thing.name+
-    "_"+data.thing.driver.name+
-    "_"+data.thing.driver.deviceId+
-    "_"+data.thing.driver.capability.name+
+    var selector = target + ' > tbody';
+
+    $("<tr id=\""+createCssIdFromThingObject(data.thing)+
     "\">" +
     "<td>" + data.thing.name + "</td>" +
     "<td>" + data.thing.driver.name + "</td>" +
     "<td>" + data.thing.driver.deviceId + "</td>" +
     "<td>" + data.thing.driver.capability.name + "</td>" +
     "<td>" + data.thing.driver.capability.value + "</td>" +
-    "</tr>");
-
-    console.log(data);
-
+    "</tr>").prependTo(selector);
 }
 
 function getCapability(thing, driver, capability, deviceId, target, callback){
@@ -61,9 +52,19 @@ function getCapability(thing, driver, capability, deviceId, target, callback){
 
         addElement(data.response, target);
 
-
         if(callback != undefined){
             callback();
         }
     });
+}
+
+function createCssIdFromThingObject(thing){
+    var id = thing.name+
+    "_"+thing.driver.name+
+    "_"+thing.driver.deviceId+
+    "_"+thing.driver.capability.name;
+
+    id =  id.replace(/\./g, '');
+
+    return id;
 }

@@ -33,7 +33,7 @@ var self = {
 	},
 
 	getDeviceIdList: function() {
-		var deviceIdList = [];
+    	var deviceIdList = [];
 
 		return deviceIdList;
 	},
@@ -61,6 +61,6 @@ var self = {
 			console.log(err);
 		});
 	}
-};
+}
 
 module.exports = self;

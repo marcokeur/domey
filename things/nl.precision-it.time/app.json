@@ -17,6 +17,10 @@
       "capabilities": [ "time", "date", "sunrise", "sunset" ]
     }
   ],
+  "settings": {
+    "latitude" :  "52.211157",
+    "longitude":  "5.969923"
+  },
   "flow": {
 
   }

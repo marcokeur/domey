@@ -11,14 +11,18 @@ var self = {
             name:   'group1',
             type:   'rgbw',
             state: {
-                enabled:  false
+                enabled:  false,
+                hue: 0,
+                brightness: 50
             }
         },
         {   id:     2,
             name:   'group2',
             type:   'rgbw',
             state: {
-                enabled: false
+                enabled: false,
+                hue: 0,
+                brightness: 50
             }
         }
     ],
@@ -101,19 +105,6 @@ var self = {
                 self.update( device.id );
 
                 callback( device.state.enabled );
-            }
-        },
-        disabled: {
-            get: function(deviceId, callback){
-                var device = self.getDevice( deviceId );
-
-                if( device instanceof Error ) return callback( device );
-                
-                if(device.state.enabled == false){
-                    callback( true );
-                }else{
-                    callback( false );
-                }
             }
         },
         brightness: {

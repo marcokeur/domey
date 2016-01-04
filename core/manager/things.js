@@ -209,7 +209,6 @@ function gatherCapabilties(self, thingName){
 
 function getDeviceIdList(thingName, driverName){
     var driver = Domey.manager('drivers').getDriver(thingName, driverName);
-
     return driver.getDeviceIdList();
 
 }

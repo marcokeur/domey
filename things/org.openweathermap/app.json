@@ -1,0 +1,27 @@
+{
+  "id": "nl.precision-it.weather",
+  "version": "1.0",
+  "name": {
+    "en": "Weather"
+  },
+  "description": {
+    "en": "Publishes information from the openweathermap.org API."
+  },
+  "author": {
+    "name": "Marco Keur",
+    "website": "http://github.com/marcokeur"
+  },
+  "drivers": [
+    {
+      "id": "weather",
+      "capabilities": [ "temp", "humidity", "pressure", "wind", "icon", "type" ]
+    }
+  ],
+  "settings": {
+    "location" :  "Apeldoorn, NL",
+    "appid":  "f6f5d38dc7fb33dc9871ca9082571b08"
+  },
+  "flow": {
+
+  }
+}

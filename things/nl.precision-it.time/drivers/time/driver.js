@@ -1,3 +1,6 @@
+var request = require('request');
+var settings = Domey.manager('things').getThingMetaData('nl.precision-it.time', 'settings');
+
 var self = {
 
     cache: {},
@@ -7,12 +10,11 @@ var self = {
         var self = this;
         console.log('driver time init');
 
-        setInterval(function(){
-            recalculate(self)
-            }
-            , 1000
+        recalculate(self);
+        callApi(self);
 
-        );
+        setInterval(function(){recalculate(self)}, 1000);
+        setInterval(function(){callApi(self)}, 600000);
 
         // we're ready
         callback();
@@ -39,13 +41,13 @@ var self = {
 
         sunrise: {
             get: function(deviceId, callback){
-                callback('07:00');
+                callback(self.cache.sunrise);
             }
         },
 
         sunset: {
             get: function(deviceId, callback){
-                callback('18:00');
+                callback(self.cache.sunset);
             }
         }
     }
@@ -63,13 +65,36 @@ function recalculate(self){
     var sec  = date.getSeconds();
     sec = (sec < 10 ? "0" : "") + sec;
 
+    var year = date.getFullYear();
 
-    var day = date.getDay() + 1;
-    var month  = date.getMonth() + 1;
-    var year  = date.getFullYear();
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
 
     updateCache('time', hour + ":" + min + ":" + sec);
     updateCache('date', day + "-" + month + "-" + year);
+}
+
+function callApi(self){
+    request('http://api.sunrise-sunset.org/json?lat='+settings.latitude+'&lng='+settings.longitude+'&date=today', function(error, response, body){
+        if(!error && response.statusCode == 200){
+            updateCache('sunrise', convertTo24Hour(JSON.parse(body).results.sunrise));
+            updateCache('sunset', convertTo24Hour(JSON.parse(body).results.sunset));
+        }
+    });
+}
+
+function convertTo24Hour(time) {
+    var hours = parseInt(time.substr(0, 2));
+    if(time.indexOf('AM') != -1 && hours == 12) {
+        time = time.replace('12', '0');
+    }
+    if(time.indexOf('PM')  != -1 && hours < 12) {
+        time = time.replace(hours, (hours + 12));
+    }
+    return time.replace(/(am|pm)/i, '');
 }
 
 function updateCache(key, value){

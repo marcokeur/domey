@@ -33,12 +33,14 @@ Scene.prototype.init = function () {
 
 };
 
-Scene.prototype.apiGetCollection = function(){
+Scene.prototype.apiGetCollection = function(cb, handler){
     var response = [];
 
     //set http response code
     response['status'] = 200;
     response['data'] = JSON.parse(JSON.stringify(self.scenes));
+
+    console.log(response);
 
     if(activeSceneId > 0){
         for(var i in response['data']){
@@ -48,10 +50,10 @@ Scene.prototype.apiGetCollection = function(){
             }
         }
     }
-    return response;
+    cb(response, handler);
 };
 
-Scene.prototype.apiGetElement = function(element){
+Scene.prototype.apiGetElement = function(element, cb, handler){
     var response = [];
 
     //find the specific flow
@@ -66,27 +68,30 @@ Scene.prototype.apiGetElement = function(element){
                 response['data'].active == true;
             }
 
-            return response;
+            cb(response, handler);
+            return;
         }
     }
 
     response['status'] = 404;
-    return response;
+    cb(response, handler);
+    return;
 };
 
-Scene.prototype.apiGetRouter = function(params){
+Scene.prototype.apiGetRouter = function(params, cb, handler){
     var element = params[1];
     var action = params[2];
 
     switch(action){
         case 'activate':
-            return self.apiActivateScene(element);
+            cb(self.apiActivateScene(element), handler);
             break;
         case 'deactivate':
-            return self.apiDeactivateScene(element);
+            cb(self.apiDeactivateScene(element), handler);
             break;
         default:
             console.log('unknown action: ' + action);
+            cb(undefined, handler);
             break;
     }
 };

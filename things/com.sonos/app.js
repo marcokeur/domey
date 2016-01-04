@@ -12,9 +12,13 @@ App.prototype.init = function () {
 }
 
 function playMusic(args, callback) {
-    Domey.manager('drivers').getDriver('com.sonos.speaker').play(args.host, args.uri);
+    var driver = Domey.manager('drivers').getDriver('com.sonos.speaker');
+    console.log('driver: ' + JSON.stringify(driver));
+    driver.play(args.host, args.uri);
 }
 
 function stopMusic(args, callback) {
-    Domey.manager('drivers').getDriver('com.sonos.speaker').stop(args.host);
+    var driver = Domey.manager('drivers').getDriver('com.sonos.speaker');
+
+    driver.stop(args.host);
 }
