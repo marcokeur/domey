@@ -44,11 +44,22 @@ function addElement(data, target){
     "<td>" + data.thing.driver.deviceId + "</td>" +
     "<td>" + data.thing.driver.capability.name + "</td>" +
     "<td>" + data.thing.driver.capability.value + "</td>" +
+    //"<td><input></input></td>" +
     "</tr>").prependTo(selector);
+
+/*
+    $('#' + createCssIdFromThingObject(data.thing)).find('input').keypress(function (e) {
+       if (e.which == 13) {
+           //$('form#login').submit();
+           console.log('lol');
+           return false;    //<---- Add this line
+       }
+   });
+   */
 }
 
 function getCapability(thing, driver, capability, deviceId, target, callback){
-    $.getJSON('/api/thing/'+thing+'/'+driver+'/'+capability+'/'+deviceId, function(data){
+    $.getJSON('/api/thing/'+thing+'/'+driver+'/'+deviceId+'/'+capability, function(data){
 
         addElement(data.response, target);
 

@@ -21,6 +21,10 @@
                 "url" : "mongodb://localhost:27017/mqtt",
                 "collection" : "domey_mqtt"
             }
+        },
+        "wireless_433": {
+            "rxPin": 4,
+            "txPin": 5
         }
     }
 }

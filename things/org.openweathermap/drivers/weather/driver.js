@@ -73,8 +73,6 @@ function callApi(self){
             updateCache('rain', result.rain[0]);
             updateCache('type', result.weather[0].description);
             updateCache('icon', result.weather[0].icon);
-
-            console.log(self.cache);
         }
     });
 }

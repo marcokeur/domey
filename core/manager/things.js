@@ -40,6 +40,7 @@ Things.prototype.init = function(){
     });
 
     Domey.manager('web').addApiCall('GET', 'thing', this.apiGetCollection, this.apiGetElement, this.apiGetRouter);
+    Domey.manager('web').addApiCall('POST', 'thing', null, null, this.apiPostRouter);
 
 };
 
@@ -83,8 +84,8 @@ Things.prototype.apiGetRouter = function(params, callback, handler){
     var response = [];
     var thingName = params[1];
     var driverName = params[2];
-    var capabilityName = params[3];
-    var deviceId = params[4];
+    var deviceId = params[3];
+    var capabilityName = params[4];
 
     response['status'] = 404;
 
@@ -114,6 +115,48 @@ Things.prototype.apiGetRouter = function(params, callback, handler){
         });
     }
 
+};
+
+Things.prototype.apiPostRouter = function(params, body, callback, handler){
+    var response = [];
+    var thingName = params[1];
+    var driverName = params[2];
+    var deviceId = params[3];
+
+    var driver = Domey.manager('drivers').getDriver(thingName, driverName);
+
+    response['status'] = 200;
+    response['data'] = JSON.parse(JSON.stringify({ 'thing' : {
+                           'name' : thingName,
+                           'driver' : {
+                               'name' : driverName,
+                               'deviceId' : deviceId,
+                               'capabilities' : []
+                           }
+                       }
+                       }));
+
+    for(var i in body){
+        if(typeof driver.capabilities[i] == 'undefined'){
+            response['status'] = 400;
+            response['data'].thing.driver.capabilities.push({'name' : i, 'error': 'unknown capability'});
+        }else{
+            if(typeof driver.capabilities[i].set != 'undefined'){
+                driver.capabilities[i].set(deviceId, body[i], function(retVal){
+                    if(retVal == body[i]){
+                        response['data'].thing.driver.capabilities.push({'name' : i, 'value': body[i]});
+                    }else{
+                        response['data'].thing.driver.capabilities.push({'name' : i, 'error': 'setting ' + i + ' to ' + body[i] + ' failed'});
+                    }
+                });
+            }else{
+                response['status'] = 400;
+                response['data'].thing.driver.capabilities.push({'name' : i, 'error': 'capability not settable'});
+            }
+        }
+    }
+
+    callback(response, handler);
 };
 
 function getThingsDir(){

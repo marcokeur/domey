@@ -1,0 +1,30 @@
+// NAVIGATION MENU
+.navbar-nav.navbar-inverse.navbar-fixed-top
+  .container
+    .navbar-header
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='index.html')
+        img(src='assets/img/logo30.png', alt='')
+        |  DOMEY Dashboard
+    .navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li.active
+          a(href='/')
+            i.icon-home.icon-white
+            |  Home
+        li
+          a(href='/dashboard/things')
+            i.icon-folder-open.icon-white
+            |  Things
+        li
+          a(href='/dashboard/scenes')
+            i.icon-calendar.icon-white
+            |  Scenes
+        li
+          a(href='/dashboard/flows')
+            i.icon-th.icon-white
+            |  Flows
+    // /.nav-collapse

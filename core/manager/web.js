@@ -5,7 +5,8 @@ var express = require('express')
 , app = express()
 , http = require('http').Server(app)
 , io = require('socket.io')(http)
-, jade = require('jade');
+, jade = require('jade')
+, bodyParser = require('body-parser');
 
 var apiItems = [];
 
@@ -31,6 +32,7 @@ Web.prototype.init = function(){
 
     // static file handling
     app.use(express.static(__dirname + '/../../public'));
+    app.use(bodyParser.json());
 
     //load routes from dir
     require(__dirname + '/../../routes')(app);
@@ -59,6 +61,8 @@ Web.prototype.init = function(){
         var collection = params[0];
         var element = params[1];
 
+        Domey.log(4, 0, 'Client ' + request.connection.remoteAddress + ' did an '+ httpMethod +' request on /api/' + params.join('/'));
+
         for(var i in apiItems){
             if((apiItems[i].method == httpMethod) && (apiItems[i].collection == collection)){
 
@@ -68,7 +72,11 @@ Web.prototype.init = function(){
                 }else if(params[2] == undefined || params[2].length == 0){
                     apiItems[i].elementFunction(element, apiCallback, response);
                 }else if(apiItems[i].routerFunction != undefined){
-                    apiItems[i].routerFunction(params, apiCallback, response);
+                    if(httpMethod == 'POST'){
+                        apiItems[i].routerFunction(params, request.body, apiCallback, response);
+                    }else{
+                        apiItems[i].routerFunction(params, apiCallback, response);
+                    }
                 }
                 break;
             }
@@ -76,7 +84,8 @@ Web.prototype.init = function(){
     });
 
     io.on('connection', function(socket){
-        console.log('a user connected');
+        console.log('Websocket');
+        Domey.log(4, 0, 'Client ' + socket.handshake.address + ' connected to the WebSocket');
     });
 
     Domey.on('capabilityUpdated', function(data){

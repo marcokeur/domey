@@ -1,0 +1,16 @@
+extends layout
+
+block title
+    h1.page-header Dashboard
+
+block content
+    .container
+        .row
+            a(href='/dashboard/things') Things
+            a(href='/dashboard/scenes') Scenes
+            a(href='/dashboard/flows') Flows
+
+
+block script
+    script(src='/js/dashboard.js')
+

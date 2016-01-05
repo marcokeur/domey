@@ -4,14 +4,14 @@ var kaku = require('./kaku.js');
 console.log(kaku.createCode());
 
 var Gpio = require('onoff').Gpio;  // Constructor function for Gpio objects.
-//var gpio433In = new Gpio(4, 'in', 'both'); // Export GPIO #4 as an interrupt
+var gpio433In = new Gpio(4, 'in', 'both'); // Export GPIO #4 as an interrupt
 var gpio433Out = new Gpio(5, 'out');
 
 console.log('Please press the button on GPIO #4...');
 
 // The callback passed to watch will be called when the button on GPIO #4 is
 // pressed. 
-button.watch(function (err, value) {
+gpio433In.watch(function (err, value) {
   if (err) {
     throw err;
   }
