@@ -33,11 +33,19 @@ function deleteElement(data, target){
     var selector = "#" + createCssIdFromThingObject(data.thing);
     $(selector).remove();
 }
-
+var even = true;
 function addElement(data, target){
     var selector = target + ' > tbody';
+    var className;
+    if(even){
+        className='even';
+        even = false;
+    }else{
+        className = 'odd';
+        even = true;
+    }
 
-    $("<tr id=\""+createCssIdFromThingObject(data.thing)+
+    $("<tr class='"+className+"' id=\""+createCssIdFromThingObject(data.thing)+
     "\">" +
     "<td>" + data.thing.name + "</td>" +
     "<td>" + data.thing.driver.name + "</td>" +

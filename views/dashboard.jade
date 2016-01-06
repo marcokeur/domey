@@ -222,22 +222,6 @@ block content
                 img(src='assets/img/up-small.png', alt='')
                 |  23.88%
         .col-sm-3.col-lg-3
-          // TOTAL SUBSCRIBERS BLOCK
-          .half-unit
-            dtitle Total Subscribers
-            hr
-            .cont
-              p
-                bold 14.744
-              p 98 Subscribed Today
-          // FOLLOWERS BLOCK
-          .half-unit
-            dtitle Twitter Followers
-            hr
-            .cont
-              p
-                bold 17.833 Followers
-              p @SomeUser
         // LATEST NEWS BLOCK
         .col-sm-3.col-lg-3
           .dash-unit
@@ -257,24 +241,7 @@ block content
       // /row
       // FOURTH ROW OF BLOCKS
       .row
-        // TWITTER WIDGET BLOCK
-        .col-sm-3.col-lg-3
-          .dash-unit
-            dtitle Twitter Widget
-            hr
-            .info-user
-              span.li_megaphone.fs2(aria-hidden='true')
-            br
-            #jstwitter.clearfix
-              ul#twitter_update_list
-            script(src='http://twitter.com/javascripts/blogger.js')
-            // Script Needed to load the Tweets
-            script(src='http://api.twitter.com/1/statuses/user_timeline/wrapbootstrap.json?callback=twitterCallback2&count=1')
-            // To show your tweets replace "wrapbootstrap", in the line above, with your user.
-            .text
-              p
-                grey Show your tweets here!
-        // NOTIFICATIONS BLOCK
+         // NOTIFICATIONS BLOCK
         .col-sm-3.col-lg-3
           .dash-unit
             dtitle Notifications

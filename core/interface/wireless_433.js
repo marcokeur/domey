@@ -38,34 +38,65 @@ wireless_433.prototype.init = function(){
 }
 
 wireless_433.prototype.send = function(opts, callback){
-    if(typeof gpio433Out == 'undefined'){
-        callback(false);
-    }else{
-        for(var i = 0; i < opts.cycles; i++){
-            sendBuffer(buffer.mainSig);
+    var success;
+    for(var i = 0; i < opts.cycles[0]; i++){
+        if(typeof opts.startSig != 'undefined')
+            success = sendBuffer(opts.startSig);
+
+        var bitCounter = 0;
+        while(bitCounter != opts.mainSig[4]){
+            var bitList = (opts.mainSig[bitCounter/8] >>> 0).toString(2);
+
+            for(var j = 0; j < 8; j++){
+                var bit = bitList[j];
+
+                if(bit == 1){
+                    success = sendBuffer(opts.lowSig);
+                }else{
+                    success = sendBuffer(opts.highSig);
+                }
+
+                bitCounter++;
+
+                if(bitCounter == opts.mainSig[4]){
+                    break;
+                }
+            }
+
         }
-        callback(true);
+
+        if(typeof opts.endSig != 'undefined')
+            success = sendBuffer(opts.endSig);
+
     }
+
+    callback(success);
 }
 
 function sendBuffer(buffer){
     var length = buffer.length;
 
-    for(var x = 0; x < buffer.length; x+=2){
-        //key on
-        gpio433Out.writeSync(1);
+    if(gpio433Out == 'undefined'){
+        for(var x = 0; x < buffer.length; x+=2){
+            //key on
+            gpio433Out.writeSync(1);
 
-        //sleep for period
-        sleep.usleep(code[x]);
+            //sleep for period
+            sleep.usleep(code[x]);
 
-        //key off
-        gpio433Out.writeSync(0);
+            //key off
+            gpio433Out.writeSync(0);
 
-        //if we haven't reached end of buffer yet
-        if(x+1 < buffer.length){
-            //sleep for next period
-            sleep.usleep(code[x+1]);
+            //if we haven't reached end of buffer yet
+            if(x+1 < buffer.length){
+                //sleep for next period
+                sleep.usleep(code[x+1]);
+            }
         }
+        return true;
+    }else{
+        Domey.log(0, 0, 'Failed sending out: ' + JSON.stringify(buffer));
+        return false;
     }
 }
 

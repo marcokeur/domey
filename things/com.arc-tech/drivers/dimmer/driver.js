@@ -1,6 +1,4 @@
 //https://wiki.pilight.org/doku.php/arctech_switch_old_v7_0?s[]=eurodomest
-var request = require('request');
-
 var self = {
 
     switches: [
@@ -19,7 +17,7 @@ var self = {
     init: function( devices, callback ){
 
         var self = this;
-        console.log('driver kaku old init');
+        console.log('driver dimmer kaku old init');
 
         // we're ready
         callback();
@@ -61,7 +59,7 @@ var self = {
                 sendSignal(null, enabled, function(result){
                     if(result){
                         device.enabled = enabled;
-                        Domey.capabilityUpdated('com.arc-tech', 'old', deviceId, 'enabled', device.enabled);
+                        Domey.capabilityUpdated('com.arc-tech', 'dimmer', deviceId, 'enabled', device.enabled);
                     }
                 });
 
@@ -76,23 +74,25 @@ var self = {
 
 function sendSignal(channel, enabled, callback){
     var opts = {
-        cycles      : new Buffer([ 3 ]),
-        mainSig     : new Buffer([ 335, 1005, 1005,  335,       //0
-                                   335, 1005,  335, 1005,       //1
-                                   335, 1005,  335, 1005,       //1
-                                   335, 1005,  335, 1005,       //1
-                                   335, 1005, 1005,  335,       //0
-                                   335, 1005,  335, 1005,       //1
-                                   335, 1005,  335, 1005,       //1
-                                   335, 1005,  335, 1005,       //1
-                                   335, 1005,  335, 1005,       //1
-                                   335, 1005, 1005,  335,       //0
-                                   335, 1005, 1005,  335,       //0
-                                   335, 1005, 1005,  335,       //0
-                                   335, 11390 ]),
+        //startSig    : new Buffer([0]),        //arc tech old doesnt have a startsig
+        highSig     : [ 295, 1180, 1180, 295],  //high third pulse, means 0
+        lowSig      : [ 295, 1180, 295, 1180],  //low third pulse, means 1
+        endSig      : [ 295, 11210],            //endsig of messages
+        cycles      : [ 20 ]                    //repeats of whole message
     }
 
+    if( enabled ){
+        //10100 00001 0 0
+        opts.mainSig = new Buffer([0xA0, 0x40, 0x00, 0x00, 12]);
+    }else{
+        //10100 00001 0 1
+        opts.mainSig = new Buffer([0xA0, 0x50, 0x00, 0x00, 12]);
+    }
+
+    Domey.log(0, 0, 'Sending out: ' + JSON.stringify(opts));
+
     Domey.interface('wireless_433').send(opts, callback);
+
 }
 
 module.exports = self;

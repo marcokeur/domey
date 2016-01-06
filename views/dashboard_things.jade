@@ -1,17 +1,21 @@
 extends layout
 
+block head
+    link(href='/assets/css/table.css', rel='stylesheet')
+
 block content
     .container
         .row
             table(id="thingsTable" style="width: 100%")
                 thead
                     tr
-                        td Thing
-                        td Driver
-                        td DeviceId
-                        td Capability
-                        td Value
+                        th Thing
+                        th Driver
+                        th DeviceId
+                        th Capability
+                        th Value
                 tbody
+    br
 
 block script
     script.
