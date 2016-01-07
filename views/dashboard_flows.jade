@@ -1,16 +1,26 @@
 extends layout
 
-block title
-    h1.page-header Dashboard Flows
+block head
+    link(href='/assets/css/table.css', rel='stylesheet')
 
 block content
     .container
         .row
+            table(id="flowsTable" style="width: 100%")
+                thead
+                    tr
+                        th Flow
+                        th Description
+                        th Enable
+                        th Disable
+                        th Active
+                tbody
+    br
 
 block script
     script.
         $(document).ready(function(){
-            getCollection('flow', '.row', function(){ console.log('loading done'); });
+            loadFlows('#flowsTable', function(){ console.log('loading done'); });
         });
     script(src='/js/dashboard.js')
     script(src='/js/dashboard_flows.js')

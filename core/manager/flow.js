@@ -76,7 +76,7 @@ Flow.prototype.init = function () {
     
     Domey.on('all_things_registered', function(things){
         self.flows = Domey.getConfig('flows');
-
+        console.log('all things registered!!!');
         for(var i in self.flows){
             self.flows[i].trigger['item'] = getFlowItemByMethod(self.flows[i].trigger.method);
             for(var j in self.flows[i].trigger.conditionset.conditions){
@@ -164,12 +164,14 @@ function getFlowItemByMethod(method){
     }
 }
 
-Flow.prototype.apiGetCollection = function(){
+Flow.prototype.apiGetCollection = function(cb, handler){
     var response = [];
 
     //set http response code
     response['status'] = 200;
-    response['data'] = [];
+    response['data'] = {
+        'flows' : []
+    };
 
     //find the specific flow
     for(var i in self.flows){
@@ -180,14 +182,15 @@ Flow.prototype.apiGetCollection = function(){
         element.name = self.flows[i].name;
         element.desc = self.flows[i].desc;
 
-        response['data'].push(element);
+        response['data'].flows.push(element);
 
     }
-
-    return response;
+    console.log('Flows: ' + JSON.stringify(response));
+    //return response;
+    cb(response, handler);
 }
 
-Flow.prototype.apiGetElement = function(element){
+Flow.prototype.apiGetElement = function(element, cb, handler){
     var response = [];
 
     //find the specific flow
@@ -203,10 +206,11 @@ Flow.prototype.apiGetElement = function(element){
             response['data'].name = self.flows[i].name;
             response['data'].desc = self.flows[i].desc;
 
-            return response;
+            cb(response, handler);
+            return;
         }
     }
 
     response['status'] = 404;
-    return response;
+    cb(response, handler);
 }

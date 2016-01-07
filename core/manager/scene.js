@@ -38,18 +38,19 @@ Scene.prototype.apiGetCollection = function(cb, handler){
 
     //set http response code
     response['status'] = 200;
-    response['data'] = JSON.parse(JSON.stringify(self.scenes));
+    response['data'] = {
+        'scenes' : JSON.parse(JSON.stringify(self.scenes))
+    }
 
-    console.log(response);
-
-    if(activeSceneId > 0){
-        for(var i in response['data']){
-            if(response['data'][i].id == activeSceneId){
-                response['data'][i].active = true;
-                console.log(activeSceneId);
-            }
+    for(var i in response['data'].scenes){
+        if(response['data'].scenes[i].id == activeSceneId){
+            response['data'].scenes[i].active = true;
+            console.log(activeSceneId);
+        }else{
+            response['data'].scenes[i].active = false;
         }
     }
+
     cb(response, handler);
 };
 

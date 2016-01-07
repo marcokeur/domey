@@ -20,7 +20,7 @@ block content
 block script
     script.
         $(document).ready(function(){
-            loadScenes('#thingsTable', function(){ console.log('loading done'); });
+            loadThings('#thingsTable', function(){ console.log('loading done'); });
             openWebSocketConnection();
         });
     script(src='/js/dashboard.js')

@@ -1,8 +1,8 @@
-function loadScenes(selector){
+function loadFlows(selector){
     //getCollection('scene', selector, addElement, addEventHandlers);
 
-    $.getJSON('/api/scene', function(data){
-        $.each(data.response.scenes, function(key, scene){
+    $.getJSON('/api/flow', function(data){
+        $.each(data.response.flows, function(key, scene){
             addElement(scene, selector);
         })
     })
@@ -23,10 +23,10 @@ function addElement(data, target){
     $("<tr class='"+className+"' id=\""+createCssIdFromSceneObject(data)+
     "\">" +
     "<td>" + data.name + "</td>" +
-    "<td>" + data.icon + "</td>" +
-    "<td>" + JSON.stringify(data.enable) + "</td>" +
-    "<td>" + JSON.stringify(data.disable) + "</td>" +
-    "<td>" + data.active + "</td>" +
+    "<td>" + data.desc + "</td>" +
+    //"<td>" + JSON.stringify(data.enable) + "</td>" +
+    //"<td>" + JSON.stringify(data.disable) + "</td>" +
+    //"<td>" + data.active + "</td>" +
     "</tr>").prependTo(selector);
 }
 
