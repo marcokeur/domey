@@ -23,17 +23,13 @@ Things.prototype.init = function(){
 
     var thingNames = getThingNames();
 
-    for(var i in thingNames){
-        Domey.log(2, 0, 'loading ' + thingNames[i]);
-        loadThing(this, thingNames[i]);
-    }
-
-    this.on('thing_registered', function(thingName){
+    Domey.on('thing_registered', function(thingName){
         //check if all items have been loaded
-        if(thingList.length == fs.readdirSync(__dirname + '/../things/').length) {
+        if(Object.keys(thingList).length == fs.readdirSync(__dirname + '/../../things/').length) {
             setTimeout(function(){
                 //if so, emit the all things registered event
-                self.emit('all_things_registered', things);
+                //Domey.emit('all_things_registered', things);
+                Domey.emit('all_things_registered');
                 console.log('all things registered!');
             }, 2000);
         }
@@ -42,6 +38,10 @@ Things.prototype.init = function(){
     Domey.manager('web').addApiCall('GET', 'thing', this.apiGetCollection, this.apiGetElement, this.apiGetRouter);
     Domey.manager('web').addApiCall('POST', 'thing', null, null, this.apiPostRouter);
 
+    for(var i in thingNames){
+        Domey.log(2, 0, 'loading ' + thingNames[i]);
+        loadThing(this, thingNames[i]);
+    }
 };
 
 Things.prototype.apiGetCollection = function(cb, handler){

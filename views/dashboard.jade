@@ -21,19 +21,19 @@ block content
         .col-sm-3.col-lg-3
           // LOCAL TIME BLOCK
           .half-unit
-            dtitle Local Time
-            hr
-            .clockcenter
-              digiclock 12:45:25
-          // SERVER UPTIME
-          .half-unit
-            dtitle Server Uptime
+            dtitle Time
             hr
             .cont
-              p
-                img(src='assets/img/up.png', alt='')
-                bold Up
-                |  | 356ms.
+                #currenttime
+                #currentdate
+          // SERVER UPTIME
+          .half-unit
+            dtitle Weather
+            hr
+            .cont
+                #weathericon
+                #weathertype
+                #sunset
       // /row
       // SECOND ROW OF BLOCKS
       .row
@@ -291,3 +291,20 @@ block content
             canvas#canvas(width='300', height='300')
       // /row
     // /container
+
+block script
+    script.
+        $(document).ready(function(){
+            //getCollection('flow', '.row', function(){ console.log('loading done'); });
+            //loadFlows('#flowsTable', function(){ console.log('loading done'); });
+            getCapabilityValue('nl.precision-it.time', 'time', 'system', 'time', '#currenttime');
+            getCapabilityValue('nl.precision-it.time', 'time', 'system', 'date', '#currentdate');
+            getCapabilityValue('org.openweathermap', 'weather', 'system', 'type', '#weathertype');
+            getCapabilityValue('nl.precision-it.time', 'time', 'system', 'sunset', '#sunset', 'Sunset: ');
+            getCapabilityValue('org.openweathermap', 'weather', 'system', 'icon', '#weathericon', '<img src=', ' />');
+
+            openDashWebSocketConnection();
+        });
+    //script(src='/js/dashboard.js')
+    //script(src='/js/dashboard_flows.js')
+    script(src="https://cdn.socket.io/socket.io-1.3.7.js")

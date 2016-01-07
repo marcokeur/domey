@@ -1,4 +1,4 @@
-function loadScenes(selector, cb){
+function loadThings(selector, cb){
     //getCollection('scene', selector, addElement, addEventHandlers);
     $.getJSON('/api/thing', function(data){
        $.each(data.response.things, function(key, value){
@@ -22,7 +22,6 @@ function openWebSocketConnection(){
         updateElement(data, '#thingsTable');
     });
 }
-
 
 function updateElement(data, target){
     deleteElement(data, target);
