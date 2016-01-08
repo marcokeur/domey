@@ -29,13 +29,11 @@ Flow.prototype.getName = function(){
 }
 
 Flow.prototype.init = function () {
-	console.log("flow mamanger - init");
-
-    self = this;
+	self = this;
 
     Domey.manager('web').addApiCall('GET', 'flow', self.apiGetCollection, self.apiGetElement);
 
-    Domey.on('thing_registered', function (thingName) {
+    Domey.manager('things').on('thingRegistered', function (thingName) {
         var metaData = Domey.manager('things').getThingMetaData(thingName);
 
         /* parse metadata from a registered 'thing' and register callbacks
@@ -74,9 +72,9 @@ Flow.prototype.init = function () {
         }
     });
     
-    Domey.on('all_things_registered', function(things){
+    Domey.manager('things').on('allThingsRegistered', function(){
         self.flows = Domey.getConfig('flows');
-        console.log('all things registered!!!');
+
         for(var i in self.flows){
             self.flows[i].trigger['item'] = getFlowItemByMethod(self.flows[i].trigger.method);
             for(var j in self.flows[i].trigger.conditionset.conditions){
@@ -98,8 +96,7 @@ Flow.prototype.trigger = function(method, args){
     //for each trigger we know
     for(var i in flows){
         trigger = flows[i].trigger;
-                
-        console.log(trigger);
+
         //check if it matches the method received
         if(method == trigger.method){
             //we have a match, emit the trigger to conditions        
@@ -183,10 +180,7 @@ Flow.prototype.apiGetCollection = function(cb, handler){
         element.desc = self.flows[i].desc;
 
         response['data'].flows.push(element);
-
     }
-    console.log('Flows: ' + JSON.stringify(response));
-    //return response;
     cb(response, handler);
 }
 

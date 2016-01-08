@@ -23,13 +23,12 @@ Things.prototype.init = function(){
 
     var thingNames = getThingNames();
 
-    Domey.on('thing_registered', function(thingName){
+    self.on('thingRegistered', function(thingName){
         //check if all items have been loaded
         if(Object.keys(thingList).length == fs.readdirSync(__dirname + '/../../things/').length) {
             setTimeout(function(){
                 //if so, emit the all things registered event
-                //Domey.emit('all_things_registered', things);
-                Domey.emit('all_things_registered');
+                self.emit('allThingsRegistered');
                 console.log('all things registered!');
             }, 2000);
         }
@@ -190,7 +189,6 @@ function installDependencies( dependencies, callback ){
         // catch errors
         npm.commands.install(depList, function (er, data) {
             // log the error or data
-            console.log('npm install done');
             callback();
         });
     });
@@ -229,7 +227,7 @@ function loadThing(self, thingName){
 
         thingList[thingName] = inst;
 
-        Domey.emit('thing_registered', thingName);
+        self.emit('thingRegistered', thingName);
         Domey.log(2, 0, 'Thing ' + thingName + ' registered');
     });
 

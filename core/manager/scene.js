@@ -20,9 +20,6 @@ Scene.prototype.getName = function(){
 };
 
 Scene.prototype.init = function () {
-    
-    console.log("scene mamanger - init");
-
     self = this;
 
     self.scenes = Domey.getConfig('scenes');
@@ -45,7 +42,6 @@ Scene.prototype.apiGetCollection = function(cb, handler){
     for(var i in response['data'].scenes){
         if(response['data'].scenes[i].id == activeSceneId){
             response['data'].scenes[i].active = true;
-            console.log(activeSceneId);
         }else{
             response['data'].scenes[i].active = false;
         }
@@ -91,7 +87,6 @@ Scene.prototype.apiGetRouter = function(params, cb, handler){
             cb(self.apiDeactivateScene(element), handler);
             break;
         default:
-            console.log('unknown action: ' + action);
             cb(undefined, handler);
             break;
     }
@@ -142,14 +137,12 @@ function activateScene(scene) {
     activeSceneId = scene.id;
 
     for (var i in scene.enable) {
-        console.log('action.' + scene.enable[i].action);
         Domey.triggerAction(scene.enable[i].action, scene.enable[i].args);
     }
 }
 
 function deactivateScene(scene){
     for (var i in scene.enable) {
-        console.log('action.' + scene.disable[i].action);
         Domey.triggerAction(scene.disable[i].action, scene.disable[i].args);
     }
 
