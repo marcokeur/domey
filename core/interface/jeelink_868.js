@@ -25,8 +25,6 @@ JeeLink_868.prototype.getName = function(){
 }
 
 JeeLink_868.prototype.init = function(){
-	console.log("JeeLink_868 init");
-    
     config = Domey.getConfig('interfaces', 'jeelink_868');
     
     port = new SerialPort(config.port, {
@@ -36,7 +34,6 @@ JeeLink_868.prototype.init = function(){
         parity: 'none',
         stopBits: 1
     }, function(err) {
-        console.log("port open");
         port.write("h\r");
     });
 
@@ -74,6 +71,6 @@ JeeLink_868.prototype.init = function(){
     });
     
     port.on('error', function(err) {
-        console.log(err);
+        Domey.log(0, 0, err);
     });
 };

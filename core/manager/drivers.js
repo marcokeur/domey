@@ -18,9 +18,7 @@ Drivers.prototype.getName = function(){
 }
 
 Drivers.prototype.init = function(){
-    console.log("driver mamanger - init");
-
-    Domey.on('thing_registered', function(thingName){
+    Domey.manager('things').on('thingRegistered', function(thingName){
         var metaData = Domey.manager('things').getThingMetaData(thingName);
 
         metaData.drivers.forEach(function(driver){

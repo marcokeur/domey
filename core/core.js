@@ -26,7 +26,7 @@ module.exports = Domey;
 util.inherits(Domey, EventEmitter);
 
 Domey.prototype.init = function(){
-	console.log('Framework - init');
+	this.log(0, 0, 'Framework - init');
 
     callInitOnInstances(managers);
     callInitOnInstances(interfaces);
@@ -68,7 +68,7 @@ Domey.prototype.log = function(level, indent, line){
     for(var i = 0; i < indent; i++){
         process.stdout.write('    ');
     }
-    process.stdout.write(line);
+    process.stdout.write(line + '');
     process.stdout.write('\n');
 }
 

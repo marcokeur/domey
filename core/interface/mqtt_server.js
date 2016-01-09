@@ -25,8 +25,6 @@ mqtt_server.prototype.getName = function(){
 }
 
 mqtt_server.prototype.init = function(){
-	console.log("mqtt_server init");
-  
     var self = this;
     
     config = Domey.getConfig('interfaces', 'mqtt_server');
@@ -46,7 +44,7 @@ mqtt_server.prototype.init = function(){
 	server = new mosca.Server(settings);
 
 	server.on('clientConnected', function(client) {
-		console.log('client connected', client.id);
+		Domey.log(4, 0, 'Client connected: ', client.id);
 	});
 
 	// fired when a message is received
@@ -57,13 +55,6 @@ mqtt_server.prototype.init = function(){
             }
         }
 	});
-
-	server.on('ready', setup);
-
-	// fired when the mqtt server is ready
-	function setup() {
-	  console.log('Mosca server is up and running');
-	}
 }
 
 mqtt_server.prototype.subscribe = function(topic){

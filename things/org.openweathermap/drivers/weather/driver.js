@@ -66,12 +66,17 @@ function callApi(self){
     request('http://api.openweathermap.org/data/2.5/weather?q='+settings.location+'&appid='+settings.appid, function(error, response, body){
         if(!error && response.statusCode == 200){
             var result = JSON.parse(body);
-            if(typeof result.main != undefined){
+            if(typeof result != 'undefined' &&
+                typeof result.main != 'undefined'){
                 updateCache('temp', result.main.temp);
                 updateCache('humidity', result.main.humidity);
                 updateCache('pressure', result.main.pressure);
                 updateCache('wind', result.wind.speed);
-                updateCache('rain', result.rain[0]);
+                if(typeof result.rain != 'undefined'){
+                    updateCache('rain', result.rain[0]);
+                    }else{
+                    updateCache('rain', 0);
+                    }
                 updateCache('type', result.weather[0].description);
                 updateCache('icon', 'http://openweathermap.org/img/w/' + result.weather[0].icon + '.png');
             }
