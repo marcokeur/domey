@@ -58,7 +58,7 @@ var self = {
 
                 if( device instanceof Error ) return callback( device );
 
-                sendSignal(null, enabled, function(result){
+                sendSignal(device.unit, device.id, 0, enabled, function(result){
                     if(result){
                         device.enabled = enabled;
                         Domey.capabilityUpdated('com.arc-tech', 'switch', deviceId, 'enabled', device.enabled);
@@ -74,28 +74,49 @@ var self = {
     }
 };
 
-function sendSignal(channel, enabled, callback){
+function sendSignal(address, device, group, enabled, callback){
     var kakuPeriodicity = 375;
-    var opts = {
-        //startSig    : new Buffer([0]),        //arc tech old doesnt have a startsig
-        highSig     : [ kakuPeriodicity, 3*kakuPeriodicity, 3*kakuPeriodicity, kakuPeriodicity],  //high third pulse, means 0
-        lowSig      : [ kakuPeriodicity, 3*kakuPeriodicity, kakuPeriodicity, 3*kakuPeriodicity],  //low third pulse, means 1
-        endSig      : [ kakuPeriodicity, 32*kakuPeriodicity],            //endsig of messages
-        cycles      : [ 3 ]                    //repeats of whole message
-    }
 
-    if( enabled ){
-        //10100 00001 0 0
-        opts.mainSig = new Buffer([0xA0, 0x40, 0x00, 0x00, 12]);
-    }else{
-        //10100 00001 0 1
-        opts.mainSig = new Buffer([0xA0, 0x50, 0x00, 0x00, 12]);
-    }
+    var trits = getTrits(address, device, group, enabled);
+    console.log('trits: ' + trits);
 
-    Domey.log(0, 0, 'Sending out: ' + JSON.stringify(opts));
+    Domey.log(0, 0, 'Sending out: ' + JSON.stringify(trits));
 
-    Domey.interface('wireless_433').send(opts, callback);
+    Domey.interface('wireless_433').send(trits, kakuPeriodicity, callback);
 }
+
+
+function getTrits(address, device, group, enabled){
+    var trits = [];
+    var i;
+
+    for(i = 0; i < 4; i++){
+        trits[i]=(address & 1)?2:0;
+        address>>=1;
+
+    }
+
+    for(; i<6; i++){
+        trits[i] = (device & 1)?2:0;
+        device>>1;
+    }
+
+    for(; i<8; i++){
+        trits[i]= (group & 1)?2:0;
+        group>>=1;
+    }
+
+    trits[8] = 0;
+    trits[9] = 2;
+    trits[10] = 2;
+
+    //on or off
+    trits[11]=(enabled?2:0);
+
+    return trits;
+}
+
+function deviceToTrits(device){}
 
 /*
 var code;

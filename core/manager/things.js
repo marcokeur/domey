@@ -134,7 +134,7 @@ Things.prototype.apiPostRouter = function(params, body, callback, handler){
                            }
                        }
                        }));
-
+    console.log('body: ' + body);
     for(var i in body){
         if(typeof driver.capabilities[i] == 'undefined'){
             response['status'] = 400;

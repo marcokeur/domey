@@ -82,7 +82,7 @@ function sendBuffer(buffer){
             gpio433Out.writeSync(1);
 
             //sleep for period
-            sleep.usleep(code[x]);
+            sleep.usleep(buffer[x]);
 
             //key off
             gpio433Out.writeSync(0);
@@ -90,7 +90,7 @@ function sendBuffer(buffer){
             //if we haven't reached end of buffer yet
             if(x+1 < buffer.length){
                 //sleep for next period
-                sleep.usleep(code[x+1]);
+                sleep.usleep(buffer[x+1]);
             }
         }
         return true;
