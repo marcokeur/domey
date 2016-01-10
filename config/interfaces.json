@@ -24,7 +24,7 @@
         },
         "wireless_433": {
             "rxPin": 4,
-            "txPin": 5
+            "txPin": 14
         }
     }
 }

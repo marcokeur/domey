@@ -43,7 +43,7 @@ Persistence.prototype.getName = function(){
 
 Persistence.prototype.init = function(){
 	self = this;
-
+/*
     mongoose.connect('mongodb://localhost/domotica');
     
     var mongoHandle = mongoose.model('CapabilityUpdates', Thing);
@@ -73,7 +73,7 @@ Persistence.prototype.init = function(){
                 Domey.log(3, 0, 'Mongodb upsert error: ' + err + ' ');
         });
     });
-
+*/
     Domey.manager('web').addApiCall('GET', 'persistence', this.apiGetCollection, this.apiGetElement, this.apiGetRouter);
 };
 Persistence.prototype.apiGetCollection = function(callback, handler){

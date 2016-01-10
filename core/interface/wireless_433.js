@@ -37,38 +37,40 @@ wireless_433.prototype.init = function(){
     }
 }
 
-wireless_433.prototype.send = function(opts, callback){
+wireless_433.prototype.send = function(trits, periodicity, callback){
     var success;
-    for(var i = 0; i < opts.cycles[0]; i++){
-        if(typeof opts.startSig != 'undefined')
-            success = sendBuffer(opts.startSig);
 
-        var bitCounter = 0;
-        while(bitCounter != opts.mainSig[4]){
-            var bitList = (opts.mainSig[bitCounter/8] >>> 0).toString(2);
+	var buffer = [];
 
-            for(var j = 0; j < 8; j++){
-                var bit = bitList[j];
+	for(var i in trits){
+		switch(trits[i]){
 
-                if(bit == 1){
-                    success = sendBuffer(opts.lowSig);
-                }else{
-                    success = sendBuffer(opts.highSig);
-                }
+			case 0:
+				buffer.push(periodicity);
+				buffer.push(periodicity*3);
+				buffer.push(periodicity);
+				buffer.push(periodicity*3);
+				break;
+			case 1:
+	                        buffer.push(periodicity*3);
+                                buffer.push(periodicity);
+                                buffer.push(periodicity*3);
+                                buffer.push(periodicity);
+                                break;
+			case 2:
+                                buffer.push(periodicity);
+                                buffer.push(periodicity*3);
+                                buffer.push(periodicity*3);
+                                buffer.push(periodicity);
+                                break;
+		}
+	}
+	buffer.push(periodicity);
+	buffer.push(periodicity*31);
 
-                bitCounter++;
-
-                if(bitCounter == opts.mainSig[4]){
-                    break;
-                }
-            }
-
-        }
-
-        if(typeof opts.endSig != 'undefined')
-            success = sendBuffer(opts.endSig);
-
-    }
+	for(var i = 0; i < 5; i++){
+		sendBuffer(buffer);
+	}
 
     callback(success);
 }
@@ -76,7 +78,7 @@ wireless_433.prototype.send = function(opts, callback){
 function sendBuffer(buffer){
     var length = buffer.length;
 
-    if(gpio433Out == 'undefined'){
+    if(typeof gpio433Out != 'undefined'){
         for(var x = 0; x < buffer.length; x+=2){
             //key on
             gpio433Out.writeSync(1);

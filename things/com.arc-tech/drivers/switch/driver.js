@@ -5,8 +5,8 @@ var self = {
 
     switches: [
         {   deviceId:     0,
-            unit:         1,
-            id:           2,
+            unit:         0,
+            id:           0,
             enabled:  false
         },
         {   deviceId:     1,
@@ -57,6 +57,8 @@ var self = {
                 var device = self.getDevice( deviceId );
 
                 if( device instanceof Error ) return callback( device );
+
+		console.log('set: ' + enabled);
 
                 sendSignal(device.unit, device.id, 0, enabled, function(result){
                     if(result){
@@ -111,7 +113,7 @@ function getTrits(address, device, group, enabled){
     trits[10] = 2;
 
     //on or off
-    trits[11]=(enabled?2:0);
+    trits[11]=(enabled=='true'?2:0);
 
     return trits;
 }
