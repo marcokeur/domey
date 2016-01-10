@@ -49,3 +49,16 @@ function loadDriver(thing, driverId, callback){
         callback();
     });
 };
+
+Drivers.prototype.getSchema = function(thingName, driverName){
+    var thingMetaData = Domey.manager('things').getThingMetaData(thingName);
+
+    for(var i in thingMetaData.drivers){
+        var driverMetaData = thingMetaData.drivers[i];
+
+        if(driverMetaData.id == driverName){
+            return driverMetaData;
+        }
+
+    }
+}

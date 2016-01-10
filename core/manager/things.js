@@ -3,6 +3,7 @@ var thingList = {};
 var fs = require('fs');
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
+var validate = require('jsonschema').validate;
 var self;
 
 function Things()
@@ -72,7 +73,6 @@ Things.prototype.apiGetElement = function(thingName, cb, handler){
                 'drivers' : gatherCapabilties(self, i)
             }};
 
-            //cb(response, handler);
             break;
         }
     }
@@ -123,6 +123,7 @@ Things.prototype.apiPostRouter = function(params, body, callback, handler){
     var deviceId = params[3];
 
     var driver = Domey.manager('drivers').getDriver(thingName, driverName);
+    var metaData = Domey.manager('drivers').getSchema(thingName, driverName);
 
     response['status'] = 200;
     response['data'] = JSON.parse(JSON.stringify({ 'thing' : {
@@ -134,23 +135,37 @@ Things.prototype.apiPostRouter = function(params, body, callback, handler){
                            }
                        }
                        }));
-    console.log('body: ' + body);
+
     for(var i in body){
         if(typeof driver.capabilities[i] == 'undefined'){
             response['status'] = 400;
             response['data'].thing.driver.capabilities.push({'name' : i, 'error': 'unknown capability'});
         }else{
-            if(typeof driver.capabilities[i].set != 'undefined'){
-                driver.capabilities[i].set(deviceId, body[i], function(retVal){
-                    if(retVal == body[i]){
-                        response['data'].thing.driver.capabilities.push({'name' : i, 'value': body[i]});
-                    }else{
-                        response['data'].thing.driver.capabilities.push({'name' : i, 'error': 'setting ' + i + ' to ' + body[i] + ' failed'});
-                    }
-                });
+            console.log('meta' + JSON.stringify(metaData.capabilities));
+            var schema;
+            for(var j in metaData.capabilities){
+                schema = metaData.capabilities[j].set;
+            }
+
+            var validationResult = validate(body, schema);
+
+            if(validationResult.errors.length == 0){
+                if(typeof driver.capabilities[i].set != 'undefined'){
+                    driver.capabilities[i].set(deviceId, body[i], function(retVal){
+                        if(retVal == body[i]){
+                            response['data'].thing.driver.capabilities.push({'name' : i, 'value': body[i]});
+                        }else{
+                            response['data'].thing.driver.capabilities.push({'name' : i, 'error': 'setting ' + i + ' to ' + body[i] + ' failed'});
+                        }
+                    });
+                }else{
+                    response['status'] = 400;
+                    response['data'].thing.driver.capabilities.push({'name' : i, 'error': 'capability not settable'});
+                }
             }else{
+                //an error occurred validation the post data
                 response['status'] = 400;
-                response['data'].thing.driver.capabilities.push({'name' : i, 'error': 'capability not settable'});
+                response['data'].thing.driver.capabilities.push({'name' : i, 'error': validationResult.errors[0].stack});
             }
         }
     }

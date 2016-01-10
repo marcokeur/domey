@@ -1,34 +1,44 @@
 {
-	"id": "com.arc-tech",
-	"version": "1.0",
-	"name": {
-		"en": "MiLight"
-	},
-	"description": {
-		"en": "Control your MiLights"
-	},
-	"author": {
-		"name": "Marco Keur",
-		"website": "http://github.com/marcokeur"
-	},
-	"dependencies": {
-	},
-    "drivers": [
-		{
-			"id": "switch",
-			"name": {
-				"en": "Milight Bulb",
-				"nl": "Milight Lamp"
-			},
-            "capabilities": [ "enabled" ]
-		},
-        {
-          "id": "dimmer",
-          "name": {
-            "en": "Milight Bulb",
-            "nl": "Milight Lamp"
-          },
-          "capabilities": [ "enabled" ]
+  "id": "com.arc-tech",
+  "version": "1.0",
+  "name": {
+    "en": "MiLight"
+  },
+  "description": {
+    "en": "Control your MiLights"
+  },
+  "author": {
+    "name": "Marco Keur",
+    "website": "http://github.com/marcokeur"
+  },
+  "dependencies": {
+  },
+  "drivers": [
+    {
+      "id": "switch",
+      "name": {
+        "en": "Milight Bulb",
+        "nl": "Milight Lamp"
+      },
+      "capabilities": {
+          "enabled": {
+            "get": {},
+            "set": {
+              "type": "object",
+              "properties": {
+                "enabled": {"type": "boolean"}
+              }
+            }
+          }
         }
-	]
+    },
+    {
+      "id": "dimmer",
+      "name": {
+        "en": "Milight Bulb",
+        "nl": "Milight Lamp"
+      },
+      "capabilities": ["enabled"]
+    }
+  ]
 }

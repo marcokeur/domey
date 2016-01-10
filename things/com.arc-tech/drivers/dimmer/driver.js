@@ -91,7 +91,7 @@ function sendSignal(channel, enabled, callback){
 
     Domey.log(0, 0, 'Sending out: ' + JSON.stringify(opts));
 
-    Domey.interface('wireless_433').send(opts, callback);
+    Domey.interface('ook_433').send(opts, callback);
 
 }
 

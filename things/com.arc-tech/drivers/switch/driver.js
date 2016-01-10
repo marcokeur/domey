@@ -10,8 +10,8 @@ var self = {
             enabled:  false
         },
         {   deviceId:     1,
-            unit:         1,
-            id:           2,
+            unit:         0,
+            id:           1,
             enabled:  false
         }
     ],
@@ -67,9 +67,6 @@ var self = {
                     }
                 });
 
-                //just for test:
-                //Domey.capabilityUpdated('com.arc-tech', 'old', deviceId, 'enabled', device.enabled);
-
                 callback(device.enabled);
             }
         }
@@ -80,11 +77,10 @@ function sendSignal(address, device, group, enabled, callback){
     var kakuPeriodicity = 375;
 
     var trits = getTrits(address, device, group, enabled);
-    console.log('trits: ' + trits);
 
     Domey.log(0, 0, 'Sending out: ' + JSON.stringify(trits));
 
-    Domey.interface('wireless_433').send(trits, kakuPeriodicity, callback);
+    Domey.interface('ook_433').send(trits, kakuPeriodicity, callback);
 }
 
 
@@ -113,54 +109,9 @@ function getTrits(address, device, group, enabled){
     trits[10] = 2;
 
     //on or off
-    trits[11]=(enabled=='true'?2:0);
+    trits[11]=(enabled?2:0);
 
     return trits;
 }
 
-function deviceToTrits(device){}
-
-/*
-var code;
-function createCode(unit, id, state){
-
-    code = [];
-
-    convertToPulses(unit, 5);
-
-    convertToPulses(id, 5);
-
-    addToCode(highPulse);
-
-    convertToPulses(state);
-
-    addToCode(endPulse);
-
-    console.log(code);
-}
-
-function convertToPulses(number, length){
-    var binary = dec2bin(number);
-    console.log(binary);
-    if((binary.length - length) < 0){
-        for(var i = 0; i > (binary.length - length); i--){
-            addToCode(lowPulse);
-        }
-    }
-
-    for(var i = 0; i < binary.length; i++){
-        if(binary[i] == 1){
-            addToCode(lowPulse);
-        }else{
-            addToCode(highPulse);
-        }
-    }
-}
-
-function addToCode(pulse){
-    pulse.forEach(function(value){
-        code.push(value);
-    });
-}
-*/
 module.exports = self;
