@@ -17,14 +17,14 @@ function getCapabilityValue(thingName, driverName, deviceId, capability, selecto
     var prefix = '';
     var postfix = '';
 
-    $.getJSON('/api/thing/' + thingName + '/' + driverName + '/' + deviceId + '/' + capability, function(data){
+    $.get('/api/thing/' + thingName + '/' + driverName + '/' + deviceId + '/' + capability, function(data){
         if(typeof pre != 'undefined')
             prefix = pre;
         if(typeof post != 'undefined')
             postfix = post;
 
         $(selector).html(prefix + data.response.thing.driver.capability.value + postfix);
-    });
+    }, 'json');
 
     this.itemCache.push({"name":thingName,
                     "driver" : {
@@ -39,6 +39,30 @@ function getCapabilityValue(thingName, driverName, deviceId, capability, selecto
                     }
                });
 }
+
+
+
+function setCapabilityValue(thingName, driverName, deviceId, capability, value, selector, callback){
+    $(selector).click(function(){
+        var data = {};
+        data[capability] = value;
+        console.log(JSON.stringify(data));
+
+    $.ajax({
+      url:'/api/thing/' + thingName +'/' + driverName + '/' + deviceId,
+      type:"POST",
+      data:data,
+      contentType:"application/json; charset=utf-8",
+      dataType:"json",
+      success: function(result){
+        callback(result);
+      }
+    })
+        });
+}
+
+
+
 
 function updateElement(data){
     this.itemCache.forEach(function(item){

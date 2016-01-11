@@ -42,73 +42,8 @@ block content
           .dash-unit
             dtitle Inbox (1)
             hr
-            .framemail
-              .window
-                ul.mail
-                  li
-                    i.unread
-                    img.avatar(src='assets/img/photo01.jpeg', alt='avatar')
-                    p.sender Adam W.
-                    p.message
-                      strong Working
-                      |  - This is the last...
-                    .actions
-                      a
-                        img(src='http://png-1.findicons.com/files//icons/2232/wireframe_mono/16/undo.png', alt='reply')
-                      a
-                        img(src='http://png-1.findicons.com/files//icons/2232/wireframe_mono/16/star_fav.png', alt='favourite')
-                      a
-                        img(src='http://png-4.findicons.com/files//icons/2232/wireframe_mono/16/tag.png', alt='label')
-                      a
-                        img(src='http://png-4.findicons.com/files//icons/2232/wireframe_mono/16/trash.png', alt='delete')
-                  li
-                    i.read
-                    img.avatar(src='assets/img/photo02.jpg', alt='avatar')
-                    p.sender Dan E.
-                    p.message
-                      strong Hey man!
-                      |  - You have to taste ...
-                    .actions
-                      a
-                        img(src='http://png-1.findicons.com/files//icons/2232/wireframe_mono/16/undo.png', alt='reply')
-                      a
-                        img(src='http://png-1.findicons.com/files//icons/2232/wireframe_mono/16/star_fav.png', alt='favourite')
-                      a
-                        img(src='http://png-4.findicons.com/files//icons/2232/wireframe_mono/16/tag.png', alt='label')
-                      a
-                        img(src='http://png-4.findicons.com/files//icons/2232/wireframe_mono/16/trash.png', alt='delete')
-                  li
-                    i.read
-                    img.avatar(src='assets/img/photo03.jpg', alt='avatar')
-                    p.sender Leonard N.
-                    p.message
-                      strong New Mac :D
-                      |  - So happy with ...
-                    .actions
-                      a
-                        img(src='http://png-1.findicons.com/files//icons/2232/wireframe_mono/16/undo.png', alt='reply')
-                      a
-                        img(src='http://png-1.findicons.com/files//icons/2232/wireframe_mono/16/star_fav.png', alt='favourite')
-                      a
-                        img(src='http://png-4.findicons.com/files//icons/2232/wireframe_mono/16/tag.png', alt='label')
-                      a
-                        img(src='http://png-4.findicons.com/files//icons/2232/wireframe_mono/16/trash.png', alt='delete')
-                  li
-                    i.read
-                    img.avatar(src='assets/img/photo04.jpg', alt='avatar')
-                    p.sender Peter B.
-                    p.message
-                      strong Thank you
-                      |  - Finally I can ...
-                    .actions
-                      a
-                        img(src='http://png-1.findicons.com/files//icons/2232/wireframe_mono/16/undo.png', alt='reply')
-                      a
-                        img(src='http://png-1.findicons.com/files//icons/2232/wireframe_mono/16/star_fav.png', alt='favourite')
-                      a
-                        img(src='http://png-4.findicons.com/files//icons/2232/wireframe_mono/16/tag.png', alt='label')
-                      a
-                        img(src='http://png-4.findicons.com/files//icons/2232/wireframe_mono/16/trash.png', alt='delete')
+            video
+                source(src="http://streaming4.webcam.nl:80/duravermeer01/duravermeer01.stream/playlist.m3u8", type="application/vnd.apple.mpegurl")
           // /dash-unit
         // /span3
         // GRAPH CHART - lineandbars.js file
@@ -294,6 +229,7 @@ block content
 
 block script
     script.
+        var cacheStatus = [];
         $(document).ready(function(){
             //getCollection('flow', '.row', function(){ console.log('loading done'); });
             //loadFlows('#flowsTable', function(){ console.log('loading done'); });
@@ -302,6 +238,12 @@ block script
             getCapabilityValue('org.openweathermap', 'weather', 'system', 'type', '#weathertype');
             getCapabilityValue('nl.precision-it.time', 'time', 'system', 'sunset', '#sunset', 'Sunset: ');
             getCapabilityValue('org.openweathermap', 'weather', 'system', 'icon', '#weathericon', '<img src=', ' />');
+
+            setCapabilityValue('com.arc-tech', 'switch', 0, 'enabled', true, '#load', function(result){
+                console.log(result);
+                if(result.response.thing.driver.capabilities.length > 0)
+                    cacheStatus[0] = result
+            });
 
             openDashWebSocketConnection();
         });

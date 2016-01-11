@@ -27,20 +27,21 @@ ook_433.prototype.init = function () {
     config = Domey.getConfig('interfaces', 'ook_433');
 
     try {
-        gpio433In = new Gpio(config.rxPin, 'in', 'both'); // Export GPIO #4 as an interrupt
         gpio433Out = new Gpio(config.txPin, 'out');
-
-        gpio433In.watch(edgeDetected);
+        gpio433Out.writeSync(0);
     } catch (ex) {
         console.log(ex);
     }
 }
 
-ook_433.prototype.send = function (trits, periodicity, callback) {
+ook_433.prototype.send = function (trits, periodicity, repeats, callback) {
     var success;
 
+    /** create a buffer containing the timeperiods between a high-low or low-high
+        edge. Most OOK protocols use 3 states for this (0, 1, 2), based on a fixed
+        time periodicity
+    */
     var buffer = [];
-
     for (var i in trits) {
         switch (trits[i]) {
 
@@ -67,12 +68,12 @@ ook_433.prototype.send = function (trits, periodicity, callback) {
     buffer.push(periodicity);
     buffer.push(periodicity * 31);
 
-    var result;
-    for (var i = 0; i < 5; i++) {
-        result = sendBuffer(buffer);
+
+    for (var i = 0; i < repeats; i++) {
+        success = sendBuffer(buffer);
     }
 
-    if(!result)
+    if(!success)
         Domey.log(0, 0, 'Failed sending');
 
     callback(success);

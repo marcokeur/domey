@@ -58,8 +58,6 @@ var self = {
 
                 if( device instanceof Error ) return callback( device );
 
-		console.log('set: ' + enabled);
-
                 sendSignal(device.unit, device.id, 0, enabled, function(result){
                     if(result){
                         device.enabled = enabled;
@@ -75,12 +73,13 @@ var self = {
 
 function sendSignal(address, device, group, enabled, callback){
     var kakuPeriodicity = 375;
+    var repeats = 5;
 
     var trits = getTrits(address, device, group, enabled);
 
     Domey.log(0, 0, 'Sending out: ' + JSON.stringify(trits));
 
-    Domey.interface('ook_433').send(trits, kakuPeriodicity, callback);
+    Domey.interface('ook_433').send(trits, kakuPeriodicity, repeats, callback);
 }
 
 

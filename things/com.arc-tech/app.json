@@ -38,7 +38,11 @@
         "en": "Milight Bulb",
         "nl": "Milight Lamp"
       },
-      "capabilities": ["enabled"]
+      "capabilities": {
+        "enabled": {
+
+        }
+      }
     }
   ]
 }
