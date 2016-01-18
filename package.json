@@ -13,10 +13,9 @@
     "mosca": "~0.31.0",
     "npm": "^2.13.3",
     "onoff": "^1.0.3",
-    "serialport": "~1.7.4",
+    "serialport": "^1.7.4",
     "sleep": "^3.0.0",
-    "socket.io": "^1.3.7",
-    "jsonschema": "*"
+    "socket.io": "^1.3.7"
   },
   "devDependencies": {
     "blanket": "^1.1.9",
