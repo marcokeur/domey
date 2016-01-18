@@ -16,4 +16,8 @@ module.exports = function(app){
     app.get('/dashboard/flows', function(request, response){
         response.render('dashboard_flows');
     });
+
+    app.get('/dashboard/history', function(request, response){
+        response.render('dashboard_history');
+    });
 };

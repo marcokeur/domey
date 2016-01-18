@@ -11,7 +11,7 @@ var self = {
         console.log('driver weather init');
 
         callApi(self);
-        setInterval(function(){callApi(self)}, 600000);
+        setInterval(function(){callApi(self)}, 6000000);
 
         // we're ready
         callback();
@@ -68,7 +68,7 @@ function callApi(self){
             var result = JSON.parse(body);
             if(typeof result != 'undefined' &&
                 typeof result.main != 'undefined'){
-                updateCache('temp', result.main.temp);
+                updateCache('temp', (result.main.temp - 273.15)); //convert to celsius
                 updateCache('humidity', result.main.humidity);
                 updateCache('pressure', result.main.pressure);
                 updateCache('wind', result.wind.speed);

@@ -8,19 +8,7 @@ var CapabilityEvent = new mongoose.Schema({
     value:String,
     when: { type: Date, default: Date.now}
 });
-/*
-var Capability = new mongoose.Schema({
-    name :String,
-    deviceId :String,
-    events: [CapabilityEvent]
-});
 
-var Driver = new mongoose.Schema({
-    name : String,
-    capabilities:[Capability],
-    events: []
-});
-*/
 var Thing = new mongoose.Schema({
     name : String,
     //drivers: [Driver],
@@ -43,7 +31,7 @@ Persistence.prototype.getName = function(){
 
 Persistence.prototype.init = function(){
 	self = this;
-/*
+
     mongoose.connect('mongodb://localhost/domotica');
     
     var mongoHandle = mongoose.model('CapabilityUpdates', Thing);
@@ -73,7 +61,7 @@ Persistence.prototype.init = function(){
                 Domey.log(3, 0, 'Mongodb upsert error: ' + err + ' ');
         });
     });
-*/
+
     Domey.manager('web').addApiCall('GET', 'persistence', this.apiGetCollection, this.apiGetElement, this.apiGetRouter);
 };
 Persistence.prototype.apiGetCollection = function(callback, handler){
