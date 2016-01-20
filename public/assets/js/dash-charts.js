@@ -1,5 +1,5 @@
 ﻿/*** First Chart in Dashboard page ***/
-
+/*
 	$(document).ready(function() {
 		info = new Highcharts.Chart({
 			chart: {
@@ -43,7 +43,7 @@
 	});
 
 /*** second Chart in Dashboard page ***/
-
+/*
 	$(document).ready(function() {
 		info = new Highcharts.Chart({
 			chart: {
@@ -86,3 +86,4 @@
 		
 	});
 
+*/

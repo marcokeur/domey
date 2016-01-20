@@ -1,5 +1,5 @@
 ﻿	// LINE AND BARS CHARTS
-
+/*
 $(function () {
   
   function generateNumber(min, max) {
@@ -99,3 +99,4 @@ $(function () {
   });
   
 });
+*/

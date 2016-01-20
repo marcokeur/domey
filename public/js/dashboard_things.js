@@ -1,5 +1,4 @@
 function loadThings(selector, cb){
-    //getCollection('scene', selector, addElement, addEventHandlers);
     $.getJSON('/api/thing', function(data){
        $.each(data.response.things, function(key, value){
            //{"name":"com.milight","drivers":[{"name":"bulb","capabilities":["enabled","disabled","brightness","hue"]}

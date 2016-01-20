@@ -1,3 +1,4 @@
+/*
 window.onload = function(){
 	//canvas initialization
 	var canvas = document.getElementById("canvas");
@@ -87,3 +88,4 @@ window.onload = function(){
 	
 	
 }
+*/

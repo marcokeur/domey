@@ -1,5 +1,5 @@
 // Interactiveness now
-
+/*
 (function() {
 
 	var clock = document.querySelector('digiclock');
@@ -31,11 +31,13 @@
 	setInterval(ticktock, 1000);
 	
 }());
-
+*/
 /* ---------- Notifications ---------- */
+/*
 	$('.noty').click(function(e){
 		e.preventDefault();
 		var options = $.parseJSON($(this).attr('data-noty-options'));
 		noty(options);
 	});
+	*/
 
