@@ -14,7 +14,26 @@
   "drivers": [
     {
       "id": "weather",
-      "capabilities": [ "temp", "humidity", "pressure", "wind", "icon", "type" ]
+      "capabilities": {
+        "temp": {
+          "get":{}
+        },
+        "humidity": {
+          "get":{}
+        },
+        "pressure": {
+          "get":{}
+        },
+        "wind": {
+          "get":{}
+        },
+        "icon": {
+          "get":{}
+        },
+        "type": {
+          "get":{}
+        }
+      }
     }
   ],
   "settings": {

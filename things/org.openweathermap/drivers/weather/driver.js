@@ -68,7 +68,7 @@ function callApi(self){
             var result = JSON.parse(body);
             if(typeof result != 'undefined' &&
                 typeof result.main != 'undefined'){
-                updateCache('temp', (result.main.temp - 273.15)); //convert to celsius
+                updateCache('temp', Number((result.main.temp - 273.15).toFixed(1))); //convert to celsius
                 updateCache('humidity', result.main.humidity);
                 updateCache('pressure', result.main.pressure);
                 updateCache('wind', result.wind.speed);

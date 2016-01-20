@@ -14,7 +14,20 @@
   "drivers": [
     {
       "id": "time",
-      "capabilities": [ "time", "date", "sunrise", "sunset" ]
+      "capabilities": {
+        "time": {
+          "get": {}
+        },
+        "date": {
+          "get": {}
+        },
+        "sunrise": {
+          "get": {}
+        },
+        "sunset": {
+          "get": {}
+        }
+      }
     }
   ],
   "settings": {

@@ -1,0 +1,54 @@
+{
+	"id": "nl.precision-it.p1",
+	"version": "1.0",
+	"name": {
+		"en": "P1 data from energymeter"
+	},
+	"description": {
+		"en": "Control Roomba via MQTT"
+	},
+	"author": {
+		"name": "Marco Keur",
+		"website": "http://github.com/marcokeur"
+	},
+	"dependencies": {
+	},
+    "drivers": [
+		{
+			"id": "p1",
+			"name": {
+				"en": "Roomba vacuum cleaner",
+				"nl": "Roomba stofzuiger"
+			},
+			"capabilities": {
+			  "t1Used": {
+				"get": {}
+			  },
+			  "t2Used": {
+				"get": {}
+			  },
+			  "t1Returned": {
+				"get": {}
+			  },
+			  "t2Returned": {
+				"get": {}
+			  },
+			  "currentTarif": {
+				"get": {}
+			  },
+			  "currentlyUsing": {
+				"get": {}
+			  },
+			  "currentlyReturning": {
+				"get": {}
+			  },
+			  "gasUsed": {
+				"get": {}
+			  }
+			}
+		}
+	],
+  	"settings": {
+	  "port": "/dev/ttyUSB1"
+	}
+}

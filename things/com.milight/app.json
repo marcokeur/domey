@@ -22,7 +22,17 @@
 				"nl": "Milight Lamp"
 			},
             "class": "light",
-            "capabilities": [ "enabled", "brightness", "hue" ]
+            "capabilities": {
+                "enabled": {
+                    "get": {}
+                },
+                "brightness": {
+                    "get": {}
+                },
+                "hue": {
+                    "get": {}
+                }
+            }
 		}
 	],
     "flow": {

@@ -9,7 +9,7 @@
     "jade": "~1.11.0",
     "jasmine-node": "^1.14.5",
     "jsonschema": "^1.0.3",
-    "mongoose": "~4.0.7",
+    "mongoose": "~4.2.7",
     "mosca": "~0.31.0",
     "npm": "^2.13.3",
     "onoff": "^1.0.3",

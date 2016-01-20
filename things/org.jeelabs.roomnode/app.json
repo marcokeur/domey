@@ -20,7 +20,17 @@
 				"en": "JeeLabs RoomNode",
 				"nl": "JeeLabs RoomNode"
 			},
-            "capabilities": [ "temperature", "light", "motion" ]
+            "capabilities": {
+				"temperature": {
+				  "get": {}
+				},
+				"light": {
+				  "get": {}
+				},
+				"motion": {
+				  "get": {}
+				}
+			}
 		}
 	],
     "flow": {

@@ -34,7 +34,7 @@ Persistence.prototype.init = function(){
 
     mongoose.connect('mongodb://localhost/domotica');
     
-    var mongoHandle = mongoose.model('CapabilityUpdates', Thing);
+    self.mongoHandle = mongoose.model('CapabilityUpdates', Thing);
 
     Domey.on('capabilityUpdated', function(data){
         //console.log('Make persistent: ' + JSON.stringify(data));
@@ -46,7 +46,7 @@ Persistence.prototype.init = function(){
             value: data.thing.driver.capability.value
         };
 
-        mongoHandle.findOneAndUpdate(
+        self.mongoHandle.findOneAndUpdate(
         {
             name: data.thing.name,
         },
@@ -55,7 +55,8 @@ Persistence.prototype.init = function(){
         },
         {
             safe:true,
-            upsert: true
+            upsert: true,
+            lean: true
         }, function(err, doc){
             if(err)
                 Domey.log(3, 0, 'Mongodb upsert error: ' + err + ' ');
@@ -96,9 +97,9 @@ Persistence.prototype.apiGetRouter = function(params, callback, handler){
     if(typeof capabilityName != 'undefined')
         matchRules.push({'capabilityEvent.capabilityName': capabilityName});
 
-    var mongoHandle = mongoose.model('CapabilityUpdates', Thing);
+    //var mongoHandle = mongoose.model('CapabilityUpdates', Thing);
 
-    mongoHandle.aggregate([
+    self.mongoHandle.aggregate([
         {$match: {'name': thingName}},
         {$unwind: '$capabilityEvent'},
         {$match: {

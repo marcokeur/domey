@@ -253,11 +253,17 @@ function gatherCapabilties(self, thingName){
     var metaData = self.getThingMetaData(thingName, 'drivers');
 
     for(var i in metaData){
-        response.push({
+        var responseItem = {
             'name': metaData[i].id,
-            'capabilities': metaData[i].capabilities,
+            'capabilities': [],
             'devices': getDeviceIdList(thingName, metaData[i].id)
-        });
+        }
+
+        for(var j in metaData[i].capabilities){
+            responseItem.capabilities.push(j);
+        }
+
+        response.push(responseItem);
     }
 
     return response;

@@ -7,4 +7,4 @@ sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-po
 
 echo "Running framework in screen"
 npm install --production
-screen -dm -S framework node app.js
+screen -dm -S framework NODE_ENV=production node ./app.js
