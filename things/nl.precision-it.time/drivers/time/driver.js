@@ -54,8 +54,8 @@ var self = {
 };
 
 function recalculate(self){
-    var date = new Date();
-
+    var date = Date.now();
+/*
     var hour = date.getHours();
     hour = (hour < 10 ? "0" : "") + hour;
 
@@ -72,9 +72,10 @@ function recalculate(self){
 
     var day  = date.getDate();
     day = (day < 10 ? "0" : "") + day;
-
-    updateCache('time', hour + ":" + min + ":" + sec);
-    updateCache('date', day + "-" + month + "-" + year);
+*/
+    //updateCache('time', hour + ":" + min + ":" + sec);
+    //updateCache('date', day + "-" + month + "-" + year);
+    updateCache('time', date);
 }
 
 function callApi(self){
