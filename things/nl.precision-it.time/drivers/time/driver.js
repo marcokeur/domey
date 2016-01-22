@@ -10,6 +10,8 @@ var self = {
         var self = this;
         console.log('driver time init');
 
+        self.date = Date.now();
+
         recalculate(self);
         callApi(self);
 
@@ -54,8 +56,8 @@ var self = {
 };
 
 function recalculate(self){
-    var date = Date.now();
-/*
+    var date = new Date();
+
     var hour = date.getHours();
     hour = (hour < 10 ? "0" : "") + hour;
 
@@ -72,10 +74,11 @@ function recalculate(self){
 
     var day  = date.getDate();
     day = (day < 10 ? "0" : "") + day;
-*/
-    //updateCache('time', hour + ":" + min + ":" + sec);
-    //updateCache('date', day + "-" + month + "-" + year);
-    updateCache('time', date);
+
+    updateCache('time', hour + ":" + min + ":" + sec);
+    updateCache('date', day + "-" + month + "-" + year);
+    //self.date = self.date+1000;
+    //updateCache('time', self.date);
 }
 
 function callApi(self){
