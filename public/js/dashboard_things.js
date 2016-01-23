@@ -15,7 +15,10 @@ function loadThings(selector, cb){
 }
 
 function openWebSocketConnection(){
-    var socket = io();
+    var socket = io.connect('http://' + location.host, { 'transports': ['websocket'] });
+
+    //var socket = new io.Socket();
+    //socket.connect('http://' + ipAddress + ':' + port, { 'transports': ['websocket'] });
 
     socket.on('capabilityUpdated', function(data){
         updateElement(data, '#thingsTable');

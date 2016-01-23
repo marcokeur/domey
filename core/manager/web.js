@@ -4,7 +4,7 @@ var EventEmitter = require('events').EventEmitter;
 var express = require('express')
 , app = express()
 , http = require('http').Server(app)
-, io = require('socket.io')(http)
+, io = require('socket.io')(http, { 'transports': ['websocket'] })
 , jade = require('jade')
 , bodyParser = require('body-parser');
 

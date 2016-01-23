@@ -1,7 +1,7 @@
 {
     "interfaces": {
         "jeelink_868": {
-            "port": "/dev/tty.usbserial-A1014IM3"
+            "port": "/dev/ttyUSB0"
         },
         "rpi_gpio": {
             "pins": [
