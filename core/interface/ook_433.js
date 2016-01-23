@@ -1,7 +1,7 @@
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var sleep = require('sleep');
-var Gpio = require('onoff').Gpio;
+//var Gpio = require('onoff').Gpio;
 
 var config, gpio433In, gpio433Out;
 

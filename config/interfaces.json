@@ -25,6 +25,10 @@
         "ook_433": {
             "rxPin": 4,
             "txPin": 14
+        },
+        "pushover": {
+            "user": "us6uEEkiFXYotqfH8P84hxCrPHQo86",
+            "token": "aHUaSBfNBuRNTFD7tkbbiXq7WTvAMS"
         }
     }
 }

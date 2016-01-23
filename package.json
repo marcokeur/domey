@@ -13,6 +13,7 @@
     "mosca": "~0.31.0",
     "npm": "^2.13.3",
     "onoff": "^1.0.3",
+    "pushover-notifications": "^0.2.2",
     "serialport": "^2.0.6",
     "sleep": "^3.0.0",
     "socket.io": "^1.3.7"
