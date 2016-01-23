@@ -22,23 +22,10 @@ var self = {
                             self.devices[roomnodePackage.id] = roomnodePackage;
                         }
                         
-                        // emit realtime event if something has changed
+                        // emit event if something has changed
                         Object.keys(roomnodePackage.state).forEach(function(sensor){
-                            /*
-                            Domey.manager('drivers').realtime({
-                                thing: 'org.jeenode.roomnode',
-                                driver: 'roomnode',
-                                device: roomnodePackage.id, 
-                                state: {
-                                    type: sensor,
-                                    value: roomnodePackage.state[sensor]
-                                }
-                            });
-                            */
                             Domey.capabilityUpdated('org.jeelabs.roomnode', 'roomnode', roomnodePackage.id, sensor, roomnodePackage.state[sensor]);
                         });
-
-
 
                         //emit a flow trigger
                         Domey.manager('flow').trigger('measurement', {

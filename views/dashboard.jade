@@ -239,14 +239,14 @@ block script
             getCapabilityValue('nl.precision-it.time', 'time', 'system', 'sunset', '#sunset', 'Sunset: ');
             getCapabilityValue('org.openweathermap', 'weather', 'system', 'icon', '#weathericon', '<img src=', ' />');
 
-            setCapabilityValue('com.arc-tech', 'switch', 0, 'enabled', true, '#load', function(result){
+            setCapabilityValue('com.arc-tech', 'switch', 0, 'enabled', !cacheStatus[0], '#load', function(result){
                 console.log(result);
                 if(result.response.thing.driver.capabilities.length > 0)
                     cacheStatus[0] = result
             });
 
-            openDashWebSocketConnection();
+          openWebSocketConnection();
         });
-    //script(src='/js/dashboard.js')
+    script(src='/js/dashboard.js')
     //script(src='/js/dashboard_flows.js')
     script(src="https://cdn.socket.io/socket.io-1.3.7.js")

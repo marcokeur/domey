@@ -48,17 +48,17 @@ function setCapabilityValue(thingName, driverName, deviceId, capability, value, 
         data[capability] = value;
         console.log(JSON.stringify(data));
 
-    $.ajax({
-      url:'/api/thing/' + thingName +'/' + driverName + '/' + deviceId,
-      type:"POST",
-      data:data,
-      contentType:"application/json; charset=utf-8",
-      dataType:"json",
-      success: function(result){
-        callback(result);
-      }
-    })
-        });
+        $.ajax({
+          url:'/api/thing/' + thingName +'/' + driverName + '/' + deviceId,
+          type:"POST",
+          data:JSON.stringify(data),
+          contentType:"application/json; charset=utf-8",
+          dataType:"json",
+          success: function(result){
+            callback(result);
+          }
+        })
+    });
 }
 
 
@@ -75,11 +75,11 @@ function updateElement(data){
     });
 }
 
-function openDashWebSocketConnection(){
-    var socket = io();
+function openWebSocketConnection(){
+    var socket = io.connect('http://' + location.host, { 'transports': ['websocket'] });
 
     socket.on('capabilityUpdated', function(data){
-        updateElement(data);
+        updateElement(data, '#thingsTable');
     });
 }
 

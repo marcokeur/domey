@@ -5,12 +5,12 @@ var self = {
 
     switches: [
         {   deviceId:     0,
-            unit:         0,
+            unit:         3,
             id:           0,
             enabled:  false
         },
         {   deviceId:     1,
-            unit:         0,
+            unit:         3,
             id:           1,
             enabled:  false
         }
